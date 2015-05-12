@@ -26,6 +26,8 @@ class UserController extends Controller{
 			]
 		);
 
+		$v->setAttributeNames(['email' => 'e-mail', 'password' => 'wachtwoord']);
+
 		if($v->fails())
 		{
 			$request->flash();
