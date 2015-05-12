@@ -13,5 +13,5 @@
 
 
 Route::controllers([
-	'answer' => 'WelcomeController'
+	'account' => 'UserController'
 ]);
