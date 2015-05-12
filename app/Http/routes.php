@@ -1,9 +1,13 @@
 <?php
 
 Route::controllers([
-	'/question'	=> 'QuestionController',
+	'question'	=> 'QuestionController',
 	'account' => 'UserController',
+	'answer' => 'AnswerController',
 
-	//This Route needs to stay at the BOTTOM!!!!!!! Or everything will DIE!!!
+	/*
+		HomeController need to stay at the bottom. 
+		It is a wildcard, all Controller routes under this wildcard will not work!
+	*/
 	'/' => 'HomeController' 	
 ]);

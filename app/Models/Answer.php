@@ -14,6 +14,10 @@ class Answer extends Model{
 		return $this->hasMany('App\Models\AnswerVote');
 	}
 
+	public function User(){
+		return $this->belongsTo('App\Models\User');
+	}
+
 	public function TotalVotes(){
 		$votes = $this->Votes;
 		$totalvotes = 0;
