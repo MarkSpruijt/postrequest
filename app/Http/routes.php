@@ -1,9 +1,8 @@
 <?php
 
-Route::controllers([
-	'/question'	=> 'QuestionController',
-	'account' => 'UserController',
+Route::get('/','QuestionController@index');
 
-	//This Route needs to stay at the BOTTOM!!!!!!! Or everything will DIE!!!
-	'/' => 'HomeController' 	
+Route::controllers([
+	'question'	=> 'QuestionController',
+	'account' => 'UserController',
 ]);

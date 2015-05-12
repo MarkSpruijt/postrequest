@@ -5,6 +5,13 @@ use App\Models\Question;
 
 class QuestionController extends Controller {
 
+	public function index()
+	{
+		$questions = Question::orderBy('created_at', 'DESC')->get();
+
+	return view('home', compact('questions'));
+	}
+
 	public function __construct()
 	{
 		$this->middleware('guest');
