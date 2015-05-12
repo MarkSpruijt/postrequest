@@ -13,6 +13,6 @@
 
 
 Route::controllers([
-	'account' => 'UserController'
+	'account' => 'UserController',
 	'/' => 'HomeController'
 ]);
