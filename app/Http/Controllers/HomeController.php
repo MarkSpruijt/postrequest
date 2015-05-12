@@ -9,7 +9,7 @@ class HomeController extends Controller {
 		$this->middleware('guest');
 	}
 
-	public function getindex()
+	public function getIndex()
 	{
 		return view('home');
 	}

@@ -14,4 +14,5 @@
 
 Route::controllers([
 	'account' => 'UserController'
+	'/' => 'HomeController'
 ]);
