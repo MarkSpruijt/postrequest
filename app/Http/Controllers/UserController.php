@@ -10,6 +10,7 @@ class UserController extends Controller{
 	public function getLogin()
 	{
 		return view('user.login');
+
 	}
 
 	public function postLogin(Request $request)
@@ -40,5 +41,11 @@ class UserController extends Controller{
 		$v->messages()->add('generic', 'Verkeerde wachtwoord en/of email');
 		return redirect()->action('UserController@getLogin')->withErrors($v->messages());
 
+	}
+
+	public function getLogout()
+	{
+		Auth::logout();
+		return redirect()->action('UserController@getLogin');
 	}
 }
