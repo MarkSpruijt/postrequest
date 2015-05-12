@@ -9,12 +9,6 @@ class QuestionController extends Controller {
 	{
 		$this->middleware('guest');
 	}
-
-	public function getIndex()
-	{
-		return view('question/question');
-	}
-
 	public function getCreate(){
 		return view('question/create');
 	}

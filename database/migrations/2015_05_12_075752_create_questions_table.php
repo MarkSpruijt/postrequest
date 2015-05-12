@@ -12,7 +12,6 @@ class CreateQuestionsTable extends Migration {
 	 */
 	public function up()
 	{
-			{
 		Schema::create('questions', function(Blueprint $table)
 		{
 			$table->increments('id');
@@ -20,7 +19,6 @@ class CreateQuestionsTable extends Migration {
 			$table->string('content');
 			$table->timestamps();
 		});
-	}
 	}
 
 	/**
