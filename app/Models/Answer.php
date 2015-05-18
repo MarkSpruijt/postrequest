@@ -14,6 +14,11 @@ class Answer extends Model{
 		return $this->hasMany('App\Models\AnswerVote');
 	}
 
+	public function question()
+	{
+		return $this->belongsTo('App\Models\Question');
+	}
+
 	public function User(){
 		return $this->belongsTo('App\Models\User');
 	}
@@ -31,5 +36,4 @@ class Answer extends Model{
 		}
 		return $totalvotes;
 	}
-
 }

@@ -21,8 +21,9 @@ class QuestionController extends Controller {
 	public function getDetails($id)
 	{
 		$question = Question::find($id);
-		$answers = Answer::where('question_id', $id)->get();
-		return view('question.details', compact('question', 'answers'));
+		$question->sortAnswers();
+
+		return view('question.details', compact('question'));
 	}
 
 	public function getCreate(){
