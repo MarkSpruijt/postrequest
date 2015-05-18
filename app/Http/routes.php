@@ -9,7 +9,5 @@ Route::get('question/{question_id}/{answer_id}/choose', 'QuestionController@choo
 Route::controllers([
 	'question'	=> 'QuestionController',
 	'account' => 'UserController',
-
-	// Deze shizzledizzle moet onderaan blijven staan anders verzuipen de kikkers.
-	'/' => 'HomeController'
+	'answer' => 'AnswerController'
 ]);
