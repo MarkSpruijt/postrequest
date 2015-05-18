@@ -13,4 +13,5 @@
 			<p>{{$answer->User->username}}</p>
 		</div>
 	@endforeach
+	<a href="{{ URL::to('answer/create/'.$question['id']) }}"><button>Stuur antwoord</button></a>
 @endsection
