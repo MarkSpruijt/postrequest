@@ -30,6 +30,7 @@ class AnswerController extends Controller {
 
 	public function getVote($id){
 		$user_id = Auth::user()->id;
+		//check if user has voted allready
 		if(AnswerVote::where('user_id', $user_id)->where('answer_id', $id)->first()){
 			return redirect()->back();
 		}
@@ -38,6 +39,7 @@ class AnswerController extends Controller {
 		$vote->answer_id = $id;
 		$vote->vote = 1;
 		$vote->save();
+		
 		return redirect()->back();
 	}
 
