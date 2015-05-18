@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers;
 
+use Auth;
+use App\Models\Answer;
 use Illuminate\Http\Request;
 use App\Models\Question;
 
@@ -23,6 +25,7 @@ class QuestionController extends Controller {
 	public function postCreate(Request $request)
 	{
 		$data = $request ->only('title','content');
+		$data['user_id'] = Auth::user()->id;
 		$question = new Question;
 		$question->fill($data)->save(); 
 
@@ -39,6 +42,7 @@ class QuestionController extends Controller {
 			$question->answer_id = $answer_id;
 			$question->save();
 		}
+
 
 		// Dit aanpassen naar de locatie van de detailpagina.
 		return redirect('/');
