@@ -25,7 +25,7 @@ class AnswerController extends Controller {
 		$content = Request::input('content');
 		$user_id = Auth::user()->id;
 		Answer::create(['content' => $content,'question_id' => $id, 'user_id' => $user_id]);
-		return redirect()->back();
+		return redirect("question/". $id);
 	}
 
 	public function getVote($id){
@@ -39,7 +39,7 @@ class AnswerController extends Controller {
 		$vote->answer_id = $id;
 		$vote->vote = 1;
 		$vote->save();
-		
+
 		return redirect()->back();
 	}
 
