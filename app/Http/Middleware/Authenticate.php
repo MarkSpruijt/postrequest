@@ -40,7 +40,7 @@ class Authenticate {
 			}
 			else
 			{
-				return redirect()->action('App\Http\Controllers\UserController@getLogin');
+				return redirect()->action('UserController@getLogin');
 			}
 		}
 
