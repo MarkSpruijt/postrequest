@@ -18,4 +18,7 @@ Vraag pagina enzo
 
 {!! Form::close() !!}
 <a href="{{URL::to('/')}}">Terug</a>
+
+
+
 @endsection
