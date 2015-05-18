@@ -1,6 +1,7 @@
 @extends('app')
 
 @section('content')
+	<h1>Inloggen</h1>
 	{!! Form::open() !!}
 		{!! $errors->first('generic') !!}
 		{!! $errors->first('email', '<label>:message</label>') !!}
