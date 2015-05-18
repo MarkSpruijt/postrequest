@@ -5,11 +5,11 @@ Vraag pagina enzo
 
 {!!	Form::open()  !!}
 	<div class="form-group">
-		{!! Form::text('title',null) !!}
+		{!! Form::text('title',null,['placeholder' => 'De Titel.']) !!}
 	</div>
 
 	<div class="form-group">
-		{!! Form::textarea('content',null) !!}
+		{!! Form::textarea('content',null,['placeholder' => 'Stel hier je vraag.']) !!}
 	</div>
 
 	<div class="form-group">
@@ -17,4 +17,5 @@ Vraag pagina enzo
 	</div>
 
 {!! Form::close() !!}
+<a href="{{URL::to('/')}}">Terug</a>
 @endsection
