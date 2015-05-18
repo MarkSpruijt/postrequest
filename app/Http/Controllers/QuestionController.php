@@ -14,7 +14,7 @@ class QuestionController extends Controller {
 
 	public function __construct()
 	{
-		$this->middleware('guest');
+		$this->middleware('App\Http\Middleware\Authenticate');
 	}
 	public function getCreate(){
 		return view('question/create');
