@@ -5,7 +5,7 @@ Index pagina enzo
 <a href="{{ URL::to('question/create') }}">Create</a>
 
 @foreach($questions as $question)
-	<h2>{{ $question->title }}</h2><h5>{{ $question->content }}</h5></a>
-	{{ date('d M Y H:m',strtotime($question->updated_at)) }}
+	<a href="{{ URL::to('question/'.$question['id']) }}"><h2>{{ $question->title }}  -  {{ date('d M Y H:m',strtotime($question->updated_at)) }}</h2></a>
+	
 @endforeach
 @endsection
