@@ -5,6 +5,6 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 class Question extends Eloquent{
 
 		protected $fillable = [
-		'title','content'
+		'title','content', 'answer_id', 'user_id'
 	];
 }
