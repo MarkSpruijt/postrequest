@@ -1,12 +1,13 @@
 <?php
 
+Route::get('/','QuestionController@index');
 Route::get('question/{question_id}/{answer_id}/comment', 'CommentController@getCreate');
 Route::post('question/{question_id}/{answer_id}/comment', 'CommentController@postCreate');
 
 Route::controllers([
-	'/question'	=> 'QuestionController',
+	'question'	=> 'QuestionController',
 	'account' => 'UserController',
 
-	//This Route needs to stay at the BOTTOM!!!!!!! Or everything will DIE!!!
-	'/' => 'HomeController' 	
+	// Deze shizzledizzle moet onderaan blijven staan anders verzuipen de kikkers.
+	'/' => 'HomeController'
 ]);
