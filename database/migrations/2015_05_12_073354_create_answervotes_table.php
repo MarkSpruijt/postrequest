@@ -18,7 +18,7 @@ class CreateAnswervotesTable extends Migration {
 			$table->integer('user_id');
 			$table->integer('answer_id');
 			$table->boolean('vote'); // 0 = negative, 1 = positive;
-			$table->timestamp('created_at');
+			$table->timestamps();
 		});
 	}
 

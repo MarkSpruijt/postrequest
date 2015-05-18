@@ -3,7 +3,7 @@
 use Illuminate\Database\Eloquent\Model;
 
 class AnswerVote extends Model{
-	
+
 	protected $table = 'answer_votes';
 
 	protected $fillable = ['content', 'question_id', 'user_id'];
@@ -12,5 +12,9 @@ class AnswerVote extends Model{
 
 	public function Answer(){
 		return $this->belongsTo('App\Models\Answer');
+	}
+
+	public function User(){
+		return $this->belongsTo('App\Models\User');
 	}
 }
