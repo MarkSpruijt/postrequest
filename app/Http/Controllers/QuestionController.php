@@ -4,7 +4,6 @@ use Auth;
 use App\Models\Answer;
 use Illuminate\Http\Request;
 use App\Models\Question;
-use App\Models\Answer;
 
 class QuestionController extends Controller {
 
