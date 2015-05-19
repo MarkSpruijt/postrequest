@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Post Request</title>
 	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+	<link rel="stylesheet" href="{{ asset('/css/font-awesome.min.css')}}">
 </head>
 <body>
 	@if (Auth::guest())

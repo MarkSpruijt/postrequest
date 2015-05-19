@@ -9,12 +9,12 @@
 <p>{{$question['content']}}</p>
 <h2>Antwoorden</h2>
 	@foreach($question->answers as $answer)
-		<div class="answer" style="margin: 10px; 
-		@if($question['answer_id'] == $answer['id'])
-			background-color: #0F0;
-		@else
-			background-color: #999;
-		@endif">
+		<div class="answer" style="margin: 10px;"> 
+			@if($question['answer_id'] == $answer['id'])
+					<i class="fa question_checked fa-check-square-o fa-3"></i>
+			@else
+			@endif
+
 			<p>Votes: {{$answer['votes']}} <a href="{{URL::to('answer/vote/' . $answer['id'])}}">+</a></p>
 
 			<p>{{$answer['content']}}</p>
@@ -26,12 +26,11 @@
 				<!-- Owner van de vraag -->
 				@if(Auth::user()->id == $question->user_id)
 					<a href='{{ URL::to('question/'. $question['id'] . '/' . $answer['id'] . '/choose') }}'>Dit antwoord niet meer accepteren.</a>
-				@else
 					Dit antwoord is als geaccepteerd beschouwd door de desbetreffende vraagstellende gebruiker.
 				@endif
 			@else
 				@if(Auth::user()->id == $question->user_id)
-					<a href='{{ URL::to('question/'. $question['id'] . '/' . $answer['id'] . '/choose') }}'>Accepteer dit antwoord.</a>
+					<a href='{{ URL::to('question/'. $question['id'] . '/' . $answer['id'] . '/choose') }}'>Markeer dit als het juiste antwoord. <i class="fa fa-check"></i></a>
 				@endif
 			@endif
 
