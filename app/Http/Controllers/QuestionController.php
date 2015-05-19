@@ -47,12 +47,12 @@ class QuestionController extends Controller {
 		// Is het de eigenaar van de question en bestaat het antwoord uberhaupt wel?
 		if(Auth::user()->id ==  $question->user_id && Answer::find($answer_id)->exists)
 		{
-			$question->answer_id = $answer_id;
+			$question->answer_id = ($question->answer_id == $answer_id) ? NULL : $answer_id;
 			$question->save();
 		}
 
 
 		// Dit aanpassen naar de locatie van de detailpagina.
-		return redirect('/');
+		return redirect('/question/' . $question_id);
 	}
 }

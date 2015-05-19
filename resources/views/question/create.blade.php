@@ -13,7 +13,7 @@ Vraag pagina enzo
 	</div>
 
 	<div class="form-group">
-		{!! Form::submit('Vraag het aan de Community',['class' => 'btn btn-primary']) !!}
+		{!! Form::submit('Vraag het aan de gemeenschap',['class' => 'btn btn-primary']) !!}
 	</div>
 
 {!! Form::close() !!}
