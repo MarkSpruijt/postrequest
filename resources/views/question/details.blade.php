@@ -17,13 +17,23 @@
 			<p>{{$answer['content']}}</p>
 			<p>{{$answer['created_at']}}</p>
 			<p>{{$answer->User->username}}</p>
-			@if($question['answer_id'] != $answer->id)
-			@if(Auth::user()->id == $question->user_id)
-				<a href='{{ URL::to('question/'. $question['id'] . '/' . $answer['id'] . '/choose') }}'>Kies dit als juiste antwoord.</a>
-			@endif
+
+			<!-- Juiste answer -->
+			@if($question['answer_id'] == $answer->id)
+			
+				<!-- Owner van de vraag -->
+				@if(Auth::user()->id == $question->user_id)
+					<a href='{{ URL::to('question/'. $question['id'] . '/' . $answer['id'] . '/choose') }}'>Dit antwoord niet meer accepteren.</a>
+				@else
+					Dit antwoord is als geaccepteerd beschouwd door de desbetreffende vraagstellende gebruiker.
+				@endif
+
 			@else
-				Dit antwoord is als juiste antwoord gekozen door de vraagstellende gebruiker.
+				@if(Auth::user()->id == $question->user_id)
+					<a href='{{ URL::to('question/'. $question['id'] . '/' . $answer['id'] . '/choose') }}'>Accepteer dit antwoord.</a>
+				@endif
 			@endif
+
 
 		</div>
 	@endforeach
