@@ -1,9 +1,10 @@
 <?php namespace App\Http\Controllers;
 
 use Auth;
-use Request;
+use App;
 use App\Models\Answer;
 use App\Models\AnswerVote;
+use Illuminate\Http\Request;
 
 class AnswerController extends Controller {
 
@@ -21,11 +22,37 @@ class AnswerController extends Controller {
 		return view('answer.add');
 	}
 
-	public function postCreate($id){
-		$content = Request::input('content');
+	public function postCreate(Request $request, $id){
+		$data = $request->only('content');
 		$user_id = Auth::user()->id;
-		Answer::create(['content' => $content,'question_id' => $id, 'user_id' => $user_id]);
+		Answer::create(['content' => $data['content'],'question_id' => $id, 'user_id' => $user_id]);
 		return redirect("question/". $id);
+	}
+
+	public function getEdit($id)
+	{
+		$answer = Answer::find($id);
+
+		if($answer && $answer->user_id == Auth::user()->id)
+			return view('answer.edit')->withAnswer($answer);
+
+		return App::abort(403);
+	}
+
+	public function postEdit(Request $request, $id)
+	{
+		$answer = Answer::find($id);
+		$data = $request->only('content');
+
+		if($answer && $answer->user_id == Auth::user()->id)
+		{
+			$answer->content = $data['content'];
+			$answer->save();
+			return redirect('question/' . $answer->question_id);
+		}
+
+		return App::abort(403);
+
 	}
 
 	public function getVote($id){

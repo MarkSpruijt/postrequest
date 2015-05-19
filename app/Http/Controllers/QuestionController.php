@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use Auth;
+use App;
 use App\Models\Answer;
 use Illuminate\Http\Request;
 use App\Models\Question;
@@ -38,6 +39,30 @@ class QuestionController extends Controller {
 		$question->fill($data)->save(); 
 
 		return redirect('/');
+	}
+
+	public function getEdit($id)
+	{
+		$question = Question::find($id);
+		if($question && $question->user_id == Auth::user()->id)
+			return view('question.edit')->withQuestion($question);
+
+		return App::abort('403');
+	}
+
+	public function postEdit(Request $request, $id)
+	{
+		$question = Question::find($id);
+		if($question && $question->user_id == Auth::user()->id)
+		{
+			$data = $request->only('title', 'content');
+
+			$question->fill($data);
+
+			$question->save();
+
+			return redirect('question/' . $question->id);
+		}
 	}
 
 	public function chooseAnswer($question_id, $answer_id)
