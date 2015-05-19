@@ -1,9 +1,10 @@
 <?php  namespace App\Http\Controllers;
 
 use Auth;
+use Hash;
 use Validator;
+use App\Models\User;
 use Illuminate\Http\Request;
-
 
 class UserController extends Controller{
 	
@@ -49,5 +50,24 @@ class UserController extends Controller{
 	{
 		Auth::logout();
 		return redirect()->action('UserController@getLogin');
+	}
+
+	public function getActivate($key){
+		return view('user.activate');
+	}
+
+	public function postActivate($key, Request $request){
+		if($request->password != $request->password2){
+			return view('user.activate')->with('error', 'Wachtwoorden komen niet overeen.');
+		}
+		$user = User::where('key', $key)->first();
+		if(!isset($user->email)){
+			return view('user.activate')->with('error', 'Geen account gevonden om te activeren.');
+		}
+		$user->password = Hash::make($request->password);
+		$user->key = '';
+		$user->save();
+
+		return redirect('/');
 	}
 }

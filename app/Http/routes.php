@@ -13,6 +13,13 @@ Route::get('question/{question_id}/{answer_id}/choose', 'QuestionController@choo
 Route::get('ask','QuestionController@getCreate');
 Route::post('ask','QuestionController@postCreate');
 
+//if user rank is 100
+Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
+{
+	Route::controllers([
+		'admin' => 'AdminController'
+	]);
+});
 
 Route::controllers([
 	'account' => 'UserController',
