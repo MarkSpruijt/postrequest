@@ -1,7 +1,8 @@
 <?php namespace App\Http\Controllers;
 
-use Auth;
 use App;
+use Auth;
+use Mail;
 use App\Models\Answer;
 use Illuminate\Http\Request;
 use App\Models\Question;
