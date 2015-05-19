@@ -14,7 +14,7 @@ class Answer extends Model{
 		return $this->hasMany('App\Models\AnswerVote');
 	}
 
-	public function question()
+	public function Question()
 	{
 		return $this->belongsTo('App\Models\Question');
 	}

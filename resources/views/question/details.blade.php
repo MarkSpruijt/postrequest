@@ -15,7 +15,7 @@
 		@else
 			background-color: #999;
 		@endif">
-			<p>Votes: {{$answer->TotalVotes()}} <a href="{{URL::to('answer/vote/' . $answer['id'])}}">+</a></p>
+			<p>Votes: {{$answer['votes']}} <a href="{{URL::to('answer/vote/' . $answer['id'])}}">+</a></p>
 
 			<p>{{$answer['content']}}</p>
 			<p>{{$answer['created_at']}}</p>
