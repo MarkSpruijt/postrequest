@@ -9,7 +9,7 @@ Index pagina enzo
 	
 @endforeach
 
-{{-- <div>
+<div>
   {{ Markdown::render($content) }}
-</div> --}}
+</div>
 @endsection
