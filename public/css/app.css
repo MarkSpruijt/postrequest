@@ -10,6 +10,11 @@ a{
 a:hover{
 	color: grey;
 }
+
+input, select{
+	display: block;
+}
+
 .question_checked::before{
 	color: lightgreen;
 	font-size: 5em;

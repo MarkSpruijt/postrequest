@@ -3,9 +3,13 @@
 @section('content')
 
 <h3>Gebruiker(s) toevoegen</h3>
-<p>Gebruik een komma(,) om email adressen te scheiden. Gebruik alleen een komma als u meerdere accounts wilt aanmaken</p>
 {!!	Form::open()  !!}
-		{!! Form::textarea('emails',null,['placeholder' => 'E-mail(s)']) !!}
+		{!! Form::label("Naam") !!}
+		{!! Form::text("realname") !!}
+		{!! Form::label("E-mail") !!}
+		{!! Form::email("email") !!}
+		{!! Form::label("Rank") !!}
+		{!! Form::select("rank", [0 => 'Leerling', 100 => "Docent"]) !!}
 		{!! Form::submit('Verstuur') !!}
 {!! Form::close() !!}
 <a href="{{URL::to('admin')}}">Terug</a>
