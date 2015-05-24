@@ -1,13 +1,18 @@
 @extends('app')
 
 @section('content')
-Index pagina enzo
-<a href="{{ URL::to('ask') }}">Create</a>
+	<h1>Laatst gestelde vragen</h1>
 
-@foreach($questions as $question)
-	<a href="{{ URL::to('question/'.$question['id']) }}"><h2>{{ $question->title }} || Created at: || {{ date('d M Y H:m',strtotime($question->updated_at)) }}</h2></a>
-	
-@endforeach
+	@foreach($questions as $question)
+		<div class="question">
+			<a href="{{ URL::to('question/'.$question['id']) }}">
+				<p><strong>{{ $question->title }}</strong></p>
+
+				<p class="info">{{ date('d M Y H:m',strtotime($question->updated_at)) }} {{$question->user->username}}</p>
+			</a>
+		</div>
+		
+	@endforeach
 {{-- 
 <div>
   {{ Markdown::render($content) }}
