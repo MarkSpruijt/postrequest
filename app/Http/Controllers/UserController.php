@@ -57,19 +57,34 @@ class UserController extends Controller{
 	}
 
 	public function postActivate($key, Request $request){
-		if($request->password != $request->password2){
-			return view('user.activate')->with('error', 'Wachtwoorden komen niet overeen.');
-		}
-		if(User::where("username", $request->username)->first()){
-			return view('user.activate')->with('error', 'Gebruikersnaam is al bezet.');
-		}
 		$user = User::where('key', $key)->first();
 		if(!isset($user->email)){
 			return view('user.activate')->with('error', 'Geen account gevonden om te activeren.');
 		}
+
+		$credentials = $request->only('username', 'password','password2');
+
+		$v = Validator::make(
+			$credentials,
+			[
+				'username' => 'required|unique:users', 
+				'password' => 'required|min:8',
+				'password2' => 'same:password'
+			]
+		);
+
+		$v->setAttributeNames(['username' => 'Gebruikersnaam', 'password' => 'Wachtwoord', 'password2' => 'Wachtwoord bevestiging']);
+
+		if($v->fails())
+		{
+			$request->flash();
+			return redirect()->back()->withErrors($v->messages());
+		}
+
+
 		$user->username = $request->username;
 		$user->password = Hash::make($request->password);
-		$user->key = '';
+		$user->key = NULL;
 		$user->save();
 
 		return redirect('/');

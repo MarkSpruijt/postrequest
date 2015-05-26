@@ -1,8 +1,12 @@
-@extends('admin')
+@extends('app')
 
 @section('content')
 
 <h3>Gebruiker(s) toevoegen</h3>
+	@if(isset($message))
+		<p>{{$message}}</p>
+	@endif
+	
 {!!	Form::open()  !!}
 		{!! Form::label("Naam") !!}
 		{!! Form::text("realname") !!}
