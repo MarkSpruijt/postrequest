@@ -14,7 +14,7 @@
 	</div>
 
 	<div class="form-group">
-		{!! Form::submit('Vraag aanpassen',['class' => 'btn btn-primary']) !!}
+		{!! Form::submit('Wijzigingen opslaan',['class' => 'btn btn-primary']) !!}
 	</div>
 
 {!! Form::close() !!}
