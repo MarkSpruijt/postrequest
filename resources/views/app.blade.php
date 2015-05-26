@@ -22,21 +22,7 @@
 			</ul>
 	</div>
 	<div class="content frame">
-
 		@yield('content')
-
-
-		<!-- This is for the solved thing, so we can find what classes mark used. they may be removed when solved is up and running. -->
-		<div class="question question_solved">
-			<a href="http://localhost/postrequest/public/question/1">
-				<p><strong>Parse: Query local database is 20 times slower then sqlite</strong></p>
-				<i class="fa fa-check solved"></i>
-				<p class="info">2015-05-23 20:28:33 Leerling A</p>
-			</a>
-		</div>
-
-
-
 	</div>
 	<div class="footer frame">
 		<p>PostRequest &copy;2015</p>
