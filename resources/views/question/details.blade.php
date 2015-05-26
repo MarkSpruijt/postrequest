@@ -38,6 +38,17 @@
 			@if(Auth::user()->id == $answer->user_id)
 				<a href='{{ URL::to('answer/edit/' . $answer->id) }}'>Bewerken</a>
 			@endif
+
+			<a href="{{ action('CommentController@getCreate', [$question->id, $answer->id]) }}">Reageer op dit antwoord.</a>
+
+			<!-- Antwoorden -->
+			@foreach($answer->comments as $comment)
+				<div class="answer" style="margin: 10px;"> 
+				{{ date('d M Y H:m',strtotime($comment->created_at)) }}<br>
+				{{$comment->user->username}}<br>
+				{{$comment->content}}
+				</div>
+				@endforeach
 		</div>
 	@endforeach
 	<a href="{{ URL::to('answer/create/'.$question['id']) }}"><button>Stuur antwoord</button></a>
