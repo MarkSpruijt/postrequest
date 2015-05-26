@@ -97,7 +97,7 @@ input, select{
 	color: #3399ff;
 	text-shadow: 1px 1px #333;
 }
-.question_solved{
+.question_solved a{
 	background-color: #B5FFBE;
 }
 
