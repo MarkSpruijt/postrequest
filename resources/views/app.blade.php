@@ -12,11 +12,11 @@
 	<div class="header frame">
 			<img class="logo" src="{{ asset('images/postrequest.png') }}" alt="Header">
 			<ul class="menu">
-				<li><a href="{{URL::to('/')}}">Home</a></li>
-				<li><a href="{{URL::to('ask')}}">Vraag stellen</a></li>
 				@if (Auth::guest())
 					<li><a href="{{URL::to('account/login')}}">Inloggen</a></li>
 				@else
+					<li><a href="{{URL::to('/')}}">Overzicht</a></li>
+					<li><a href="{{URL::to('ask')}}">Vraag stellen</a></li>
 					<li><a href="{{URL::to('account/logout')}}">Uitloggen</a></li>
 				@endif
 			</ul>
