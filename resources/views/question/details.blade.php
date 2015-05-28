@@ -24,8 +24,7 @@
 
 				<p>{{$answer['content']}}</p>
 
-				<p class="post_info">{{ date('d M Y H:m',strtotime($question->updated_at)) }}</p>
-				<p class="post_info">{{$answer->User->username}}</p>
+				<p class="post_info">{{ date('d M Y H:m',strtotime($question->updated_at)) }}<br>{{$answer->User->username}}</p>
 
 				<!-- Juiste answer -->
 				@if($question['answer_id'] == $answer->id)
@@ -52,7 +51,7 @@
 				<!-- Antwoorden -->
 				@foreach($answer->comments as $comment)
 					<div class="answer" style="margin: 10px;"> 
-						<p class="info">{{ date('d M Y H:m',strtotime($question->updated_at)) }} {{$question->user->username}}</p>
+						<p class="post_info">{{ date('d M Y H:m',strtotime($question->updated_at)) }}<br> {{$question->user->username}}</p>
 						{{$comment->user->username}}<br>
 						{{$comment->content}}
 				</div>
