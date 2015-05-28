@@ -6,6 +6,7 @@ use Mail;
 use App\Models\Answer;
 use Illuminate\Http\Request;
 use App\Models\Question;
+use Validator;
 
 class QuestionController extends Controller {
 
@@ -18,6 +19,7 @@ class QuestionController extends Controller {
 	{
 		$questions = Question::orderBy('created_at', 'DESC')->get();
 		return view('home', compact('questions'));
+
 	}
 
 	public function getDetails($id)
@@ -53,6 +55,24 @@ class QuestionController extends Controller {
 
 	public function postEdit(Request $request, $id)
 	{
+		$createquestion = $request->only('title', 'content');
+
+		$v = Validator::make(
+			$createquestion,
+			[
+				'title' => 'required', 
+				'content' => 'required'
+			]
+		);
+
+		$v->setAttributeNames(['title' => 'Titel', 'content' => 'Inhoud']);
+
+		if($v->fails())
+		{
+			$request->flash();
+			return redirect()->action('QuestionController@getEdit', $id)->withErrors($v->messages());
+		}
+		
 		$question = Question::find($id);
 		if($question && $question->user_id == Auth::user()->id)
 		{
