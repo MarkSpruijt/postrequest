@@ -1,19 +1,18 @@
 @extends('app')
 
 @section('content')
-	<div class="question" style="margin: 10px;"> 
+	<div class="question_detail" style="margin: 10px;"> 
 		<h1>{{$question['title']}}</h1>
 			@if($question->user_id == Auth::user()->id)
 				<a href='{{ URL::to('question/edit/' . $question->id) }}'>Bewerken</a>
 			@endif
 		<p>{{$question['content']}}</p>
 	</div>
-		<h2>Antwoorden</h2>
+		<h2 class="answers">Antwoorden</h2>
 			@foreach($question->answers as $answer)
 				<div class="question_answers">
 				@if($question['answer_id'] == $answer['id'])
-						<i class="fa question_checked fa-check-square-o fa-3"></i>
-				@else
+						<i class="fa question_checked fa-check fa-3"></i>
 				@endif
 
 				<p>Votes: {{$answer['votes']}}
@@ -58,6 +57,5 @@
 				@endforeach
 		</div>
 	@endforeach
-	<a href="{{ URL::to('answer/create/'.$question['id']) }}"><button>Stuur antwoord</button></a>
-	</div>
+	<a class="button" href="{{ URL::to('answer/create/'.$question['id']) }}">Stuur antwoord</a>
 @endsection
