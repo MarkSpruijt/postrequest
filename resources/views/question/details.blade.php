@@ -2,13 +2,13 @@
 
 @section('content')
 	<div class="question_detail" style="margin: 10px;"> 
-		<h1>{{$question['title']}}</h1>
+		<h1>{{ucfirst($question['title'])}}</h1>
+		<p class="question_content">{{$question['content']}}</p>
 			@if($question->user_id == Auth::user()->id)
-				<a href='{{ URL::to('question/edit/' . $question->id) }}'>Bewerken</a>
+				<a href='{{ URL::to('question/edit/' . $question->id) }}'>Bewerk je vraag</a>
 			@endif
-		<p>{{$question['content']}}</p>
 	</div>
-		<h2 class="answers">Antwoorden</h2>
+		<h2 class="answers">Antwoorden:</h2>
 			@foreach($question->answers as $answer)
 				<div class="question_answers">
 				@if($question['answer_id'] == $answer['id'])
@@ -23,7 +23,7 @@
 
 				<p>{{$answer['content']}}</p>
 
-				<p class="post_info">{{ date('d M Y H:m',strtotime($question->updated_at)) }}<br>{{$answer->User->username}}</p>
+				<p class="post_info">{{ date('d M Y H:m',strtotime($question->updated_at)) }}<br><a href="{{URL::to('profile/'. $answer->User->username )}}">{{$answer->User->username}}</p></a>
 
 				<!-- Juiste answer -->
 				@if($question['answer_id'] == $answer->id)
@@ -50,9 +50,8 @@
 				<!-- Antwoorden -->
 				@foreach($answer->comments as $comment)
 					<div class="answer" style="margin: 10px;"> 
-						<p class="post_info">{{ date('d M Y H:m',strtotime($question->updated_at)) }}<br> {{$question->user->username}}</p>
-						{{$comment->user->username}}<br>
-						{{$comment->content}}
+						<p class="post_info">{{ date('d M Y H:m',strtotime($question->updated_at)) }}<br><a href="{{URL::to('profile/'. $comment->User->username )}}">{{$comment->user->username}}</a></p><br>
+						<p class="question_content">{{$comment->content}}</p>
 				</div>
 				@endforeach
 		</div>

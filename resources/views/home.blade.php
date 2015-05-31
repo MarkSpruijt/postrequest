@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content')
-	<h1>Laatst gestelde vragen</h1>
+	<h1 class="main_title">Laatst gestelde vragen:</h1>
 
 	@foreach($questions as $question)
 		<a class="a_view" href="{{ URL::to('question/'.$question['id']) }}">

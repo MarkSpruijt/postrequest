@@ -79,7 +79,7 @@ class AnswerController extends Controller {
 		$vote = new AnswerVote;
 		$vote->user_id = $user_id;
 		$vote->answer_id = $id;
-		$vote->vote = -1;
+		$vote->vote = 1;
 		$vote->save();
 
 		return redirect()->back();

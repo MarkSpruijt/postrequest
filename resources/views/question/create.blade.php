@@ -1,11 +1,11 @@
 @extends('app')
 
 @section('content')
-<h1>Vraag stellen</h1>
+<h1>Stel je vraag:</h1>
 {!!	Form::open()  !!}
 	<div class="form-group">
 		{!! Form::label('Titel') !!}<br/>
-		{!! Form::text('title',null,['placeholder' => 'Titel']) !!}
+		{!! Form::text('title',null,['placeholder' => 'Titel', 'class' => 'title']) !!}
 	</div>
 
 	<div class="form-group">
