@@ -76,6 +76,7 @@ input[type="submit"]:hover,
 	width: 100%;
 	background-color: #333;
 	border-bottom: 5px solid #3399ff;
+	height: 161px;
 }
 .adduser{
 	text-align: center;
@@ -83,6 +84,7 @@ input[type="submit"]:hover,
 .header .logo{
 	padding: 5px;
 	width: 200px;
+	float: left;
 }
 input.title{
 	width: 100%;
