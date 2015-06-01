@@ -84,6 +84,7 @@ input[type="submit"]:hover,
 .header .logo{
 	padding: 5px;
 	width: 200px;
+	float: left;
 }
 input.title{
 	width: 100%;
