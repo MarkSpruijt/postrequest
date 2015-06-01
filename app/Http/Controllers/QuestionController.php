@@ -41,7 +41,7 @@ class QuestionController extends Controller {
 		$question = new Question;
 		$question->fill($data)->save(); 
 
-		return redirect('/');
+		return redirect('question/' . $question->id);
 	}
 
 	public function getEdit($id)
