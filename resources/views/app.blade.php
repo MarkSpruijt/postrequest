@@ -20,7 +20,7 @@
 					<li><a href="{{URL::to('/')}}">Overzicht</a></li>
 					<li><a href="{{URL::to('ask')}}">Vraag stellen</a></li>
 						@if (Auth::User()->rank == 100)
-							<li><a href="{{URL::to('admin')}}">AdminPanel</a></li>					
+							<li><a href="{{URL::to('admin')}}">Beheer</a></li>					
 						@endif
 					{{-- <li><a href="{{URL::to('profile/'. Auth::User()->id )}}">{{ Auth::User()->username}}</a></li> --}}
 					<li><a href="">{{ Auth::User()->username}}</a></li>
