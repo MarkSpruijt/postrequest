@@ -24,7 +24,7 @@ class UserTableSeeder extends Seeder {
 
 	public function run()
 	{
-		User::create(['email' => 'docent@mydavinci.nl', 'password' => Hash::make('docent')]);
-		User::create(['email' => 'leerling@mydavinci.nl', 'password' => Hash::make('leerling')]);
+		User::create(['realname' => 'Docent A','email' => 'docent@mydavinci.nl', 'password' => Hash::make('docent'), 'rank' => 100]);
+		User::create(['realname' => 'Leerling A','email' => 'leerling@mydavinci.nl', 'password' => Hash::make('leerling')]);
 	}
 }

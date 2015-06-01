@@ -12,6 +12,7 @@ Route::post('question/{question_id}/{answer_id}/comment', 'CommentController@pos
 Route::get('question/{question_id}/{answer_id}/choose', 'QuestionController@chooseAnswer');
 Route::get('ask','QuestionController@getCreate');
 Route::post('ask','QuestionController@postCreate');
+Route::get('profile/{user_id}','UserController@getProfile');
 
 //if user rank is 100
 Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()

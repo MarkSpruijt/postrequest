@@ -1,7 +1,11 @@
 @extends('app')
 
 @section('content')
-	<h1 class="main_title">Laatst gestelde vragen:</h1>
+<div class="profile_info">
+	<h1>{{ $userdata->realname }}<span>&nbsp&nbsp&nbsp( {{ $userdata->username }} )</span></h1>
+	E-mail: {{ $userdata->email }}<br><br>
+	Rank: {{ $userdata->rank }}
+</div>
 
 	@foreach($questions as $question)
 		<a class="a_view" href="{{ URL::to('question/'.$question['id']) }}">
@@ -17,8 +21,4 @@
 			</div>
 		</a>
 	@endforeach
-{{-- 
-<div>
-  {{ Markdown::render($content) }}
-</div> --}}
 @endsection

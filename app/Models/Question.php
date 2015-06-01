@@ -14,6 +14,11 @@ class Question extends Eloquent{
 		return $this->hasMany('App\Models\Answer');
 	}
 
+	public function user()
+	{
+		return $this->belongsTo('App\Models\User');
+	}
+
 	/**
 	*	Puts the right answer on top.
 	*

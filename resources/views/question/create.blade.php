@@ -1,24 +1,21 @@
 @extends('app')
 
 @section('content')
-Vraag pagina enzo
-
+<h1>Stel je vraag:</h1>
 {!!	Form::open()  !!}
 	<div class="form-group">
-		{!! Form::text('title',null,['placeholder' => 'De Titel.']) !!}
+		{!! Form::label('Titel') !!}<br/>
+		{!! Form::text('title',null,['placeholder' => 'Titel', 'class' => 'title']) !!}
 	</div>
 
 	<div class="form-group">
-		{!! Form::textarea('content',null,['placeholder' => 'Stel hier je vraag.']) !!}
+		{!! Form::label('Typ hier je vraag') !!}<br/>
+		{!! Form::textarea('content',null,['placeholder' => 'De vraag']) !!}
 	</div>
 
 	<div class="form-group">
-		{!! Form::submit('Vraag het aan de gemeenschap',['class' => 'btn btn-primary']) !!}
+		{!! Form::submit('Vraag stellen',['class' => 'btn btn-primary']) !!}
 	</div>
 
 {!! Form::close() !!}
-<a href="{{URL::to('/')}}">Terug</a>
-
-
-
 @endsection

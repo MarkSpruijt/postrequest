@@ -8,6 +8,11 @@ class Comment extends Eloquent{
 		'content','user_id', 'answer_id'
 	];
 
+	public function user()
+	{
+		return $this->belongsTo('App\Models\User');
+	}
+
 	public function answer()
 	{
 		return $this->belongsTo('App\Models\Answer');	

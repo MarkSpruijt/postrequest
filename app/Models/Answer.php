@@ -10,6 +10,10 @@ class Answer extends Model{
 
 	protected $hidden = [];
 
+	public function comments()
+	{
+		return $this->hasMany('App\Models\Comment');
+	}
 	public function Votes(){
 		return $this->hasMany('App\Models\AnswerVote');
 	}

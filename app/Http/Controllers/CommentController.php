@@ -32,6 +32,6 @@ class CommentController extends Controller {
 		$comment = new Comment;
 		$comment->fill($data)->save(); 
 
-		return redirect('/');
+		return redirect()->action('QuestionController@getDetails', $question_id);
 	}
 }

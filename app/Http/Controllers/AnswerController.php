@@ -69,7 +69,4 @@ class AnswerController extends Controller {
 
 		return redirect()->back();
 	}
-
-	
-
 }

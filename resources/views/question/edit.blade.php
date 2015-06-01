@@ -1,7 +1,10 @@
 @extends('app')
 
 @section('content')
+
 <h2>Vraag bewerken</h2>
+		<p>{!! $errors->first('title') !!}</p>
+		<p>{!! $errors->first('content') !!}</p>
 {!!	Form::open()  !!}
 	<div class="form-group">
 		{!! Form::label('Titel') !!}<br/>
@@ -14,7 +17,7 @@
 	</div>
 
 	<div class="form-group">
-		{!! Form::submit('Vraag aanpassen',['class' => 'btn btn-primary']) !!}
+		{!! Form::submit('Wijzigingen opslaan',['class' => 'btn btn-primary']) !!}
 	</div>
 
 {!! Form::close() !!}

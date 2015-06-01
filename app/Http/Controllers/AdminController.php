@@ -16,19 +16,19 @@ class AdminController extends Controller{
 	}
 
 	public function postAdduser(Request $request){
-		$emails = explode(',', $request->input('emails'));
-		foreach($emails as $email){
-			$key = str_random(15);
-			$user = new User;
-			$user->key = $key;
-			$user->email = $email;
-			$user->save();
-			Mail::send('emails.welcome', ['key' => $key], function($message) use ($email)
-			{
-			    $message->to($email, $email)->subject('Welkom bij PostRequest!');
-			});
-		}
-		return view('admin.adduser');
+		$key = str_random(15);
+		$user = new User;
+		$user->key = $key;
+		$user->realname = $request->realname;
+		$user->email = $request->email;
+		$user->rank = $request->rank;
+		$email = $request->email;
+		Mail::send('emails.welcome', ['key' => $key], function($message) use ($email)
+		{
+		    $message->to($email, $email)->subject('Welkom bij PostRequest!');
+		});
+		$user->save();
+		return view('admin.adduser')->with("message", "Account aangemaakt voor '$request->realname'");
 	}
 
 }
