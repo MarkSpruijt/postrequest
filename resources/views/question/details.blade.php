@@ -17,7 +17,9 @@
 
 				<p>Votes: {{$answer['votes']}}
 					<a href="{{URL::to('answer/vote/' . $answer['id'])}}">
+						@if($answer->user_id !== Auth::user()->id)
 						<i title="Upvote!" class="fa fa-chevron-up"></i>
+						@endif
 					</a>
 				</p>
 
