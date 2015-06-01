@@ -4,6 +4,7 @@ use Auth;
 use Hash;
 use Validator;
 use App\Models\User;
+use App\Models\Questions;
 use Illuminate\Http\Request;
 
 class UserController extends Controller{
@@ -88,5 +89,11 @@ class UserController extends Controller{
 		$user->save();
 
 		return redirect('/');
+	}
+
+	public function getProfile(Request $request, $id){
+	  $userdata = User::find($id);
+	  $questions = $userdata->questions;
+	  return view('user/profile')->withuserdata($userdata)->withquestions($questions);
 	}
 }

@@ -23,7 +23,9 @@
 
 				<p>{{$answer['content']}}</p>
 
-				<p class="post_info">{{ date('d M Y H:m',strtotime($question->updated_at)) }}<br><a href="{{URL::to('profile/'. $answer->User->username )}}">{{$answer->User->username}}</p></a>
+				<p class="post_info">{{ date('d M Y H:m',strtotime($question->updated_at)) }}<br>
+				{{-- <a href="{{URL::to('profile/'. $answer->User->id )}}">{{$answer->User->username}}</p></a> --}}
+				<a href="#">{{$answer->User->username}}</p></a>
 
 				<!-- Juiste answer -->
 				@if($question['answer_id'] == $answer->id)
@@ -50,7 +52,9 @@
 				<!-- Antwoorden -->
 				@foreach($answer->comments as $comment)
 					<div class="answer" style="margin: 10px;"> 
-						<p class="post_info">{{ date('d M Y H:m',strtotime($question->updated_at)) }}<br><a href="{{URL::to('profile/'. $comment->User->username )}}">{{$comment->user->username}}</a></p><br>
+						<p class="post_info">{{ date('d M Y H:m',strtotime($question->updated_at)) }}<br>
+							{{-- <a href="{{URL::to('profile/'. $comment->User->id )}}">{{$comment->user->username}}</a> --}}
+							<a href="#">{{$comment->user->username}}</a></p><br>
 						<p class="question_content">{{$comment->content}}</p>
 				</div>
 				@endforeach
