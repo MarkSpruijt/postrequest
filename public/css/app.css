@@ -124,14 +124,6 @@ h1 span{
 	min-height: 60%;
 }
 
-.question_checked{
-		position: absolute;
-	right: 5px;
-	top: 60px;
-	text-align: right;
-	margin-right: 2%;
-}
-
 p.question_content{
 	max-width: 70%;
 }
@@ -143,11 +135,28 @@ p.question_content{
     font-size: 16px;
     line-height: 28px;
 }
-.question_checked::before{
+.checked{
 	color: lime;
-	font-size: 4em;
 }
-
+.checked2::before{
+	color:lime;
+	font-size: 3em;
+}
+.checked::before{
+	font-size: 3em;
+}
+.checked:hover {
+    color: grey;
+}
+.unchecked{
+	color: grey;
+}
+.unchecked::before{
+	font-size: 3em;
+}
+.unchecked:hover{
+	color: lime;
+}
 h2.answers{
 	margin-left: 1%;
 }
