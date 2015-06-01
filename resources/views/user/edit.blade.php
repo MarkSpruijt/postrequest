@@ -2,6 +2,9 @@
 
 @section('content')
 	<h1>Wijzig account</h1>
+	@if(isset($message))
+		<p>{{$message}}</p>
+	@endif
 	<p>{!! $errors->first('username') !!}</p>
 	<p>{!! $errors->first('email') !!}</p>
 	<p>{!! $errors->first('password') !!}</p>

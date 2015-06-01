@@ -105,6 +105,7 @@ class UserController extends Controller{
 
 	public function postEdit(Request $request){
 		$user = User::find(Auth::user()->id);
+		
 		$credentials = $request->only('username','email', 'password');
 		$v = Validator::make($credentials, ['username' => "required|unique:users,id,{$user['id']}",'email' => "required|unique:users,id,{$user['id']}",'password' => 'required']);
 		$v->setAttributeNames(['username' => 'Gebruikersnaam', 'password' => 'Huidig wachtwoord', 'email' => 'E-mail']);
@@ -113,9 +114,26 @@ class UserController extends Controller{
 			$request->flash();
 			return redirect()->back()->withErrors($v->messages());
 		}
-		if(isset($request->newpassword, $request->newpassword2)){
-			return 'test';
+		if(!Auth::validate($request->only('password')))
+		{
+			$request->flash();
+			return redirect()->back()->with("message", "Huidig wachtwoord incorrect.");
 		}
-		dd("hallo");
+		$user->username = $request->input('username');
+		$user->email = $request->input('email');
+		if(!empty($request->input('newpassword')) || !empty($request->input('newpassword2'))){
+			$credentials = $request->only('newpassword','newpassword');
+			$v = Validator::make($credentials, ['newpassword' => 'required|min:8', 'newpassword2' => 'same:password']);
+			$v->setAttributeNames(['username' => 'Gebruikersnaam', 'password' => 'Huidig wachtwoord', 'email' => 'E-mail']);
+			if($v->fails())
+			{
+				$request->flash();
+				return redirect()->back()->withErrors($v->messages());
+			}
+			$user->password = Hash::make($request->input('newpassword'));
+		}
+		$user->save();
+		$request->flash();
+		return redirect()->back()->with("message", "Gebruikers gegevens gewijzigd.");
 	}
 }
