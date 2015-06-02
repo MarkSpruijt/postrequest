@@ -1,8 +1,9 @@
 <?php  namespace App\Http\Controllers;
 
 use App;
-use Auth;
+use Mail;
 use Hash;
+use Auth;
 use Validator;
 use App\Models\User;
 use App\Models\Questions;
@@ -95,6 +96,10 @@ class UserController extends Controller{
 	public function getProfile(Request $request, $id){
 	  $userdata = User::find($id);
 	  $questions = $userdata->questions;
+	  if($userdata->id == Auth::User()->id)
+	  {
+	  	$userdata->showedit = true;
+	  }
 	  return view('user/profile')->withuserdata($userdata)->withquestions($questions);
 	}
 
@@ -135,5 +140,35 @@ class UserController extends Controller{
 		$user->save();
 		$request->flash();
 		return redirect()->back()->withMessages(["type" => "info","messages" => ["Gebruikers gegevens gewijzigd."]]);
+	}
+
+	public function getSendmail($userid)
+	{
+		$user = User::find($userid);
+		return view('user.sendmail')->withUser($user);
+	}
+
+	public function postSendmail($userid, Request $request)
+	{
+		$user = User::find($userid);
+		$content = $request->only('content');
+		$v = Validator::make($content, ['content' => 'required|min:50']);
+		$v->setAttributeNames(['content' => 'Bericht']);
+		if($v->fails())
+		{
+			$request->flash();
+			return redirect()->back()->withMessages(["type" => "error","messages" => $v->messages()->all()]);
+		}
+		$content = $request->get('content');
+		$email = $user->email;
+		$realname = $user->realname;
+		$emailsender = Auth::User()->email;
+		$usernamesender = Auth::User()->username;
+		
+		Mail::send('emails.sendmail', ['content' => $content, 'usernamesender' => $usernamesender, 'emailsender' => $emailsender], function($message) use ($content, $email, $realname, $usernamesender)
+		{
+		    $message->to($email, $realname)->subject("[PostRequest] U heeft een bericht ontvangen van '$usernamesender'");
+		});
+		return view('user.sendmail')->withMessages(['type' => 'info', 'messages' => ["E-mail is verstuurd."]])->withUser($user);
 	}
 }

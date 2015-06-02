@@ -1,11 +1,16 @@
 @extends('app')
 
 @section('content')
+@if($userdata->showedit)
 <a href="{{URL::to('account/edit')}}"><i class="fa fa-cog"></i> Wijzigen</a>
-<div class="profile_info">
-	<h1>{{ $userdata->realname }}<span>&nbsp&nbsp&nbsp( {{ $userdata->username }} )</span></h1>
-	E-mail: {{ $userdata->email }}<br><br>
-	Rank: {{ $userdata->rank }}
+@endif
+<div class="profile_page">
+	<img src="http://i2.pinger.pl/pgr1/a0dc4b1b000310fc4f5a21c2/Avatar.jpg">
+	<h2>{{ $userdata->username }}</h2>
+	<hr>
+	Echte naam: {{ $userdata->realname }}<br>
+	Rang: {{ $userdata->rank }}<br>
+	<a href="{{URL::to('account/sendmail/'. $userdata->id)}}" class="button button-primary">Stuur e-mail</a>
 </div>
 
 	@foreach($questions as $question)
