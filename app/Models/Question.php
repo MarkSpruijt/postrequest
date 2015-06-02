@@ -1,5 +1,6 @@
 <?php namespace App\Models;
 
+use Auth;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use App\Models\AnswerVote;
 
@@ -27,7 +28,7 @@ class Question extends Eloquent{
 	public function sortAnswers()
 	{
 		foreach($this->answers as $answer)
-		{
+		{			
 			//Count votes for answers
 			$votes = AnswerVote::where('answer_id', $answer['id'])->get();
 			$totalvotes = 0;
@@ -41,6 +42,9 @@ class Question extends Eloquent{
 				}
 			}
 			$answer->votes = $totalvotes;
+			if(AnswerVote::where('user_id', Auth::User()->id)->where('answer_id', $answer['id'])->first()){
+				$answer->disablevote = true;
+			}
 		}
 		if($this->answer_id !== NULL)
 		{
@@ -56,8 +60,6 @@ class Question extends Eloquent{
 				}
 			}
 		}
-
-
 	}
 
 }
