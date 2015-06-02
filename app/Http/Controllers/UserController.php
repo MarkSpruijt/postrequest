@@ -112,28 +112,28 @@ class UserController extends Controller{
 		if($v->fails())
 		{
 			$request->flash();
-			return redirect()->back()->withErrors($v->messages());
+			return redirect()->back()->withMessages(["type" => "error","messages" => $v->messages()->all()]);
 		}
 		if(!Auth::validate($request->only('password')))
 		{
 			$request->flash();
-			return redirect()->back()->with("message", "Huidig wachtwoord incorrect.");
+			return redirect()->back()->withMessages(["type" => "error","messages" => ["Huidig wachtwoord incorrect."]]);
 		}
 		$user->username = $request->input('username');
 		$user->email = $request->input('email');
 		if(!empty($request->input('newpassword')) || !empty($request->input('newpassword2'))){
 			$credentials = $request->only('newpassword','newpassword');
 			$v = Validator::make($credentials, ['newpassword' => 'required|min:8', 'newpassword2' => 'same:password']);
-			$v->setAttributeNames(['username' => 'Gebruikersnaam', 'password' => 'Huidig wachtwoord', 'email' => 'E-mail']);
+			$v->setAttributeNames(['newpassword' => 'Nieuwe wachtwoord', 'newpassword2' => 'Wachtwoord bevestiging']);
 			if($v->fails())
 			{
 				$request->flash();
-				return redirect()->back()->withErrors($v->messages());
+				return redirect()->back()->withMessages(["type" => "error","messages" => $v->messages()->all()]);
 			}
 			$user->password = Hash::make($request->input('newpassword'));
 		}
 		$user->save();
 		$request->flash();
-		return redirect()->back()->with("message", "Gebruikers gegevens gewijzigd.");
+		return redirect()->back()->withMessages(["type" => "info","messages" => ["Gebruikers gegevens gewijzigd."]]);
 	}
 }
