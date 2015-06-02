@@ -1,6 +1,7 @@
 <?php  namespace App\Http\Controllers;
 
 use Mail;
+use Validator;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -8,7 +9,8 @@ class AdminController extends Controller{
 	
 	public function getIndex()
 	{
-		return view('admin.show');
+		$users = User::orderBy('realname', 'ASC')->get();
+		return view('admin.show', compact('users'));
 	}
 
 	public function getAdduser(){
@@ -16,6 +18,28 @@ class AdminController extends Controller{
 	}
 
 	public function postAdduser(Request $request){
+		$user =  null;
+		$v = Validator::make(
+			$request->all(),
+			[
+				'email' => 'required|email|unique:users',
+				'rank' => 'required',
+				'name' => 'required',
+			]
+		);
+
+		$v->setAttributeNames(['email' => 'E-mail', 'name' => 'Naam', 'rank' => 'Rang']);
+
+
+		if($v->fails())
+		{
+			if ($v->failed()['email']['Unique']){
+				$user = User::where('email', '=', $request->get('email'))->first();
+			}
+			
+			return redirect()->action('AdminController@getAdduser')->withMessages(['type' => 'error', 'messages' => $v->messages()->all()])->withUser($user);
+		}
+
 		$key = str_random(15);
 		$user = new User;
 		$user->key = $key;
