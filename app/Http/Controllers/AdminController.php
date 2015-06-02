@@ -24,16 +24,16 @@ class AdminController extends Controller{
 			[
 				'email' => 'required|email|unique:users',
 				'rank' => 'required',
-				'name' => 'required',
+				'realname' => 'required',
 			]
 		);
 
-		$v->setAttributeNames(['email' => 'E-mail', 'name' => 'Naam', 'rank' => 'Rang']);
+		$v->setAttributeNames(['email' => 'E-mail', 'realname' => 'Naam', 'rank' => 'Rang']);
 
 
 		if($v->fails())
 		{
-			if ($v->failed()['email']['Unique']){
+			if (isset($v->failed()['email']['Unique'])){
 				$user = User::where('email', '=', $request->get('email'))->first();
 			}
 			

@@ -19,5 +19,5 @@
 		{!! Form::select("rank", [0 => 'Leerling', 100 => "Docent"]) !!}
 		{!! Form::submit('Verstuur') !!}
 {!! Form::close() !!}
-<a href="{{URL::to('admin')}}">Terug</a>
+<a class="button"href="{{URL::to('admin')}}">Terug</a>
 @endsection

@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content')
-<a href="{{URL::to('admin/adduser')}}">Gebruiker(s) toevoegen</a>	
+<a class="button" href="{{URL::to('admin/adduser')}}">Gebruiker(s) toevoegen</a>	
 	<table class="u-full-width">
   		<thead>
 		    <tr>
