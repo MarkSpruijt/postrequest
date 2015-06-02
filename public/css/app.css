@@ -265,6 +265,11 @@ div.question:hover{
 	color: #555;
 }
 
+.avatar {
+	width: 200px;
+	height: 200px;
+}
+
 .footer{
 	background-color: #333;
 	border-top: 5px solid #3399ff;
