@@ -76,6 +76,7 @@ input[type="submit"]:hover,
 	width: 100%;
 	background-color: #333;
 	border-bottom: 5px solid #3399ff;
+	height: 161px;
 }
 .adduser{
 	text-align: center;
@@ -83,6 +84,7 @@ input[type="submit"]:hover,
 .header .logo{
 	padding: 5px;
 	width: 200px;
+	float: left;
 }
 input.title{
 	width: 100%;
@@ -122,14 +124,6 @@ h1 span{
 	min-height: 60%;
 }
 
-.question_checked{
-		position: absolute;
-	right: 5px;
-	top: 60px;
-	text-align: right;
-	margin-right: 2%;
-}
-
 p.question_content{
 	max-width: 70%;
 }
@@ -141,11 +135,28 @@ p.question_content{
     font-size: 16px;
     line-height: 28px;
 }
-.question_checked::before{
+.checked{
 	color: lime;
-	font-size: 4em;
 }
-
+.checked2::before{
+	color:lime;
+	font-size: 3em;
+}
+.checked::before{
+	font-size: 3em;
+}
+.checked:hover {
+    color: grey;
+}
+.unchecked{
+	color: grey;
+}
+.unchecked::before{
+	font-size: 3em;
+}
+.unchecked:hover{
+	color: lime;
+}
 h2.answers{
 	margin-left: 1%;
 }
@@ -231,10 +242,44 @@ div.question:hover{
 .question_solved a{
 	background-color: #B5FFBE;
 }
+/* Info/Error Messages */
+.messages {
+	list-style: none;
+}
+
+.messages li {
+	padding: 5px;
+	font-weight: bold;
+	margin: 5px 0;
+	border: 2px solid #CCC;
+}
+
+.messages li.error {
+	background-color: #FF7D7D;
+	border-color: #FF4F4F;
+	color: #9E0000;
+}
+.messages li.info {
+	background-color: #CCC;
+	border-color: #AAA;
+	color: #555;
+}
 
 .footer{
 	background-color: #333;
 	border-top: 5px solid #3399ff;
 	text-align: center;
 	color: #fff;
+}
+
+a.upvote{
+	color: black;
+}
+
+a.upvote:hover{
+	color: grey;
+};
+
+.votecount{
+	text-align: left
 }

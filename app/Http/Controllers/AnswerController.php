@@ -54,7 +54,7 @@ class AnswerController extends Controller {
 
 	}
 
-	public function getVote($id){
+	public function getVote($id,$votenumber = 1){
 		$user_id = Auth::user()->id;
 		//check if user has voted allready
 		if(AnswerVote::where('user_id', $user_id)->where('answer_id', $id)->first()){
@@ -63,27 +63,9 @@ class AnswerController extends Controller {
 		$vote = new AnswerVote;
 		$vote->user_id = $user_id;
 		$vote->answer_id = $id;
-		$vote->vote = 1;
+		$vote->vote = $votenumber;
 		$vote->save();
 
 		return redirect()->back();
 	}
-
-		public function getDownVote($id){
-		$user_id = Auth::user()->id;
-		//check if user has voted allready
-		if(AnswerVote::where('user_id', $user_id)->where('answer_id', $id)->first()){
-			return redirect()->back();
-		}
-		$vote = new AnswerVote;
-		$vote->user_id = $user_id;
-		$vote->answer_id = $id;
-		$vote->vote = 1;
-		$vote->save();
-
-		return redirect()->back();
-	}
-
-	
-
 }

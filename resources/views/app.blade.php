@@ -20,15 +20,26 @@
 					<li><a href="{{URL::to('/')}}">Overzicht</a></li>
 					<li><a href="{{URL::to('ask')}}">Vraag stellen</a></li>
 						@if (Auth::User()->rank == 100)
-							<li><a href="{{URL::to('admin')}}">AdminPanel</a></li>					
+							<li><a href="{{URL::to('admin')}}">Beheer</a></li>					
 						@endif
-					<li><a href="{{URL::to('profile/'. Auth::User()->username )}}">{{ Auth::User()->username}}</a></li>
+					<li><a href="{{URL::to('profile/'. Auth::User()->id )}}">{{ Auth::User()->username}}</a></li>
 					<li><a href="{{URL::to('account/logout')}}">Uitloggen</a></li>
 				@endif
 			</ul>
 	</div>
 	<div class="content frame">
 		<div class="content_wrapper">
+			<?php
+				if(Session::has('messages'))
+					$messages = Session::get('messages');
+			?>
+			@if(isset($messages))
+			<ul class='messages'>
+				@foreach($messages['messages'] as $message)
+				<li class='{{ $messages['type'] }}'>{{ ucfirst($messages['type']) }}: {{ $message }}</li>
+				@endforeach
+			</ul>
+			@endif
 			@yield('content')
 		</div>
 	</div>

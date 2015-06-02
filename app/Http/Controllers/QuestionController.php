@@ -31,6 +31,7 @@ class QuestionController extends Controller {
 	}
 
 	public function getCreate(){
+
 		return view('question/create');
 	}
 
@@ -38,10 +39,18 @@ class QuestionController extends Controller {
 	{
 		$data = $request ->only('title','content');
 		$data['user_id'] = Auth::user()->id;
+
+		$v = Validator::make($data, ['title' => 'required', 'content' => 'required|min:120']);
+
+		if($v->fails())
+		{
+			return redirect()->action('QuestionController@getCreate')->withMessages(['type' => 'error', 'messages' => $v->messages()->all()]);
+		}
+
 		$question = new Question;
 		$question->fill($data)->save(); 
 
-		return redirect('/');
+		return redirect('question/' . $question->id);
 	}
 
 	public function getEdit($id)
