@@ -234,6 +234,29 @@ div.question:hover{
 	background-color: #B5FFBE;
 }
 
+/* Info/Error Messages */
+.messages {
+	list-style: none;
+}
+
+.messages li {
+	padding: 5px;
+	font-weight: bold;
+	margin: 5px 0;
+	border: 2px solid #CCC;
+}
+
+.messages li.error {
+	background-color: #FF7D7D;
+	border-color: #FF4F4F;
+	color: #9E0000;
+}
+.messages li.info {
+	background-color: #CCC;
+	border-color: #AAA;
+	color: #555;
+}
+
 .footer{
 	background-color: #333;
 	border-top: 5px solid #3399ff;
