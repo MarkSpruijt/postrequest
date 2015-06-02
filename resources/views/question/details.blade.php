@@ -58,7 +58,9 @@
 							{{-- <a href="{{URL::to('profile/'. $comment->User->id )}}">{{$comment->user->username}}</a> --}}
 							<a href="#">{{$comment->user->username}}</a></p><br>
 						<p class="question_content">{{$comment->content}}</p>
-				</div>
+						@if($comment->user_id == Auth::user()->id)
+						<a href='{{ action('CommentController@getEdit', [$question->id, $answer->id, $comment->id]) }}'>Bewerken</a>
+				</div>	@endif
 				@endforeach
 		</div>
 	@endforeach

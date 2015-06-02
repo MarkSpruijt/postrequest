@@ -34,4 +34,33 @@ class CommentController extends Controller {
 
 		return redirect()->action('QuestionController@getDetails', $question_id);
 	}
+
+	public function getEdit($question_id, $answer_id, $comment_id)
+	{
+		$comment = Comment::find($comment_id);
+		
+		if(!$comment->exists || $comment->user_id !== Auth::user()->id)
+		{
+			return App::abort(403);
+		}
+
+		return view('comment/edit')->withComment($comment);
+	}
+
+	public function postEdit(Request $request, $question_id, $answer_id, $comment_id)
+	{
+		$data = $request ->only('content');
+
+		$comment = Comment::find($comment_id);
+
+		if(!$comment->exists || $comment->user_id !== Auth::user()->id)
+		{
+			return App::abort(403);
+		}
+
+		$comment->fill($data)->save();
+	
+		return redirect()->action('QuestionController@getDetails', $question_id);
+	}
+
 }
