@@ -44,6 +44,7 @@ class QuestionController extends Controller {
 
 		if($v->fails())
 		{
+			$request->flash();
 			return redirect()->action('QuestionController@getCreate')->withMessages(['type' => 'error', 'messages' => $v->messages()->all()]);
 		}
 
