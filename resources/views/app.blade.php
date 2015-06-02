@@ -29,6 +29,13 @@
 	</div>
 	<div class="content frame">
 		<div class="content_wrapper">
+			@if(isset($messages))
+			<ul class='messages'>
+				@foreach($messages['messages'] as $message)
+				<li class='{{ $messages['type'] }}'>{{ ucfirst($messages['type']) }}: {{ $message }}</li>
+				@endforeach
+			</ul>
+			@endif
 			@yield('content')
 		</div>
 	</div>
