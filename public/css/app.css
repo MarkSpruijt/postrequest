@@ -242,10 +242,21 @@ div.question:hover{
 .question_solved a{
 	background-color: #B5FFBE;
 }
-
 .footer{
 	background-color: #333;
 	border-top: 5px solid #3399ff;
 	text-align: center;
 	color: #fff;
+}
+
+a.upvote{
+	color: black;
+}
+
+a.upvote:hover{
+	color: grey;
+};
+
+.votecount{
+	text-align: left
 }
