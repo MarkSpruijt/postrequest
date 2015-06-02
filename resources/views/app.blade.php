@@ -29,6 +29,10 @@
 	</div>
 	<div class="content frame">
 		<div class="content_wrapper">
+			<?php
+				if(Session::has('messages'))
+					$messages = Session::get('messages');
+			?>
 			@if(isset($messages))
 			<ul class='messages'>
 				@foreach($messages['messages'] as $message)
