@@ -1,6 +1,7 @@
 @extends('app')
 
 @section('content')
+<a href="{{URL::to('account/edit')}}"><i class="fa fa-cog"></i> Wijzigen</a>
 <div class="profile_info">
 	<h1>{{ $userdata->realname }}<span>&nbsp&nbsp&nbsp( {{ $userdata->username }} )</span></h1>
 	E-mail: {{ $userdata->email }}<br><br>
