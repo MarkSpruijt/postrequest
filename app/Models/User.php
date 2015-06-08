@@ -38,11 +38,21 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		 return $this->hasMany('App\Models\Question');
 	}
 
+	/**
+	 * Returns an url to the users avatar image.
+	 *
+	 * @var string
+	 */
 	public function avatar()
 	{
 		return asset($this->getAvatarFileName());
 	}
 
+	/**
+	 * Returns the file path to the image.
+	 *
+	 * @var string
+	 */
 	public function getAvatarFileName()
 	{
 		$avatars = glob('avatars/' . Auth::user()->id .'.*' );
@@ -54,6 +64,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		
 	}
 
+	/**
+	 * Checks if the user has an avatar.
+	 *
+	 * @var boolean
+	 */
 	public function hasAvatar()
 	{
 		$avatars = glob('avatars/' . Auth::user()->id .'.*' );
@@ -63,6 +78,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 			return false;
 	}
 
+	/**
+	 * Deletes the users avatar. */
 	public function deleteAvatar()
 	{
 		if($this->hasAvatar())
