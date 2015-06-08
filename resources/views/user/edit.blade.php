@@ -10,13 +10,17 @@
 	<p>{!! $errors->first('password') !!}</p>
 	<p>{!! $errors->first('newpassword') !!}</p>
 	<p>{!! $errors->first('newpassword2') !!}</p>
-	{!! Form::open() !!}
+	{!! Form::open(['files' => true]) !!}
 			
 			{!! Form::label('Gebruikersnaam') !!}
 			{!! Form::text('username', $user['username']) !!}
 
 			{!! Form::label('E-mail') !!}
 			{!! Form::email('email', $user['email']) !!}
+
+			{!! Form::label('Avatar') !!}
+			<img src="{{ $user->avatar() }}" class='avatar'>
+			{!! Form::file('avatar') !!}
 
 			{!! Form::label('Nieuw wachtwoord') !!}
 			{!! Form::password('newpassword') !!}

@@ -111,31 +111,69 @@ class UserController extends Controller{
 	public function postEdit(Request $request){
 		$user = User::find(Auth::user()->id);
 		
+		$failed = false;
+
 		$credentials = $request->only('username','email', 'password');
-		$v = Validator::make($credentials, ['username' => "required|unique:users,id,{$user['id']}",'email' => "required|unique:users,id,{$user['id']}",'password' => 'required']);
-		$v->setAttributeNames(['username' => 'Gebruikersnaam', 'password' => 'Huidig wachtwoord', 'email' => 'E-mail']);
-		if($v->fails())
+		$validator = Validator::make($credentials, ['username' => "required|unique:users,id,{$user['id']}",'email' => "required|unique:users,id,{$user['id']}",'password' => 'required']);
+		$validator->setAttributeNames(['username' => 'Gebruikersnaam', 'password' => 'Huidig wachtwoord', 'email' => 'E-mail']);
+		
+		if($validator->fails())
 		{
-			$request->flash();
-			return redirect()->back()->withMessages(["type" => "error","messages" => $v->messages()->all()]);
+			$failed = true;
 		}
-		if(!Auth::validate($request->only('password')))
+
+		// Klopt het huidige wachtwoord?
+		if(!Auth::validate(['email' => $user->email, 'password' => $request->get('password')]))
 		{
 			$request->flash();
 			return redirect()->back()->withMessages(["type" => "error","messages" => ["Huidig wachtwoord incorrect."]]);
 		}
+		
 		$user->username = $request->input('username');
 		$user->email = $request->input('email');
+
+		// Update password if needed.
 		if(!empty($request->input('newpassword')) || !empty($request->input('newpassword2'))){
 			$credentials = $request->only('newpassword','newpassword');
 			$v = Validator::make($credentials, ['newpassword' => 'required|min:8', 'newpassword2' => 'same:password']);
 			$v->setAttributeNames(['newpassword' => 'Nieuwe wachtwoord', 'newpassword2' => 'Wachtwoord bevestiging']);
 			if($v->fails())
 			{
-				$request->flash();
-				return redirect()->back()->withMessages(["type" => "error","messages" => $v->messages()->all()]);
+				$failed = true;
+				$validator->messages()->merge($v->messages());
 			}
 			$user->password = Hash::make($request->input('newpassword'));
+		}
+
+		// Update image if needed.
+		if($request->hasFile('avatar'))
+		{
+			$avatar = $request->file('avatar');
+			$v = Validator::make(['avatar' => $avatar], ['avatar' => 'mimes:jpeg,jpg,png|image|max:500']);
+			$v->setAttributeNames(['avatar' => 'Avatar']);
+
+			if($v->fails())
+			{
+				$failed = true;
+				$validator->messages()->merge($v->messages());
+			}
+			else
+			{			
+				$user = Auth::user();
+				$user->deleteAvatar();
+
+				// Replace it with the new one.
+				$avatar->move('avatars', $user->id . '.' . $avatar->getClientOriginalExtension());
+			}
+
+		}
+
+		// als er iets fout gegaan is
+		if($failed)
+		{
+			$request->flash();
+
+			return redirect()->back()->withMessages(["type" => "error","messages" => $validator->messages()->all()]);
 		}
 		$user->save();
 		$request->flash();
