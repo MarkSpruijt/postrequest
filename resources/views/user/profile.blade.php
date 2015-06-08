@@ -1,6 +1,9 @@
 @extends('app')
 
 @section('content')
+@if (Auth::User()->rank == 100)
+	<a href="{{URL::to('account/edit')}}"><i class="fa fa-cog"></i> Wijzigen</a>					
+@endif
 @if($userdata->showedit)
 <a href="{{URL::to('account/edit')}}"><i class="fa fa-cog"></i> Wijzigen</a>
 @endif

@@ -58,6 +58,18 @@
 				@foreach($answer->comments as $comment)
 					<div class="answer" style="margin: 10px;"> 
 						<p class="post_info">{{ date('d M Y H:m',strtotime($question->updated_at)) }}<br><a href="{{URL::to('profile/'. $comment->User->username )}}">{{$comment->user->username}}</a>
+											@if (!isset($answer->disablevote))
+						<a class="upvote" href="{{URL::to('answer/vote/' . $answer['id'])}}">
+						<i title="Upvote!" class="fa fa-chevron-up"></i><br>
+						</a>
+					@endif
+
+					<strong class="votecount">{{$answer['votes']}}</strong><br>
+					@if (!isset($answer->disablevote))
+						<a class="upvote" href="{{URL::to('answer/vote/' . $answer['id'] ."/0")}}">
+						<i title="Downvote!" class="fa fa-chevron-down"></i><br>
+						</a>
+					@endif
 						@foreach($question->answers as $answer)
 
 						@endforeach

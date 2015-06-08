@@ -14,7 +14,7 @@
 		  <tbody>
 		  	@foreach($users as $user)
 		    	<tr>		    	
-			      <td>{{ $user->realname }}</td>
+			      <td><a href="{{URL::to('/profile/' .$user->id)}}">{{ $user->realname }}</a></td>
 			      <td>{{ $user->username }}</td>
 			      <td>{{ $user->rank }}</td>
 			      <td>{{ $user->email }}</td>
