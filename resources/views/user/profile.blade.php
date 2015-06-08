@@ -8,7 +8,7 @@
 <a href="{{URL::to('account/edit')}}"><i class="fa fa-cog"></i> Wijzigen</a>
 @endif
 <div class="profile_page">
-	<img src="http://i2.pinger.pl/pgr1/a0dc4b1b000310fc4f5a21c2/Avatar.jpg">
+	<img class="avatar" src="{{$userdata->avatar()}}">
 	<h2>{{ $userdata->username }}</h2>
 	<hr>
 	Echte naam: {{ $userdata->realname }}<br>

@@ -56,6 +56,11 @@ class UserController extends Controller{
 	}
 
 	public function getActivate($key){
+		$user = User::where('key', $key)->first();
+		if($user == NULL){
+			return App::abort(404);
+		}
+
 		return view('user.activate');
 	}
 
