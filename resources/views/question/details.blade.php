@@ -1,12 +1,21 @@
 @extends('app')
 
 @section('content')
-	<div class="question_detail" style="margin: 10px;"> 
+	<div class="question_detail" style="margin: 10px;">
 		<h1>{{ucfirst($question['title'])}}</h1>
-		<p class="question_content">{!! Markdown::convertToHtml(HTML::entities($question['content'])) !!}</p>
+
+		<p class="post_info">
+			{{ $question->updated_at->toDateTimeString() }}<br>
+			<img class="avatar_min" src="{{$question->User->avatar()}}"><br>
+			<a href="{{URL::to('profile/'. $question->User->id )}}">{{$question->User->username}}</a>
+		</p>
+
+		<div class="question_content">
+			{!! Markdown::convertToHtml(HTML::entities($question['content'])) !!}
 			@if($question->user_id == Auth::user()->id)
 				<a href='{{ URL::to('question/edit/' . $question->id) }}'>Bewerk je vraag</a>
 			@endif
+		</div>
 	</div>
 		<h2 class="answers">Antwoorden:</h2>
 			@foreach($question->answers as $answer)
@@ -28,11 +37,11 @@
 					@endif
 				<p>{!! Markdown::convertToHtml(HTML::entities($answer['content'])) !!}</p>
 
-				<p class="post_info">{{ date('d M Y H:m',strtotime($question->updated_at)) }}<br>
-				{{-- <a href="{{URL::to('profile/'. $answer->User->id )}}">{{$answer->User->username}}</p></a> --}}
-				<a href="#">{{$answer->User->username}}</p></a>
 
-				<p class="post_info">{{ date('d M Y H:m',strtotime($question->updated_at)) }}<br><a href="{{URL::to('profile/'. $answer->User->id )}}">{{$answer->User->username}}</a><br><br>
+					<p class="post_info">
+					{{ $answer->updated_at->toDateTimeString() }}<br>
+					<img class="avatar_min" src="{{$answer->User->avatar()}}"><br>
+					<a href="{{URL::to('profile/'. $answer->User->id )}}">{{$answer->User->username}}</a><br><br>
 					@if (!isset($answer->disablevote))
 						<a class="upvote" href="{{URL::to('answer/vote/' . $answer['id'])}}">
 						<i title="Upvote!" class="fa fa-chevron-up"></i><br>
@@ -57,8 +66,11 @@
 				<!-- Antwoorden -->
 				@foreach($answer->comments as $comment)
 					<div class="answer" style="margin: 10px;"> 
-						<p class="post_info">{{ date('d M Y H:m',strtotime($question->updated_at)) }}<br><a href="{{URL::to('profile/'. $comment->User->username )}}">{{$comment->user->username}}</a>
-											@if (!isset($answer->disablevote))
+						<p class="post_info">
+						{{ $answer->updated_at->toDateTimeString() }}<br>
+						<img class="avatar_min" src="{{$comment->User->avatar()}}"><br>
+						<a href="{{URL::to('profile/'. $comment->User->id )}}">{{$comment->User->username}}</a><br><br>
+						@if (!isset($answer->disablevote))
 						<a class="upvote" href="{{URL::to('answer/vote/' . $answer['id'])}}">
 						<i title="Upvote!" class="fa fa-chevron-up"></i><br>
 						</a>
@@ -70,10 +82,6 @@
 						<i title="Downvote!" class="fa fa-chevron-down"></i><br>
 						</a>
 					@endif
-						@foreach($question->answers as $answer)
-
-						@endforeach
-						</p><br>
 						<p class="question_content">{{$comment->content}}</p>
 						@if($comment->user_id == Auth::user()->id)
 						<a href='{{ action('CommentController@getEdit', [$question->id, $answer->id, $comment->id]) }}'>Bewerken</a>
