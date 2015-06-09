@@ -69,13 +69,17 @@
 			<!-- Antwoorden -->
 			@foreach($answer->comments as $comment)
 				<div class="answer" style="margin: 10px;"> 
+					@if (!isset($comment->disablevote))
 						<a class="upvote" href="{{URL::to('comment/vote/' . $comment['id'])}}">
 							<i title="Upvote!" class="fa fa-chevron-up"></i><br>
 						</a>
+					@endif
 						<strong class="votecount">{{$comment['votes']}}</strong><br>
+					@if (!isset($comment->disablevote))
 						<a class="upvote" href="{{URL::to('comment/vote/' . $comment['id'] ."/0")}}">
 							<i title="Downvote!" class="fa fa-chevron-down"></i><br>
 						</a>
+					@endif
 					<p class="post_info">
 						{{ $answer->updated_at->toDateTimeString() }}<br>
 						<img class="avatar_min" src="{{$comment->User->avatar()}}"><br>
@@ -91,6 +95,7 @@
 					@endif
 				</div>
 			@endforeach	
+		</div>
 	@endforeach
 	<a class="button" href="{{ URL::to('answer/create/'.$question['id']) }}">Stuur antwoord</a>
 @endsection

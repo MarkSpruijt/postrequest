@@ -6,6 +6,7 @@ use Auth;
 use App\Models\Question;
 use App\Models\Answer;
 use App\Models\Comment;
+use App\Models\CommentVote;
 
 class CommentController extends Controller {
 
@@ -58,6 +59,20 @@ class CommentController extends Controller {
 		$comment->fill($data)->save();
 	
 		return redirect()->action('QuestionController@getDetails', $question_id);
+	}
+	public function getVote($id,$votenumber = 1){
+		$user_id = Auth::user()->id;
+		//check if user has voted allready
+		if(CommentVote::where('user_id', $user_id)->where('comment_id', $id)->first()){
+			return redirect()->back();
+		}
+		$vote = new CommentVote;
+		$vote->user_id = $user_id;
+		$vote->comment_id = $id;
+		$vote->vote = $votenumber;
+		$vote->save();
+
+		return redirect()->back();
 	}
 
 }
