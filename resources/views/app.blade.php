@@ -5,7 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Post Request</title>
-		<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+		<link href="{{ asset('/css/app2.css') }}" rel="stylesheet">
 		<link rel="stylesheet" href="{{ asset('/css/font-awesome.min.css')}}">
 		<link rel="stylesheet" href="{{ asset('/css/normalize.css')}}">
 	 	<link rel="stylesheet" href="{{ asset('/css/skeleton.css')}}">
@@ -27,8 +27,7 @@
 				@endif
 			</ul>
 	</div>
-	<div class="content frame">
-		<div class="content_wrapper">
+	<div class="contentbox frame">
 			<?php
 				if(Session::has('messages'))
 					$messages = Session::get('messages');
@@ -41,7 +40,6 @@
 			</ul>
 			@endif
 			@yield('content')
-		</div>
 	</div>
 	<div class="footer frame">
 		<p>PostRequest &copy;2015</p>

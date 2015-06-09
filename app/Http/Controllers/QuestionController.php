@@ -17,7 +17,7 @@ class QuestionController extends Controller {
 
 	public function getIndex()
 	{
-		$questions = Question::orderBy('created_at', 'ASC')->get();
+		$questions = Question::orderBy('created_at', 'DESC')->get();
 		return view('home', compact('questions'));
 
 	}

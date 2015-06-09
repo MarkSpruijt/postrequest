@@ -1,0 +1,245 @@
+/*
+	Imports & Includes
+*/
+	
+	@import url(http://fonts.googleapis.com/css?family=Raleway);
+
+/*
+	Frame & Body
+*/
+
+	html,body
+	{
+		margin: 0;
+		background-image: url('../images/bg.jpg');
+		height: 100%;
+	}
+	.frame
+	{
+		max-width: 1000px;
+		margin: 0 auto;
+		padding: 10px;
+	}
+
+/*
+	Font
+*/
+
+	*
+	{
+		font-family: 'Raleway', 'Verdana', 'Arial';
+		color: #222;
+	}
+
+/*
+	Default style for Headers, Links, Text
+*/
+	a
+	{
+		text-decoration: none;
+		color: #3399ff;
+	}
+	a:hover
+	{
+		color: gray;
+	}
+
+/*
+	Header & Menu
+*/
+
+	.header
+	{
+		width: 100%;
+		background-color: #333;
+		border-bottom: 5px solid #3399ff;
+		height: 161px;
+	}
+
+	.header .logo
+	{
+		padding: 5px;
+		width: 200px;
+		float: left; /* Fix for menu rendering on top of content */
+	}
+
+	.header .menu
+	{
+		max-width: 70%;
+		margin: 10px;
+		font-size: 16pt;
+		text-align: right;
+		padding-top: 120px;
+		float: right;
+	}
+	.header .menu li
+	{
+		display: inline;
+		padding-left: 10px;
+	}
+	.header .menu li a
+	{
+		transition: 0.5s color;
+		color: #fff;
+	}
+	.header .menu li a:hover
+	{
+		color: #3399ff;
+	}
+
+/*
+	ContentBox
+*/
+
+	.contentbox
+	{
+		background-color: #fff;
+		min-height: 60%;
+	}
+
+/*
+	Default css for Forms & Inputs
+*/
+input,select,textarea,.button
+{
+	width: 100%;
+}
+
+/*
+	Public Custom Classes
+*/
+
+	.avatar
+	{
+		width: 200px;
+		height: 200px;
+	}
+
+	.avatar_small
+	{
+		width: 100px;
+		height: 100px;
+	}
+
+/*
+	Messages
+*/
+	.messages 
+	{
+		list-style: none;
+	}
+
+	.messages li 
+	{
+		padding: 5px;
+		font-weight: bold;
+		margin: 5px 0;
+		border: 2px solid #CCC;
+	}
+
+	.messages li.error 
+	{
+		background-color: #FF7D7D;
+		border-color: #FF4F4F;
+		color: #9E0000;
+	}
+	.messages li.info 
+	{
+		background-color: #CCC;
+		border-color: #AAA;
+		color: #555;
+	}
+
+/*
+	Box for Questions, Answers & Comments
+*/
+
+	.box
+	{
+		position: relative;
+		display: block;
+		border: 2px solid #CCC;
+		position: relative;
+		clear: both;
+		float: left;
+		width: 100%;
+		margin: 1% 0px;
+		background-color: #fff;
+	}
+
+	.box_inner_large
+	{
+		width: 79%;
+		float: right;
+		padding: 3%;
+	}
+
+	.box_inner_small
+	{
+		float: right;
+		width: 15%;
+		text-align: center;
+		background-color: #CCC;
+	}
+
+	.box_inner_small a
+	{
+		color: #222;
+	}
+
+
+/*
+	Questions on the homepage
+*/
+
+	.question
+	{
+		position: relative;
+		display: block;
+		border: 2px solid #CCC;
+		position: relative;
+		margin: 5px;
+		padding: 5px;
+		padding-left: 5px;
+	}
+
+	.question .title
+	{
+		text-align: left;
+	}
+
+	.question .info
+	{
+		text-align: right;
+		position: absolute;
+		right: 5px;
+	}
+
+	.question_solved
+	{
+		background-color: rgba(0,255,0, 0.3);
+	}
+
+/*
+	Answers & Questions for detailpage
+*/
+
+	.answer_solved
+	{
+		background-color: rgba(0,255,0, 0.3);
+	}
+
+
+
+
+/*
+	Footer
+*/
+	
+	.footer
+	{
+		background-color: #333;
+		border-top: 5px solid #3399ff;
+		text-align: center;
+		color: #fff;
+	}
