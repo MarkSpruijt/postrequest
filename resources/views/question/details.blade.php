@@ -77,14 +77,14 @@
 					<img class="avatar_small" src="{{$comment->User->avatar()}}"><br>
 					<a href="{{URL::to('profile/'. $comment->User->id )}}">{{$comment->User->username}}</a><br><br>
 					@if (!isset($comment->disablevote))
-						<a class="upvote" href="{{URL::to('comment/vote/' . $answer['id'])}}">
+						<a class="upvote" href="{{URL::to('comment/vote/' . $comment['id'])}}">
 							<i title="Upvote!" class="fa fa-chevron-up"></i><br>
 						</a>
 					@endif
 
-					<strong class="votecount">{{$answer['votes']}}</strong><br>
+					<strong class="votecount">{{$comment['votes']}}</strong><br>
 					@if (!isset($comment->disablevote))
-						<a class="upvote" href="{{URL::to('comment/vote/' . $answer['id'] ."/0")}}">
+						<a class="upvote" href="{{URL::to('comment/vote/' . $comment['id'] ."/0")}}">
 							<i title="Downvote!" class="fa fa-chevron-down"></i><br>
 						</a>
 					@endif

@@ -229,7 +229,28 @@ input,select,textarea,.button
 		background-color: rgba(0,255,0, 0.3);
 	}
 
-
+	.checked{
+		color: lime;
+	}
+	.checked2::before{
+		color:lime;
+		font-size: 3em;
+	}
+	.checked::before{
+		font-size: 3em;
+	}
+	.checked:hover {
+	    color: gray;
+	}
+	.unchecked{
+		color: gray;
+	}
+	.unchecked::before{
+		font-size: 3em;
+	}
+	.unchecked:hover{
+		color: lime;
+	}
 
 
 /*
