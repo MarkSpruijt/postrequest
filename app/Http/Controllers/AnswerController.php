@@ -8,28 +8,29 @@ use Illuminate\Http\Request;
 
 class AnswerController extends Controller {
 
-	public function __construct(){
-		$this->middleware('App\Http\Middleware\Authenticate');
-	}
+	public function getIndex($id = 1) {
 
-	public function getIndex($id = 1){
 		$answers = Answer::where('question_id', $id)->get();
+
 		return view('answer.show')->with('answers', $answers);
 	}
 
-	public function getCreate(){
+	public function getCreate() {
+
 		return view('answer.add');
 	}
 
 	public function postCreate(Request $request, $id){
+
 		$data = $request->only('content');
 		$user_id = Auth::user()->id;
 		Answer::create(['content' => $data['content'],'question_id' => $id, 'user_id' => $user_id]);
+
 		return redirect("question/". $id);
 	}
 
-	public function getEdit($id)
-	{
+	public function getEdit($id) {
+
 		$answer = Answer::find($id);
 
 		if($answer && $answer->user_id == Auth::user()->id)
@@ -38,8 +39,8 @@ class AnswerController extends Controller {
 		return App::abort(403);
 	}
 
-	public function postEdit(Request $request, $id)
-	{
+	public function postEdit(Request $request, $id)	{
+
 		$answer = Answer::find($id);
 		$data = $request->only('content');
 
@@ -55,11 +56,14 @@ class AnswerController extends Controller {
 	}
 
 	public function getVote($id,$votenumber = 1){
+
 		$user_id = Auth::user()->id;
-		//check if user has voted allready
+		
+		// Did the user vote already?
 		if(AnswerVote::where('user_id', $user_id)->where('answer_id', $id)->first()){
 			return redirect()->back();
 		}
+
 		$vote = new AnswerVote;
 		$vote->user_id = $user_id;
 		$vote->answer_id = $id;

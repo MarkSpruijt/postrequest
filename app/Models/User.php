@@ -55,7 +55,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	public function getAvatarFileName()
 	{
-		$avatars = glob('avatars/' . Auth::user()->id .'.*' );
+		$avatars = glob('avatars/' . $this->id .'.*' );
 		
 		if(!empty($avatars))
 			return $avatars[0];
@@ -71,7 +71,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	public function hasAvatar()
 	{
-		$avatars = glob('avatars/' . Auth::user()->id .'.*' );
+		$avatars = glob('avatars/' . $this->id .'.*' );
 		if(!empty($avatars))
 			return true;
 		else
