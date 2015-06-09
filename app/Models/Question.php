@@ -3,6 +3,7 @@
 use Auth;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use App\Models\AnswerVote;
+use App\Models\CommentVote;
 
 class Question extends Eloquent{
 
@@ -28,7 +29,24 @@ class Question extends Eloquent{
 	public function sortAnswers()
 	{
 		foreach($this->answers as $answer)
-		{			
+		{	
+			foreach ($answer->comments as $comment) {
+				$votes = CommentVote::where('comment_id', $comment['id'])->get();
+				$totalvotes = 0;
+				foreach($votes as $vote)
+				{
+					if($vote['vote']){
+						$totalvotes = $totalvotes + 1;
+					}
+					else{
+						$totalvotes = $totalvotes - 1;
+					}
+			}
+			$comment->votes = $totalvotes;
+			if(CommentVote::where('user_id', Auth::User()->id)->where('comment_id', $answer['id'])->first()){
+				$comment->disablevote = true;
+			}
+			}	
 			//Count votes for answers
 			$votes = AnswerVote::where('answer_id', $answer['id'])->get();
 			$totalvotes = 0;
@@ -59,7 +77,7 @@ class Question extends Eloquent{
 					break;
 				}
 			}
-		}
 	}
+}
 
 }

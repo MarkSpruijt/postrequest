@@ -17,4 +17,19 @@ class Comment extends Eloquent{
 	{
 		return $this->belongsTo('App\Models\Answer');	
 	}
+
+	public function TotalVotes(){
+		$votes = $this->Votes;
+		dd($votes);
+		$totalvotes = 0;
+		foreach($votes as $vote){
+			if($vote['vote']){
+				$totalvotes = $totalvotes + 1;
+			}
+			else{
+				$totalvotes = $totalvotes - 1;
+			}
+		}
+		return $totalvotes;
+	}
 }

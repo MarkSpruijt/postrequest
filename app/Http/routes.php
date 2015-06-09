@@ -23,7 +23,8 @@ Route::group(['middleware' => 'App\Http\Middleware\Authenticate'], function()
 	
 	Route::controllers([
 		'account' => 'UserController',
-		'answer' => 'AnswerController'
+		'answer' => 'AnswerController',
+		'comment' => 'CommentController'
 	]);
 });
 //if user rank is 100
