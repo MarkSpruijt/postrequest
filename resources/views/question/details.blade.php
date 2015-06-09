@@ -6,7 +6,7 @@
 			{{ $question->updated_at->toDateTimeString() }}<br>
 			<img class="avatar_small" src="{{$question->User->avatar()}}"><br>
 			<a href="{{URL::to('profile/'. $question->User->id )}}">{{$question->User->username}}</a>
-		</div>
+		</div> <!-- close regel 5 -->
 
 		<div class="box_inner_large">
 			<h1>{{ucfirst($question['title'])}}</h1><hr>
@@ -14,11 +14,11 @@
 			@if($question->user_id == Auth::user()->id)
 				<a href='{{ URL::to('question/edit/' . $question->id) }}'>Bewerk je vraag</a>
 			@endif
-		</div>
-	</div>
+		</div> <!-- close regel 11 -->
+	</div><!-- close regel 4 -->
 		<h2 class="answers">Antwoorden:</h2>
 			@foreach($question->answers as $answer)
-				@if($question['answer_id'] == $answer->id)
+				@if($question['answer_id'] == $answer['id'])
 					<div class="box answer answer_solved">
 				@else
 					<div class="box answer">
@@ -39,7 +39,7 @@
 							<i title="Downvote!" class="fa fa-chevron-down"></i><br>
 							</a>
 						@endif
-					</div>
+					</div> <!-- close regel 26 -->
 
 
 					<div class="box_inner_large">
@@ -89,16 +89,16 @@
 							<i title="Downvote!" class="fa fa-chevron-down"></i><br>
 							</a>
 						@endif
-						</div>
+						</div> <!-- close regel 76 -->
 						<div class="box_inner_large"><p>{{$comment->content}}</p>
 						@if($comment->user_id == Auth::user()->id)
 							<a href='{{ action('CommentController@getEdit', [$question->id, $answer->id, $comment->id]) }}'>Bewerken</a>
-						</div>	
+						</div>	<!-- close regel 93 -->
 					@endif
-				</div>
+				</div><!-- close regel 75 -->
 				@endforeach
-			</div>
-		</div>
+			</div><!-- close regel 45 -->
+		</div> <!-- close regel 24 / 22 -->
 	@endforeach
 	<a class="button" href="{{ URL::to('answer/create/'.$question['id']) }}">Stuur antwoord</a>
 @endsection
