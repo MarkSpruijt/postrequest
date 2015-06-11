@@ -30,18 +30,22 @@
 			{{ $answer->updated_at->toDateTimeString() }}<br>
 			<img class="avatar_small" src="{{$answer->User->avatar()}}"><br>
 			<a href="{{URL::to('profile/'. $answer->User->id )}}">{{$answer->User->username}}</a><br><br>
-			@if (!isset($answer->disablevote))
-				<a class="upvote" href="{{URL::to('answer/vote/' . $answer['id'])}}">
-				<i title="Upvote!" class="fa fa-chevron-up"></i><br>
-				</a>
-			@endif
 
-			<strong class="votecount">{{$answer['votes']}}</strong><br>
-			@if (!isset($answer->disablevote))
-				<a class="upvote" href="{{URL::to('answer/vote/' . $answer['id'] ."/0")}}">
-				<i title="Downvote!" class="fa fa-chevron-down"></i><br>
-				</a>
-			@endif
+			<div class="voting_box">
+				
+				@if (!isset($answer->disablevote))
+					<a class="upvote" href="{{URL::to('answer/vote/' . $answer['id'])}}">
+					<i title="Upvote!" class="fa fa-chevron-up"></i><br>
+					</a>
+				@endif
+
+				Votes:  <strong class="votecount">{{$answer['votes']}}</strong><br>
+				@if (!isset($answer->disablevote))
+					<a class="upvote" href="{{URL::to('answer/vote/' . $answer['id'] ."/0")}}">
+					<i title="Downvote!" class="fa fa-chevron-down"></i><br>
+					</a>
+				@endif
+			</div>
 		</div> <!-- close regel 26 -->
 
 		<div class="box_inner_large">
@@ -76,18 +80,20 @@
 					{{ $comment->updated_at->toDateTimeString() }}<br>
 					<img class="avatar_small" src="{{$comment->User->avatar()}}"><br>
 					<a href="{{URL::to('profile/'. $comment->User->id )}}">{{$comment->User->username}}</a><br><br>
-					@if (!isset($comment->disablevote))
-						<a class="upvote" href="{{URL::to('comment/vote/' . $comment['id'])}}">
-							<i title="Upvote!" class="fa fa-chevron-up"></i><br>
-						</a>
-					@endif
+					<div class="voting_box">
+						@if (!isset($comment->disablevote))
+							<a class="upvote" href="{{URL::to('comment/vote/' . $comment['id'])}}">
+								<i title="Upvote!" class="fa fa-chevron-up"></i><br>
+							</a>
+						@endif
 
-					<strong class="votecount">{{$comment['votes']}}</strong><br>
-					@if (!isset($comment->disablevote))
-						<a class="upvote" href="{{URL::to('comment/vote/' . $comment['id'] ."/0")}}">
-							<i title="Downvote!" class="fa fa-chevron-down"></i><br>
-						</a>
-					@endif
+						Votes:  <strong class="votecount">{{$comment['votes']}}</strong><br>
+						@if (!isset($comment->disablevote))
+							<a class="upvote" href="{{URL::to('comment/vote/' . $comment['id'] ."/0")}}">
+								<i title="Downvote!" class="fa fa-chevron-down"></i><br>
+							</a>
+						@endif
+					</div>
 				</div>
 				<div class="box_inner_large"><p>{{$comment->content}}</p>
 				@if($comment->user_id == Auth::user()->id)

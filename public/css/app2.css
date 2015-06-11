@@ -187,6 +187,10 @@ input,select,textarea,.button
 		color: #222;
 	}
 
+	  .voting_box{
+	 	border-top: 10px solid white;
+	 }
+
 
 /*
 	Questions on the homepage
