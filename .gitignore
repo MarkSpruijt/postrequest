@@ -3,12 +3,4 @@
 .env
 public/avatars/
 !default.png
-.idea/.name
-.idea/PostRequest.iml
-.idea/encodings.xml
-.idea/misc.xml
-.idea/modules.xml
-.idea/scopes/scope_settings.xml
-.idea/vagrant.xml
-.idea/vcs.xml
-.idea/workspace.xml
+/.idea

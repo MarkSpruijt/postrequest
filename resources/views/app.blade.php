@@ -11,7 +11,7 @@
 	 	<link rel="stylesheet" href="{{ asset('/css/skeleton.css')}}">
 </head>
 <body>
-	<div class="header frame">
+	<div class="rightbar header">
 			<a href="{{URL::to('/')}}"><img class="logo" src="{{ asset('images/postrequest.png') }}" alt="Header"></a>
 			<ul class="menu">
 				@if (Auth::guest())
@@ -22,7 +22,7 @@
 						@if (Auth::User()->rank == 100)
 							<li><a href="{{URL::to('admin')}}">Beheer</a></li>					
 						@endif
-					<li><a href="{{URL::to('profile/'. Auth::User()->id )}}">{{ Auth::User()->username}}</a></li>
+					<li><a href="{{URL::to('profile/'. Auth::User()->id )}}">{{ Auth::User()->username }}</a></li>
 					<li><a href="{{URL::to('account/logout')}}">Uitloggen</a></li>
 				@endif
 			</ul>

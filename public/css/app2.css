@@ -13,11 +13,21 @@
 		margin: 0;
 		background-image: url('../images/bg.jpg');
 		height: 100%;
+		width: calc(100% - 10px); /* Calc for the padding in frame */
+	}
+	.rightbar{
+		text-align: right;
+		width: 250px;
+		height: 100%;
+		position: fixed;
+		right: 0;
+		top:0;
+		background-color: #333;
 	}
 	.frame
 	{
-		max-width: 1000px;
-		margin: 0 auto;
+		width: calc(100% - 250px); /* Calc with without the sidebar */
+		margin: 0;
 		padding: 10px;
 	}
 
@@ -50,32 +60,26 @@
 
 	.header
 	{
-		width: 100%;
-		background-color: #333;
-		border-bottom: 5px solid #3399ff;
-		height: 161px;
+		text-align: center; /* Centering .header .logo */
 	}
 
 	.header .logo
 	{
 		padding: 5px;
 		width: 200px;
-		float: left; /* Fix for menu rendering on top of content */
 	}
 
 	.header .menu
 	{
-		max-width: 70%;
-		margin: 10px;
+		margin-top: 50px;
 		font-size: 16pt;
-		text-align: right;
-		padding-top: 120px;
-		float: right;
+		text-align: left;
 	}
 	.header .menu li
 	{
-		display: inline;
-		padding-left: 10px;
+		margin: 0;
+		padding-left: 5%;
+		list-style-type: none;
 	}
 	.header .menu li a
 	{
@@ -103,6 +107,8 @@
 input,select,textarea,.button
 {
 	width: 100%;
+	max-width: 100%; /* Textarea can't get bigger than 100% */
+	min-width: 100%; /* Textarea can't get bigger than 100% */
 }
 
 /*
@@ -156,7 +162,6 @@ input,select,textarea,.button
 
 	.box
 	{
-		position: relative;
 		display: block;
 		border: 2px solid #CCC;
 		position: relative;
