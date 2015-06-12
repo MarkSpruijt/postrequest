@@ -22,29 +22,24 @@ class UserLogic
             ]
         );
         $v->setAttributeNames(['email' => 'E-mail', 'realname' => 'Naam', 'rank' => 'Rang']);
-        if($v->fails())
-        {
-            // Did it fail because of the email not being unique?
-            if (isset($v->failed()['email']['Unique'])){
-                // Retreive the user using this email so we can use it in the view.
+        if($v->fails()) {
+            /* Did it fail because of the email not being unique? */
+            if (isset($v->failed()['email']['Unique'])) {
+                /* Retrieve the user using this email so we can use it in the view. */
                 $user = User::where('email', '=', $properties->get('email'))->first();
             }
             return redirect()->action('AdminController@getAdduser')->withMessages(['type' => 'error', 'messages' => $v->messages()->all()])->withUser($user);
         }
-		$key = str_random(15);
-		$user = new User;
-		$user->key = $key;
-		$user->realname = $properties->realname;
-		$user->email = $properties->email;
-		$user->rank = $properties->rank;
-		$email = $properties->email;
-
+        $data = $properties->only('realname', 'email', 'rank');
+        $data['key'] = str_random(15);
+        /* $email need to be a string for the class Mail */
+		$email = $data['email'];
 		Mail::send('emails.welcome', ['key' => $key], function($message) use ($email)
 		{
 		    $message->to($email, $email)->subject('Welkom bij PostRequest!');
 		});
-
-		$user->save();
+        $user = new User;
+        $user->fill($data)->save();
 	}
 
     static function loginUser($properties)
@@ -131,7 +126,7 @@ class UserLogic
             $failed = true;
         }
 
-        // Check if current password is correct
+        /* Check if current password is correct */
         if(!Auth::validate(['email' => $user->email, 'password' => $request->get('password')]))
         {
             $request->flash();
@@ -141,7 +136,7 @@ class UserLogic
         $user->username = $request->input('username');
         $user->email = $request->input('email');
 
-        // Update password if needed.
+        /* Update password if needed. */
         if(!empty($request->input('newpassword')) || !empty($request->input('newpassword2'))){
             $credentials = $request->only('newpassword','newpassword');
             $v = Validator::make($credentials, ['newpassword' => 'required|min:8', 'newpassword2' => 'same:password']);
@@ -154,7 +149,7 @@ class UserLogic
             $user->password = Hash::make($request->input('newpassword'));
         }
 
-        // Update image if needed.
+        /* Update image if needed. */
         if($request->hasFile('avatar'))
         {
             $avatar = $request->file('avatar');
@@ -171,13 +166,13 @@ class UserLogic
                 $user = Auth::user();
                 $user->deleteAvatar();
 
-                // Replace it with the new one.
+                /* Replace it with the new one. */
                 $avatar->move('avatars', $user->id . '.' . $avatar->getClientOriginalExtension());
             }
 
         }
 
-        // Abort with messages if the validator failed
+        /* Abort with messages if the validator failed */
         if($failed)
         {
             $request->flash();
@@ -199,6 +194,7 @@ class UserLogic
             $request->flash();
             return redirect()->back()->withMessages(["type" => "error","messages" => $v->messages()->all()]);
         }
+        /* Mail class only accepts strings. Defining all values to string format */
         $content = $request->get('content');
         $email = $user->email;
         $realname = $user->realname;
