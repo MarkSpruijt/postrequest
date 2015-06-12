@@ -14,12 +14,12 @@ class AdminController extends Controller{
 		return view('admin.show', compact('users'));
 	}
 
-	public function getAddUser() {
+	public function getAdduser() {
 
 		return view('admin.adduser');
 	}
 
-	public function postAddUser(Request $request) {
+	public function postAdduser(Request $request) {
         UserLogic::createUser($request);
 		return view('admin.AddUser')->with("message", "Account aangemaakt voor '$request->realname'");
 	}
