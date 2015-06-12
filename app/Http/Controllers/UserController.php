@@ -7,6 +7,7 @@ use Auth;
 use Validator;
 use App\Models\User;
 use App\Models\Questions;
+use App\Logics\UserLogic;
 use Illuminate\Http\Request;
 
 class UserController extends Controller{
@@ -19,34 +20,7 @@ class UserController extends Controller{
 
 	public function postLogin(Request $request)
 	{
-
-		$credentials = $request->only('email', 'password');
-
-		$v = Validator::make(
-			$credentials,
-			[
-				'email' => 'required|email', 
-				'password' => 'required'
-			]
-		);
-
-		$v->setAttributeNames(['email' => 'e-mail', 'password' => 'wachtwoord']);
-
-		if($v->fails())
-		{
-			$request->flash();
-			return redirect()->action('UserController@getLogin')->withErrors($v->messages());
-		}
-
-		if(Auth::attempt($credentials))
-		{
-			return redirect()->intended('/');
-		}
-		
-		$request->flash();
-		$v->messages()->add('generic', 'Verkeerde wachtwoord en/of email');
-		return redirect()->action('UserController@getLogin')->withErrors($v->messages());
-
+        return UserLogic::loginUser($request);
 	}
 
 	public function getLogout()
