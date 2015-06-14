@@ -98,13 +98,13 @@
 	.contentbox
 	{
 		background-color: #fff;
-		min-height: 60%;
+		min-height: 85%;
 	}
 
 /*
 	Default css for Forms & Inputs
 */
-input,select,textarea,.button
+input,select,textarea
 {
 	width: 100%;
 	max-width: 100%; /* Textarea can't get bigger than 100% */
@@ -119,6 +119,9 @@ input,select,textarea,.button
 	{
 		width: 200px;
 		height: 200px;
+		float:left;
+		padding-right: 20px;
+		padding-bottom: 20px;
 	}
 
 	.avatar_small
@@ -261,6 +264,12 @@ input,select,textarea,.button
 		color: lime;
 	}
 
+/*
+	Profile
+*/
+	.sendemail{
+		float: right;	
+	}
 
 /*
 	Footer
@@ -272,4 +281,8 @@ input,select,textarea,.button
 		border-top: 5px solid #3399ff;
 		text-align: center;
 		color: #fff;
+	}
+
+	p.footertext{
+		color:white;
 	}

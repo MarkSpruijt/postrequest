@@ -18,11 +18,14 @@
 					<li><a href="{{URL::to('account/login')}}">Inloggen</a></li>
 				@else
 					<li><a href="{{URL::to('/')}}">Overzicht</a></li>
+					<li><a href="{{URL::to('/lastasked')}}">Laatst gestelde vragen</a></li>
+					
 					<li><a href="{{URL::to('ask')}}">Vraag stellen</a></li>
 						@if (Auth::User()->rank == 100)
 							<li><a href="{{URL::to('admin')}}">Beheer</a></li>					
 						@endif
 					<li><a href="{{URL::to('profile/'. Auth::User()->id )}}">{{ Auth::User()->username }}</a></li>
+
 					<li><a href="{{URL::to('account/logout')}}">Uitloggen</a></li>
 				@endif
 			</ul>
@@ -42,7 +45,7 @@
 			@yield('content')
 	</div>
 	<div class="footer frame">
-		<p>PostRequest &copy;2015</p>
+		<p class="footertext">PostRequest &copy;2015</p>
 	</div>
 </body>
 </html>
