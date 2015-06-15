@@ -8,68 +8,65 @@ use Illuminate\Http\Request;
 
 class AnswerController extends Controller {
 
-	public function getIndex($id = 1) {
+    public function getIndex($id = 1)
+    {
+        $answers = Answer::where('question_id', $id)->get();
+        return view('answer.show')->with('answers', $answers);
+    }
 
-		$answers = Answer::where('question_id', $id)->get();
+    public function getCreate()
+    {
+        return view('answer.add');
+    }
 
-		return view('answer.show')->with('answers', $answers);
-	}
+    public function postCreate(Request $request, $id)
+    {
+        $data = $request->only('content');
+        $user_id = Auth::user()->id;
+        Answer::create(['content' => $data['content'],'question_id' => $id, 'user_id' => $user_id]);
+        return redirect("question/". $id);
+    }
 
-	public function getCreate() {
+    public function getEdit($id)
+    {
+        $answer = Answer::find($id);
+        if($answer && $answer->user_id == Auth::user()->id)
+        {
+            return view('answer.edit')->withAnswer($answer);
+        }
+        return App::abort(403);
+    }
 
-		return view('answer.add');
-	}
+    public function postEdit(Request $request, $id)
+    {
+        $answer = Answer::find($id);
+        $data = $request->only('content');
+        if($answer && $answer->user_id == Auth::user()->id)
+        {
+            $answer->content = $data['content'];
+            $answer->save();
+            return redirect('question/' . $answer->question_id);
+        }
+        return App::abort(403);
+    }
 
-	public function postCreate(Request $request, $id){
+    public function getVote($id,$votenumber = 1)
+    {
+        $user_id = Auth::user()->id;
 
-		$data = $request->only('content');
-		$user_id = Auth::user()->id;
-		Answer::create(['content' => $data['content'],'question_id' => $id, 'user_id' => $user_id]);
+        $answer = Answer::find($id);
 
-		return redirect("question/". $id);
-	}
-
-	public function getEdit($id) {
-
-		$answer = Answer::find($id);
-
-		if($answer && $answer->user_id == Auth::user()->id)
-			return view('answer.edit')->withAnswer($answer);
-
-		return App::abort(403);
-	}
-
-	public function postEdit(Request $request, $id)	{
-
-		$answer = Answer::find($id);
-		$data = $request->only('content');
-
-		if($answer && $answer->user_id == Auth::user()->id)
-		{
-			$answer->content = $data['content'];
-			$answer->save();
-			return redirect('question/' . $answer->question_id);
-		}
-
-		return App::abort(403);
-
-	}
-
-	public function getVote($id,$votenumber = 1){
-
-		$user_id = Auth::user()->id;
-		
-		// Did the user vote already?
-		if(AnswerVote::where('user_id', $user_id)->where('answer_id', $id)->first()){
-			return redirect()->back();
-		}
-
-		$vote = new AnswerVote;
-		$vote->user_id = $user_id;
-		$vote->answer_id = $id;
-		$vote->vote = $votenumber;
-		$vote->save();
-
-		return redirect()->back();
-	}
+        // A user can't upvote his own answer.
+        // Did the user vote already?
+        if(!$answer || $user_id === $answer->user_id|| AnswerVote::where('user_id', $user_id)->where('answer_id', $id)->first())
+        {
+            return redirect()->back();
+        }
+        $vote = new AnswerVote;
+        $vote->user_id = $user_id;
+        $vote->answer_id = $id;
+        $vote->vote = $votenumber;
+        $vote->save();
+        return redirect()->back();
+    }
 }

@@ -3,76 +3,78 @@
 use Illuminate\Http\Request;
 
 use Auth;
-use App\Models\Question;
 use App\Models\Answer;
 use App\Models\Comment;
 use App\Models\CommentVote;
 
 class CommentController extends Controller {
 
-	public function getCreate($question_id, $answer_id) {
+    public function getCreate($question_id, $answer_id) {
 
-		$answer = Answer::find($answer_id);
-		
-		if(!$answer->exists)
-		{
-			return App::abort(404);
-		}
+        $answer = Answer::find($answer_id);
 
-		return view('comment/create');
-	}
+        if(!$answer->exists)
+        {
+            return App::abort(404);
+        }
 
-	public function postCreate(Request $request, $question_id, $answer_id) {
+        return view('comment/create');
+    }
 
-		$data = $request ->only('content');
-		$data['user_id'] = $request->user()->id;
-		$data['answer_id'] = $answer_id;
+    public function postCreate(Request $request, $question_id, $answer_id) {
 
-		$comment = new Comment;
-		$comment->fill($data)->save(); 
+        $data = $request ->only('content');
+        $data['user_id'] = $request->user()->id;
+        $data['answer_id'] = $answer_id;
 
-		return redirect()->action('QuestionController@getDetails', $question_id);
-	}
+        $comment = new Comment;
+        $comment->fill($data)->save();
 
-	public function getEdit($question_id, $answer_id, $comment_id) {
+        return redirect()->action('QuestionController@getDetails', $question_id);
+    }
 
-		$comment = Comment::find($comment_id);
-		
-		if(!$comment->exists || $comment->user_id !== Auth::user()->id)
-		{
-			return App::abort(403);
-		}
+    public function getEdit($question_id, $answer_id, $comment_id) {
 
-		return view('comment/edit')->withComment($comment);
-	}
+        $comment = Comment::find($comment_id);
 
-	public function postEdit(Request $request, $question_id, $answer_id, $comment_id) {
+        if(!$comment->exists || $comment->user_id !== Auth::user()->id)
+        {
+            return App::abort(403);
+        }
 
-		$data = $request ->only('content');
-		$comment = Comment::find($comment_id);
+        return view('comment/edit')->withComment($comment);
+    }
 
-		if(!$comment->exists || $comment->user_id !== Auth::user()->id)
-		{
-			return App::abort(403);
-		}
+    public function postEdit(Request $request, $question_id, $answer_id, $comment_id) {
 
-		$comment->fill($data)->save();
-	
-		return redirect()->action('QuestionController@getDetails', $question_id);
-	}
-	public function getVote($id,$votenumber = 1){
-		$user_id = Auth::user()->id;
-		//check if user has voted allready
-		if(CommentVote::where('user_id', $user_id)->where('comment_id', $id)->first()){
-			return redirect()->back();
-		}
-		$vote = new CommentVote;
-		$vote->user_id = $user_id;
-		$vote->comment_id = $id;
-		$vote->vote = $votenumber;
-		$vote->save();
+        $data = $request ->only('content');
+        $comment = Comment::find($comment_id);
 
-		return redirect()->back();
-	}
+        if(!$comment->exists || $comment->user_id !== Auth::user()->id)
+        {
+            return App::abort(403);
+        }
+
+        $comment->fill($data)->save();
+
+        return redirect()->action('QuestionController@getDetails', $question_id);
+    }
+    public function getVote($id,$votenumber = 1){
+        $user_id = Auth::user()->id;
+
+        $comment = Comment::find($id);
+
+        //check if user has voted already
+        if(!$comment || $comment->user_id === $user_id || CommentVote::where('user_id', $user_id)->where('comment_id', $id)->first()){
+            return redirect()->back();
+        }
+        $vote = new CommentVote;
+        $vote->user_id = $user_id;
+        $vote->comment_id = $id;
+        $vote->vote = $votenumber;
+        $vote->save();
+
+        return redirect()->back();
+    }
 
 }

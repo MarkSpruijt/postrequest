@@ -10,7 +10,7 @@
 
 		<div class="box_inner_large">
 			<h1>{{ucfirst($question['title'])}}</h1><hr>
-			{!! Markdown::convertToHtml(HTML::entities($question['content'])) !!}
+            {!! nl2br(Markdown::convertToHtml(HTML::entities($question['content']))) !!}
 			@if($question->user_id == Auth::user()->id)
 				<a href='{{ URL::to('question/edit/' . $question->id) }}'>Bewerk je vraag</a>
 			@endif
