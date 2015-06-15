@@ -55,16 +55,16 @@
 			@if(Auth::user()->id == $question->user_id)
 				<a href='{{ URL::to('question/'. $question['id'] . '/' . $answer['id'] . '/choose') }}'><i class="fa checked fa-check fa-3"></i></a>
 			@else
-				<i class="fa checked2 fa-check fa-3"></i>
+				<i  class="fa checked2 fa-check fa-3"></i>
 			@endif
 		@else
 			@if(Auth::user()->id == $question->user_id)
 				<a href='{{ URL::to('question/'. $question['id'] . '/' . $answer['id'] . '/choose') }}'>
-					<i class="fa unchecked fa-check fa-3"></i></i>
+					<i title="Dit is het goede antwoord." class="fa unchecked fa-check fa-3"></i></i>
 				</a>
 			@endif
 		@endif
-		<p>{!! Markdown::convertToHtml(HTML::entities($answer['content'])) !!}</p>
+		<p>{!! nl2br(Markdown::convertToHtml(HTML::entities($answer['content']))) !!}</p>
 
 		<!-- Edit button voor de eigenaar van het antwoord. -->
 		@if(Auth::user()->id == $answer->user_id)
@@ -95,7 +95,7 @@
 						@endif
 					</div>
 				</div>
-				<div class="box_inner_large"><p>{{$comment->content}}</p>
+				<div class="box_inner_large"><p>{!! nl2br($comment->content)!!}</p>
 				@if($comment->user_id == Auth::user()->id)
 					<a href='{{ action('CommentController@getEdit', [$question->id, $answer->id, $comment->id]) }}'>Bewerken</a>
 				@endif
@@ -105,5 +105,5 @@
 	</div><!-- close regel 45 -->
 	</div> <!-- close regel 24 / 22 -->
 	@endforeach
-	<a class="button" href="{{ URL::to('answer/create/'.$question['id']) }}">Stuur antwoord</a>
+	<a class="button answer_btn" href="{{ URL::to('answer/create/'.$question['id']) }}">Geef een antwoord</a>
 @endsection
