@@ -27,7 +27,7 @@ Route::group(['middleware' => 'App\Http\Middleware\Authenticate'], function()
 		'comment' => 'CommentController'
 	]);
 });
-//if user rank is 100
+/* if user rank is 100 */
 Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
 {
 	Route::controllers([

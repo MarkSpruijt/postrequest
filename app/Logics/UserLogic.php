@@ -28,18 +28,19 @@ class UserLogic
                 /* Retrieve the user using this email so we can use it in the view. */
                 $user = User::where('email', '=', $properties->get('email'))->first();
             }
-            return redirect()->action('AdminController@getAdduser')->withMessages(['type' => 'error', 'messages' => $v->messages()->all()])->withUser($user);
-        }
+            return redirect()->action('AdminController@getAdduser')->withMessages(['type' => 'error', 'messages' => $v->messages()->all()])->withUser($user);}
         $data = $properties->only('realname', 'email', 'rank');
         $data['key'] = str_random(15);
-        /* $email need to be a string for the class Mail */
+        /* $email and $key need to be a string for the class Mail */
 		$email = $data['email'];
+        $key = $data['key'];
 		Mail::send('emails.welcome', ['key' => $key], function($message) use ($email)
 		{
 		    $message->to($email, $email)->subject('Welkom bij PostRequest!');
 		});
         $user = new User;
         $user->fill($data)->save();
+        return view('admin.AddUser')->with("message", "Account aangemaakt voor '$request->realname'");
 	}
 
     static function loginUser($properties)

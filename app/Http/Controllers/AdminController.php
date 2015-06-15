@@ -1,27 +1,25 @@
 <?php  namespace App\Http\Controllers;
 
-use Mail;
-use Validator;
 use App\Models\User;
-use Illuminate\Http\Request;
 use App\Logics\UserLogic;
+use Illuminate\Http\Request;
+
 class AdminController extends Controller{
 	
-	public function getIndex() {
-
+	public function getIndex()
+    {
 		$users = User::orderBy('realname', 'ASC')->get();
-
 		return view('admin.show', compact('users'));
 	}
 
-	public function getAdduser() {
-
+	public function getAdduser()
+    {
 		return view('admin.adduser');
 	}
 
-	public function postAdduser(Request $request) {
-        UserLogic::createUser($request);
-		return view('admin.AddUser')->with("message", "Account aangemaakt voor '$request->realname'");
+	public function postAdduser(Request $request)
+    {
+        return UserLogic::createUser($request);
 	}
 
 }
