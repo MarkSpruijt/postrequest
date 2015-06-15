@@ -1,23 +1,36 @@
 @extends('app')
 
 @section('content')
-	<div class="box">
-		<div class="box_inner_small">
-			{{ $question->updated_at->toDateTimeString() }}<br>
-			<img class="avatar_small" src="{{$question->User->avatar()}}"><br>
-			<a href="{{URL::to('profile/'. $question->User->id )}}">{{$question->User->username}}</a>
-		</div> <!-- close regel 5 -->
 
-		<div class="box_inner_large">
-			<h1>{{ucfirst($question['title'])}}</h1><hr>
-			{!! Markdown::convertToHtml(HTML::entities($question['content'])) !!}
-			@if($question->user_id == Auth::user()->id)
-				<a href='{{ URL::to('question/edit/' . $question->id) }}'>Bewerk je vraag</a>
-			@endif
-		</div> <!-- close regel 11 -->
-	</div><!-- close regel 4 -->
-	
-	<h2 class="answers">Antwoorden:</h2>
+
+	<div class="box">
+        <div class="boxContent">
+            <h1>{{ucfirst($question['title'])}}</h1>
+            {!! Markdown::convertToHtml(HTML::entities($question['content'])) !!}
+        @if($question->user_id == Auth::user()->id)
+                <a href='{{ URL::to('question/edit/' . $question->id) }}'>Bewerk je vraag</a>
+            @endif
+        </div>
+        <div class='boxFooter'>
+            <div class="userBox">
+                <label>{{ $question->updated_at->toDateTimeString() }}</label>
+                <img class="avatar_small" src="{{$question->User->avatar()}}">
+                <a href="{{URL::to('profile/'. $question->User->id )}}">{{$question->User->username}}</a>
+            </div>
+        </div>
+    </div>
+
+	<h2 class="answers">
+        @if(count($question->answers))
+            @if(count($question->answers) === 1)
+                1 Antwoord:
+            @else
+                {{ count($question->answers) }} Antwoorden:
+            @endif
+        @else
+            Er is nog geen antwoord op deze vraag.
+        @endif
+    </h2>
 	@foreach($question->answers as $answer)
 
 	@if($question['answer_id'] == $answer['id'])
@@ -25,28 +38,25 @@
 	@else
 	<div class="box answer">
 	@endif
+        <div class="votes">
 
-		<div class="box_inner_small">
-			{{ $answer->updated_at->toDateTimeString() }}<br>
-			<img class="avatar_small" src="{{$answer->User->avatar()}}"><br>
+            @if (!isset($answer->disablevote))
+                <a class="upvote" href="{{URL::to('answer/vote/' . $answer['id'])}}">
+                    <i title="Upvote!" class="fa fa-chevron-up"></i><br>
+                </a>
+            @endif
+            <strong class="votecount">{{$answer['votes']}}</strong><br>
+            @if (!isset($answer->disablevote))
+                <a class="upvote" href="{{URL::to('answer/vote/' . $answer['id'] ."/0")}}">
+                    <i title="Downvote!" class="fa fa-chevron-down"></i><br>
+                </a>
+            @endif
+        </div>
+		<div class="userBox">
+			<label>{{ $answer->updated_at->toDateTimeString() }}</label>
+			<img class="avatar_small" src="{{$answer->User->avatar()}}">
 			<a href="{{URL::to('profile/'. $answer->User->id )}}">{{$answer->User->username}}</a><br><br>
-
-			<div class="voting_box">
-				
-				@if (!isset($answer->disablevote))
-					<a class="upvote" href="{{URL::to('answer/vote/' . $answer['id'])}}">
-					<i title="Upvote!" class="fa fa-chevron-up"></i><br>
-					</a>
-				@endif
-
-				Votes:  <strong class="votecount">{{$answer['votes']}}</strong><br>
-				@if (!isset($answer->disablevote))
-					<a class="upvote" href="{{URL::to('answer/vote/' . $answer['id'] ."/0")}}">
-					<i title="Downvote!" class="fa fa-chevron-down"></i><br>
-					</a>
-				@endif
-			</div>
-		</div> <!-- close regel 26 -->
+		</div>
 
 		<div class="box_inner_large">
 		<!-- Juiste answer -->
