@@ -235,7 +235,7 @@ input,select,textarea,.button
 
 	.answer_solved
 	{
-		background-color: rgba(0,255,0, 0.3);
+		border-color: rgba(0,255,0, 0.3);
 	}
 
 	.checked{
