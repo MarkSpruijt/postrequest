@@ -15,7 +15,7 @@ This guide will be a fast setup guide.
 
     ```composer update```
 
-6. Create a mysql database named: "LunchTime"
+6. Create a mysql database named: "PostRequest"
 7. Open cmd, navigate to the project folder then run the following commands:
 
 	```php artisan migrate:install```
@@ -28,4 +28,4 @@ This guide will be a fast setup guide.
 
 ### License
 
-LunchTime is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+PostRequest is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
