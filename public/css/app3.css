@@ -1,0 +1,143 @@
+html {
+    height: 100%;
+}
+body {
+    margin: 0px;
+    font-family: 'Open Sans';
+    height: 100%;
+}
+
+/* Generic Style */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Open Sans';
+    font-weight: 400;
+}
+
+h1{
+    font-size: 30px;
+}
+
+a{
+    text-decoration: none;
+}
+
+/* Avatars */
+.avatar{
+
+}
+/* Form */
+form {
+    width: 80%;
+    margin: 0 auto;
+}
+form input, textarea{
+    display: block;
+    padding: 5px;
+    width: 100%;
+    font-family: 'Open Sans', sans-serif;
+    margin-bottom: 10px;
+}
+form input[type=submit]
+{
+    display: block;
+    box-sizing:content-box;
+    -moz-box-sizing:content-box;
+}
+/* Header */
+nav {
+    height: 80px;
+    background-color: #222;
+}
+
+nav .logo {
+    height: 70px;
+    margin: 5px 0px 5px 10px;
+    float: left;
+}
+
+/* Menu */
+nav ul {
+    list-style: none;
+    margin: 0px;
+}
+
+nav ul li a{
+    display: block;
+    float: left;
+
+    line-height: 80px;
+    margin: 0 10px;
+
+    color: #FFF;
+    text-decoration: none;
+    font-family: 'Open Sans';
+}
+
+nav ul li a:hover{
+    color: #00b3ee;
+}
+
+/* Content */
+section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px;
+    min-height: calc(100% - 186px);
+}
+section > a{
+    background-color: #00b3ee;
+    color: #005f7b;
+    border-radius: 3px;
+    height: 10px;
+    line-height: 5px;
+    padding: 4px 10px;
+}
+
+/* Footer */
+
+footer {
+
+    background-color: #222;
+    color: #FFF;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+}
+
+
+/* Responive */
+
+@media (max-width:600px) {
+    /* Nav */
+    nav {
+        height: auto;
+    }
+    nav ul{
+        padding-left: 0px;
+    }
+    nav .logo{
+        float: none;
+        display: block;
+        padding: 5px 0;
+        margin: 0px auto;
+    }
+    nav ul li a {
+        float: none;
+        border-top: 1px solid #555;
+        text-align: center;
+        width: 100%;
+        margin: 0px;
+        height: 40px;
+        line-height: 40px;
+    }
+
+    /* Avatars */
+    .avatar{
+        width: 100%;
+    }
+    /* Generic style */
+    form{
+        width: 100%;
+    }
+
+}
