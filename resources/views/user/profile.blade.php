@@ -1,11 +1,8 @@
 @extends('app')
 
 @section('content')
-@if (Auth::User()->rank == 100)
-	<a href="{{URL::to('account/edit')}}"><i class="fa fa-cog"></i> Wijzigen</a>					
-@endif
 @if($userdata->showedit)
-<a href="{{URL::to('account/edit')}}"><i class="fa fa-cog"></i> Wijzigen</a>
+	<a href="{{URL::to('account/edit')}}"><i class="fa fa-cog"></i> Wijzigen</a>
 @endif
 <div class="profile_page">
 	<img class="avatar" src="{{$userdata->avatar()}}">
@@ -17,17 +14,15 @@
 </div>
 
 	@foreach($questions as $question)
-		<a class="a_view" href="{{ URL::to('question/'.$question['id']) }}">
+		<a  href="{{ URL::to('question/'.$question['id']) }}"
 			@if (isset($question->answer_id))
-					<div class="question question_solved">
-					<i class="fa solved fa-check"></i>
+				class="question question_solved" >
+				<i class="fa solved fa-check"></i>
 			@else
-				<div class="question a_view">
+				class="question">
 			@endif
-				<p class="title"><strong>{{ $question->title }}</strong></p>
-				<p class="info">
-				{{($question->updated_at->diffForHumans()) }} by: {{$question->user->username}}</p>
-			</div>
+				<span class="title"><strong>{{ $question->title }}</strong></span>
+				<span class="info">{{($question->updated_at->diffForHumans()) }} by: {{$question->user->username}}</span>
 		</a>
 	@endforeach
 @endsection

@@ -30,8 +30,8 @@ class Question extends Eloquent{
 	{
 		foreach($this->answers as $answer)
 		{	
-			foreach ($answer->comments as $comment) {
-				$votes = CommentVote::where('comment_id', $comment['id'])->get();
+			foreach ($answer->comments as $commentVote) {
+				$votes = CommentVote::where('comment_id', $commentVote['id'])->get();
 				$totalvotes = 0;
 				foreach($votes as $vote)
 				{
@@ -42,9 +42,9 @@ class Question extends Eloquent{
 						$totalvotes = $totalvotes - 1;
 					}
 			}
-			$comment->votes = $totalvotes;
-			if(CommentVote::where('user_id', Auth::User()->id)->where('comment_id', $answer['id'])->first()){
-				$comment->disablevote = true;
+			$commentVote->votes = $totalvotes;
+			if(CommentVote::where('user_id', Auth::User()->id)->where('comment_id', $commentVote['id'])->first()){
+				$commentVote->disablevote = true;
 			}
 			}	
 			//Count votes for answers
