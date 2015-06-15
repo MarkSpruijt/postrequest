@@ -61,8 +61,11 @@ class CommentController extends Controller {
     }
     public function getVote($id,$votenumber = 1){
         $user_id = Auth::user()->id;
+
+        $comment = Comment::find($id);
+
         //check if user has voted already
-        if(CommentVote::where('user_id', $user_id)->where('comment_id', $id)->first()){
+        if(!$comment || $comment->user_id === $user_id || CommentVote::where('user_id', $user_id)->where('comment_id', $id)->first()){
             return redirect()->back();
         }
         $vote = new CommentVote;

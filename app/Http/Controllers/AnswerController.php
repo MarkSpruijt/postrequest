@@ -53,8 +53,12 @@ class AnswerController extends Controller {
     public function getVote($id,$votenumber = 1)
     {
         $user_id = Auth::user()->id;
+
+        $answer = Answer::find($id);
+
+        // A user can't upvote his own answer.
         // Did the user vote already?
-        if(AnswerVote::where('user_id', $user_id)->where('answer_id', $id)->first())
+        if(!$answer || $user_id === $answer->user_id|| AnswerVote::where('user_id', $user_id)->where('answer_id', $id)->first())
         {
             return redirect()->back();
         }

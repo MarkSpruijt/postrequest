@@ -43,7 +43,7 @@ class Question extends Eloquent{
 					}
 			}
 			$commentVote->votes = $totalvotes;
-			if(CommentVote::where('user_id', Auth::User()->id)->where('comment_id', $commentVote['id'])->first()){
+			if(CommentVote::where('user_id', Auth::User()->id)->where('comment_id', $commentVote['id'])->first() || Auth::user()->id === $commentVote->user_id){
 				$commentVote->disablevote = true;
 			}
 			}	
@@ -60,7 +60,7 @@ class Question extends Eloquent{
 				}
 			}
 			$answer->votes = $totalvotes;
-			if(AnswerVote::where('user_id', Auth::User()->id)->where('answer_id', $answer['id'])->first()){
+			if(AnswerVote::where('user_id', Auth::User()->id)->where('answer_id', $answer['id'])->first() || Auth::user()->id === $answer->user_id){
 				$answer->disablevote = true;
 			}
 		}
