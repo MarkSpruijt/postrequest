@@ -24,6 +24,10 @@ class QuestionController extends Controller {
     public function getDetails($id)
     {
         $question = Question::find($id);
+        if(!$question)
+        {
+            App::abort(404);
+        }
         $question->sortAnswers();
 
         return view('question.details', compact('question'));

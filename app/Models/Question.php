@@ -21,6 +21,10 @@ class Question extends Eloquent{
 		return $this->belongsTo('App\Models\User');
 	}
 
+    public function tags()
+    {
+        return $this->hasMany('App\Models\Tags');
+    }
 	/**
 	*	Puts the right answer on top.
 	*
