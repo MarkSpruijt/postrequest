@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddTagTable extends Migration {
+class Addtagtable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -15,7 +15,8 @@ class AddTagTable extends Migration {
         Schema::create('tags', function(Blueprint $table)
         {
             $table->increments('id');
-            $table->string('tag');
+            $table->string('tag')->unique();
+            $table->timestamps();
         });
 	}
 

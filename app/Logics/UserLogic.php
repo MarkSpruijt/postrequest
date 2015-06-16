@@ -40,7 +40,7 @@ class UserLogic
 		});
         $user = new User;
         $user->fill($data)->save();
-        return view('admin.AddUser')->with("message", "Account aangemaakt voor '$properties->realname'");
+        return view('admin.adduser')->with("message", "Account aangemaakt voor '$properties->realname'");
 	}
 
     static function loginUser($properties)
