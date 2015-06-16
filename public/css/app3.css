@@ -21,10 +21,9 @@ a{
     text-decoration: none;
 }
 
-/* Avatars */
-.avatar{
 
-}
+/* Avatars */
+
 .avatar_small{
     width: 80px;
     height: 80px;
@@ -122,14 +121,14 @@ h2.answers {
     position: relative;
 }
 
-.box h1{
+.box h1, .box h2, .box h3{
     border-bottom: 1px solid #CCC;
 }
 
 .box.answer{
     padding-left: 50px;
-    border-bottom: 1px solid #EEE;
-    min-height: 110px;
+    border-bottom: 1px solid #CCC;
+    min-height: 120px;
 }
 
 .box .votes{
@@ -141,16 +140,39 @@ h2.answers {
     color: #AAA;
 }
 
+/* Check */
+.box .votes .check, .box .votes .check.active:hover{
+    clear: both;
+    display: block;
+    font-size: 30px;
+    color: #AAA;
+}
+
+.box .votes .check:hover, .box .votes .check.active{
+    color: #5bdb46;
+}
+
 .box .votes a {
     color: #AAA;
 }
 .box .votes a:hover{
     color: #555;
 }
+
+.box .boxContent a{
+    color: #AAA;
+
+    font-weight: bold;
+}
+
+.box .boxContent a:hover{
+    color: #222;
+
+}
+
 .box .boxFooter{
     width: 100%;
     height: 100px;
-
 }
 
 .userBox {
@@ -159,18 +181,21 @@ h2.answers {
 }
 
 .userBox label{
-    text-align: center;
+    float: left;
+    text-align: left;
     width: 100%;
     display: block;
-    clear: both;
+    width: 215px;
 }
 .userBox img{
     float: left;
+    margin-right: 5px;
 }
 .userBox a {
     float: left;
+    text-align: left;
     word-break: break-all;
-    width: 220px;
+    width: 215px;
 }
 /* Footer */
 
