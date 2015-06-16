@@ -14,6 +14,9 @@
 			@if($question->user_id == Auth::user()->id)
 				<a href='{{ URL::to('question/edit/' . $question->id) }}'>Bewerk je vraag</a>
 			@endif
+            @foreach($question->tags as $tag)
+                {{$tag->tag}}
+            @endforeach
 		</div> <!-- close regel 11 -->
 	</div><!-- close regel 4 -->
 	
