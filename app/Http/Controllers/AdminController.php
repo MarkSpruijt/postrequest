@@ -22,4 +22,13 @@ class AdminController extends Controller{
         return UserLogic::createUser($request);
 	}
 
+    public function getEdituser($id){
+        $user = User::find($id);
+        return view('user.edit')->with('user', $user);
+    }
+
+    public function postEdituser(Request $request, $id){
+        return UserLogic::editUser($request, $id);
+    }
+
 }

@@ -9,6 +9,7 @@
 		      <th>Gebruikersnaam</th>
 		      <th>Rank</th>
 		      <th>E-mail</th>
+              <th></th>
 		    </tr>
 		  </thead>
 		  <tbody>
@@ -18,7 +19,8 @@
 			      <td>{{ $user->username }}</td>
 			      <td>{{ $user->rank }}</td>
 			      <td>{{ $user->email }}</td>
-		    	</tr>
+		    	  <td><a href="{{URL::to('admin/edituser/' .$user->id)}}"><i class="fa fa-cog"></i> Wijzigen</a></td>
+                </tr>
 		    @endforeach
 		  </tbody>
 	</table>

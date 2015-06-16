@@ -208,4 +208,61 @@ class UserLogic
         });
         return view('user.sendmail')->withMessages(['type' => 'info', 'messages' => ["E-mail is verstuurd."]])->withUser($user);
     }
+
+    static function editUser($request, $id)
+    {
+        $user = User::find($id);
+
+        /*
+        * When a validator fails $failed will be set to true and the code will continue.
+        * At the end of this function we will check if failed is true and redirect with all error messages.
+        * This method is needed to get all error messages and not just te first one.
+        */
+        $failed = false;
+
+        $credentials = $request->only('username','email', 'password');
+        $validator = Validator::make($credentials, ['username' => "required|unique:users,id,{$id}",'email' => "required|unique:users,id,{$id}"]);
+        $validator->setAttributeNames(['username' => 'Gebruikersnaam', 'password' => 'Huidig wachtwoord', 'email' => 'E-mail']);
+
+        if($validator->fails())
+        {
+            $failed = true;
+        }
+
+        $user->username = $request->input('username');
+        $user->email = $request->input('email');
+
+        /* Update image if needed. */
+        if($request->hasFile('avatar'))
+        {
+            $avatar = $request->file('avatar');
+            $v = Validator::make(['avatar' => $avatar], ['avatar' => 'mimes:jpeg,jpg,png|image|max:500']);
+            $v->setAttributeNames(['avatar' => 'Avatar']);
+
+            if($v->fails())
+            {
+                $failed = true;
+                $validator->messages()->merge($v->messages());
+            }
+            else
+            {
+                $user = Auth::user();
+                $user->deleteAvatar();
+
+                /* Replace it with the new one. */
+                $avatar->move('avatars', $id . '.' . $avatar->getClientOriginalExtension());
+            }
+
+        }
+
+        /* Abort with messages if the validator failed */
+        if($failed)
+        {
+            $request->flash();
+            return redirect()->back()->withMessages(["type" => "error","messages" => $validator->messages()->all()]);
+        }
+        $user->save();
+        $request->flash();
+        return redirect()->back()->withMessages(["type" => "info","messages" => ["Gebruikers gegevens gewijzigd."]]);
+    }
 }

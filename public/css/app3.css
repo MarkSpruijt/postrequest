@@ -1,0 +1,198 @@
+html {
+    height: 100%;
+}
+body {
+    margin: 0px;
+    font-family: 'Raleway';
+    height: 100%;
+}
+
+/* Generic Style */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Raleway';
+    font-weight: 400;
+}
+
+h1{
+    font-size: 30px;
+}
+
+a{
+    text-decoration: none;
+}
+
+/* Avatars */
+.avatar{
+
+}
+/* Form */
+form {
+    width: 80%;
+    margin: 0 auto;
+}
+form input, textarea{
+    display: block;
+    padding: 5px;
+    width: 100%;
+    font-family: 'Raleway', sans-serif;
+    margin-bottom: 10px;
+}
+form input[type=submit]
+{
+    display: block;
+    box-sizing:content-box;
+    -moz-box-sizing:content-box;
+}
+/* Header */
+nav {
+    height: 80px;
+    background-color: #222;
+}
+
+nav .logo {
+    height: 70px;
+    margin: 5px 0px 5px 10px;
+    float: left;
+}
+
+/* Menu */
+nav ul {
+    list-style: none;
+    margin: 0px;
+}
+
+nav ul li a{
+    display: block;
+    float: left;
+
+    line-height: 80px;
+    margin: 0 10px;
+
+    color: #FFF;
+    text-decoration: none;
+    font-family: 'Raleway';
+}
+
+nav ul li a:hover{
+    color: #00b3ee;
+}
+
+/* Content */
+section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px;
+    min-height: calc(100% - 186px);
+    border: 1px solid lime;
+}
+section > a{
+    position: relative;
+    display: block;
+    border: 2px solid #CCC;
+    position: relative;
+    margin: 5px;
+    padding: 5px;
+    padding-left: 5px;
+}
+.question .title
+{
+    text-align: left;
+}
+.question .info
+{
+    text-align: right;
+    position: absolute;
+    right: 5px;
+}
+
+/*
+	Messages
+*/
+.messages
+{
+    list-style: none;
+}
+
+.messages li
+{
+    padding: 5px;
+    font-weight: bold;
+    margin: 5px 0;
+    border: 2px solid #CCC;
+}
+
+.messages li.error
+{
+    background-color: #FF7D7D;
+    border-color: #FF4F4F;
+    color: #9E0000;
+}
+.messages li.info
+{
+    background-color: #CCC;
+    border-color: #AAA;
+    color: #555;
+}
+/* Footer */
+
+footer {
+
+    background-color: #222;
+    color: #FFF;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+}
+
+/* Tables */
+table{
+    width: 100%;
+}
+th,
+td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #E1E1E1; }
+th:first-child,
+td:first-child {
+    padding-left: 0; }
+th:last-child,
+td:last-child {
+    padding-right: 0; }
+
+/* Responive */
+
+@media (max-width:600px) {
+    /* Nav */
+    nav {
+        height: auto;
+    }
+    nav ul{
+        padding-left: 0px;
+    }
+    nav .logo{
+        float: none;
+        display: block;
+        padding: 5px 0;
+        margin: 0px auto;
+    }
+    nav ul li a {
+        float: none;
+        border-top: 1px solid #555;
+        text-align: center;
+        width: 100%;
+        margin: 0px;
+        height: 40px;
+        line-height: 40px;
+    }
+
+    /* Avatars */
+    .avatar{
+        width: 100%;
+    }
+    /* Generic style */
+    form{
+        width: 100%;
+    }
+
+}

@@ -22,6 +22,9 @@
 			<img src="{{ $user->avatar() }}" class='avatar'>
 			{!! Form::file('avatar') !!}
 
+        @if (Auth::User()->rank == 100)
+
+        @else
 			{!! Form::label('Nieuw wachtwoord') !!}
 			{!! Form::password('newpassword') !!}
 
@@ -31,7 +34,7 @@
 			<hr>
 			{!! Form::label('Huidig Wachtwoord') !!}
 			{!! Form::password('password') !!}
-
+        @endif
 			{!! Form::submit('Wijzig') !!}
 		{!! Form::close() !!}
 @endsection

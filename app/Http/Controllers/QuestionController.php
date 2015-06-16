@@ -16,10 +16,10 @@ class QuestionController extends Controller {
     }
 
 	public function getIndex()
-	{
-		$questions = Question::orderBy('created_at', 'DESC')->take(10)->get();
-		return view('home', compact('questions'));
-
+    {
+        $questions = Question::orderBy('created_at', 'DESC')->take(10)->get();
+        return view('home', compact('questions'));
+    }
     public function getDetails($id)
     {
         $question = Question::find($id);
