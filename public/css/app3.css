@@ -257,8 +257,11 @@ section a, input[type=submit]{
     height: 100px;
 }
 
-.userBox {
+.box:first-child .userBox{
     float: left;
+}
+.userBox {
+    float: right;
     width: 300px;
 }
 
