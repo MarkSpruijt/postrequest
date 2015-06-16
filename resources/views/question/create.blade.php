@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content')
-<h1>Stel je vraag:</h1>
+<h1 class="wrapped">Stel je vraag:</h1>
 {!!	Form::open()  !!}
 	<div class="form-group">
 		{!! Form::label('Titel') !!}<br/>
