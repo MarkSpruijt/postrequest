@@ -220,9 +220,9 @@ class UserLogic
         */
         $failed = false;
 
-        $credentials = $request->only('username','email', 'password');
-        $validator = Validator::make($credentials, ['username' => "required|unique:users,id,{$id}",'email' => "required|unique:users,id,{$id}"]);
-        $validator->setAttributeNames(['username' => 'Gebruikersnaam', 'password' => 'Huidig wachtwoord', 'email' => 'E-mail']);
+        $credentials = $request->only('username','realname','email', 'password');
+        $validator = Validator::make($credentials, ['username' => "required|unique:users,id,{$id}",'realname' => 'required','email' => "required|unique:users,id,{$id}"]);
+        $validator->setAttributeNames(['username' => 'Gebruikersnaam','realname' => 'Echte naam', 'password' => 'Huidig wachtwoord', 'email' => 'E-mail']);
 
         if($validator->fails())
         {
@@ -230,6 +230,7 @@ class UserLogic
         }
 
         $user->username = $request->input('username');
+        $user->realname = $request->input('realname');
         $user->email = $request->input('email');
 
         /* Update image if needed. */
@@ -246,7 +247,7 @@ class UserLogic
             }
             else
             {
-                $user = Auth::user();
+                $user = User::find($id);
                 $user->deleteAvatar();
 
                 /* Replace it with the new one. */
@@ -263,6 +264,6 @@ class UserLogic
         }
         $user->save();
         $request->flash();
-        return redirect()->back()->withMessages(["type" => "info","messages" => ["Gebruikers gegevens gewijzigd."]]);
+        return redirect('/admin')->withMessages(["type" => "info","messages" => ["Gebruikers gegevens gewijzigd voor:". $user->realname]]);
     }
 }

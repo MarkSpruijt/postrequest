@@ -83,7 +83,6 @@ section {
     margin: 0 auto;
     padding: 30px;
     min-height: calc(100% - 186px);
-    border: 1px solid lime;
 }
 section > a{
     position: relative;

@@ -21,7 +21,7 @@
                 @if (Auth::User()->rank == 100)
                     <li><a href="{{URL::to('admin')}}">Beheer</a></li>
                 @endif
-                <li><a href="{{URL::to('profile/'. Auth::User()->id )}}">{{ Auth::User()->username }}</a></li>
+                <li><a href="{{URL::to('profile/'. Auth::User()->id )}}">Mijn Profiel</a></li>
                 <li><a href="{{URL::to('account/logout')}}">Uitloggen</a></li>
             @endif
         </ul>

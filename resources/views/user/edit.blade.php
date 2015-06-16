@@ -14,6 +14,12 @@
 			
 			{!! Form::label('Gebruikersnaam') !!}
 			{!! Form::text('username', $user['username']) !!}
+        @if (Auth::User()->rank == 100)
+            {!! Form::label('Echte naam') !!}
+            {!! Form::text('realname',$user['realname']) !!}
+        @else
+
+        @endif
 
 			{!! Form::label('E-mail') !!}
 			{!! Form::email('email', $user['email']) !!}
