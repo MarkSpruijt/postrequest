@@ -32,6 +32,11 @@ a{
     width: 80px;
     height: 80px;
 }
+
+.avatar_medium{
+    width: 250px;
+    height: 250px;
+}
 /* Form */
 form {
     width: 80%;
@@ -40,7 +45,7 @@ form {
 form input, textarea{
     display: block;
     padding: 5px;
-    width: 100%;
+    width: 50%;
     font-size: 15px;
     font-family: 'Open Sans', sans-serif;
     margin-bottom: 10px;
@@ -291,6 +296,23 @@ footer {
 }
 
 
+/* Tables */
+table{
+    width: 100%;
+}
+th,
+td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #E1E1E1; }
+th:first-child,
+td:first-child {
+    padding-left: 0; }
+th:last-child,
+td:last-child {
+    padding-right: 0; }
+
+
 /* Responive */
 
 @media (max-width:600px) {
@@ -380,4 +402,7 @@ footer {
         display: block;
     }
 
+}
+.fileupload{
+    float: right;
 }

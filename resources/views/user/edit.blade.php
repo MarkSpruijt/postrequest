@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content')
-	<h1>Wijzig account</h1>
+	<h1 class="wrapped">Wijzig account</h1>
 	@if(isset($message))
 		<p>{{$message}}</p>
 	@endif
@@ -11,7 +11,13 @@
 	<p>{!! $errors->first('newpassword') !!}</p>
 	<p>{!! $errors->first('newpassword2') !!}</p>
 	{!! Form::open(['files' => true]) !!}
-			
+
+    <div class="fileupload">
+        {!! Form::label('Avatar') !!}
+        <img src="{{ $user->avatar() }}" class='avatar_medium'>
+        {!! Form::file('avatar') !!}
+    </div>
+
 			{!! Form::label('Gebruikersnaam') !!}
 			{!! Form::text('username', $user['username']) !!}
         @if (Auth::User()->rank == 100)
@@ -23,10 +29,6 @@
 
 			{!! Form::label('E-mail') !!}
 			{!! Form::email('email', $user['email']) !!}
-
-			{!! Form::label('Avatar') !!}
-			<img src="{{ $user->avatar() }}" class='avatar'>
-			{!! Form::file('avatar') !!}
 
         @if (Auth::User()->rank == 100)
 
