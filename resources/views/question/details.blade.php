@@ -12,18 +12,11 @@
         <div class='boxFooter'>
             <ul class="tags">
                 <li>Tags:</li>
-                <li><a href="#">PHP</a></li>
-                <li><a href="#">PHP</a></li>
-                <li><a href="#">PHP</a></li>
-                <li><a href="#">PHP</a></li>
-                <li><a href="#">PHP</a></li>
-                <li><a href="#">PHP</a></li>
-                <li><a href="#">PHP</a></li>
-                <li><a href="#">PHP</a></li>
-                <li><a href="#">PHP</a></li>
-                <li><a href="#">PHP</a></li>
-                <li><a href="#">PHP</a></li>
-                <li><a href="#">VAGRANT</a></li>
+               
+            @foreach($question->tags as $tag)
+
+ 				<li><a href="#">{{$tag->tag}}</a></li>
+            @endforeach
             </ul>
             <div class="userBox">
                 <img class="avatar_small" src="{{$question->User->avatar()}}">

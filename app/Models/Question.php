@@ -21,6 +21,10 @@ class Question extends Eloquent{
 		return $this->belongsTo('App\Models\User');
 	}
 
+    public function tags()
+    {
+        return $this->belongsToMany('App\Models\Tag');
+    }
 	/**
 	*	Puts the right answer on top.
 	*
@@ -29,7 +33,7 @@ class Question extends Eloquent{
 	public function sortAnswers()
 	{
 		foreach($this->answers as $answer)
-		{	
+		{
 			foreach ($answer->comments as $comment) {
 				$votes = CommentVote::where('comment_id', $comment['id'])->get();
 				$totalvotes = 0;
@@ -76,6 +80,7 @@ class Question extends Eloquent{
             if($answerVote){
                 $answer->disablevote = true;
                 $answer->userVote = $answerVote->vote;
+                $answer->uservoted = $answervote->vote;
 			}
 		}
 		if($this->answer_id !== NULL)
@@ -87,7 +92,7 @@ class Question extends Eloquent{
 				{
 					$tempAnswer = $answer;
 					$this->answers->forget($i);
-					$this->answers->prepend($tempAnswer);	
+					$this->answers->prepend($tempAnswer);
 					break;
 				}
 			}
