@@ -15,12 +15,11 @@ class QuestionController extends Controller {
         $this->middleware('App\Http\Middleware\Authenticate');
     }
 
-    public function getIndex()
+	public function getIndex()
     {
-        $questions = Question::orderBy('created_at', 'DESC')->get();
+        $questions = Question::orderBy('created_at', 'DESC')->take(10)->get();
         return view('home', compact('questions'));
     }
-
     public function getDetails($id)
     {
         $question = Question::find($id);

@@ -2,15 +2,15 @@
 
 @section('content')
 @if($userdata->showedit)
-	<a href="{{URL::to('account/edit')}}"><i class="fa fa-cog"></i> Wijzigen</a>
+	<a href="{{URL::to('account/edit/' .$userdata->id)}}"><i class="fa fa-cog"></i> Wijzigen</a>
 @endif
 <div class="profile_page">
-	<img class="avatar" src="{{$userdata->avatar()}}">
+	<img class="avatar" src="{{$userdata->avatar()}}"><a href="{{URL::to('account/sendmail/'. $userdata->id)}}" class="sendemail button button-primary">Stuur e-mail</a>
 	<h2>{{ $userdata->username }}</h2>
 	<hr>
-	Echte naam: {{ $userdata->realname }}<br>
+
+		Echte naam: {{ $userdata->realname }}<br>
 	Rang: {{ $userdata->rank }}<br>
-	<a href="{{URL::to('account/sendmail/'. $userdata->id)}}" class="button button-primary">Stuur e-mail</a>
 </div>
 
 	@foreach($questions as $question)
