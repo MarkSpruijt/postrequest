@@ -80,7 +80,6 @@ class Question extends Eloquent{
             if($answerVote){
                 $answer->disablevote = true;
                 $answer->userVote = $answerVote->vote;
-                $answer->uservoted = $answervote->vote;
 			}
 		}
 		if($this->answer_id !== NULL)
