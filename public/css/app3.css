@@ -19,6 +19,7 @@ h1{
 
 a{
     text-decoration: none;
+    color: #000000;
 }
 
 .wrapped {
@@ -26,11 +27,21 @@ a{
     margin: 0 auto;
 }
 
+.edit_form
+{
+    width: 50%;
+}
+
 /* Avatars */
 
 .avatar_small{
     width: 80px;
     height: 80px;
+}
+
+.avatar_medium{
+    width: 250px;
+    height: 250px;
 }
 /* Form */
 form {
@@ -187,6 +198,36 @@ h2.answers {
     font-size: inherit;
 }
 
+.box .votes > a:hover{
+    background-color: white;
+}
+
+.question{
+    width: 100%;
+    border: 1px solid grey;
+    margin-bottom: 1%;
+}
+.question_solved{
+    border: 1px solid lime;
+    margin-bottom: 1%;
+}
+
+.question > .info{
+    float: right;
+}
+
+/* Profile Page */
+    .profile_info > .avatar
+    {
+        float: left;
+        padding:0% 5% 2% 0%;
+    }
+
+    .profile_buttons
+    {
+        float:right;
+    }
+
 /* Check */
 .box .votes .check{
     clear: both;
@@ -246,10 +287,12 @@ section a, input[type=submit]{
     margin: 5px 0;
     padding: 0px;
     border: none;
+
 }
 
 .userBox a:hover{
     color: #222;
+    background-color: white;
 }
 
 .box .boxFooter{
@@ -280,7 +323,6 @@ section a, input[type=submit]{
     float: left;
     text-align: left;
     word-break: break-all;
-    width: 215px;
 }
 /* Footer */
 
@@ -292,6 +334,23 @@ footer {
     text-align: center;
     line-height: 30px;
 }
+
+
+/* Tables */
+table{
+    width: 100%;
+}
+th,
+td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #E1E1E1; }
+th:first-child,
+td:first-child {
+    padding-left: 0; }
+th:last-child,
+td:last-child {
+    padding-right: 0; }
 
 
 /* Responive */
@@ -383,4 +442,7 @@ footer {
         display: block;
     }
 
+}
+.fileupload{
+    float: right;
 }
