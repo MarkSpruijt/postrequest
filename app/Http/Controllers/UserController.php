@@ -36,7 +36,7 @@ class UserController extends Controller{
 		return UserLogic::activateUser($key, $request);
 	}
 
-	public function getProfile(Request $request, $id){
+	public function getProfile($id){
 	  $userdata = User::find($id);
 	  $questions = $userdata->questions;
 	  if($userdata->id == Auth::User()->id)

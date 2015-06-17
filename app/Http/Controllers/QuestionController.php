@@ -23,6 +23,10 @@ class QuestionController extends Controller {
     public function getDetails($id)
     {
         $question = Question::find($id);
+        if(!$question)
+        {
+            App::abort(404);
+        }
         $question->sortAnswers();
 
         return view('question.details', compact('question'));
@@ -41,6 +45,14 @@ class QuestionController extends Controller {
     public function getEdit($id)
     {
         $question = Question::find($id);
+        /* Create string for edit. example: PHP,VAGRANT */
+        $stringtags = "";
+        foreach($question->tags as $tag)
+        {
+            $stringtags .= $tag->tag . ",";
+        }
+        $question->stringtags = rtrim($stringtags, ',');
+
         if($question && $question->user_id == Auth::user()->id)
         {
             return view('question.edit')->withQuestion($question);
