@@ -118,7 +118,7 @@ class UserLogic
         */
         $failed = false;
 
-        $credentials = $request->only('username','email', 'password');
+        $credentials = $request->only('username','email', 'password','showrealname');
         $validator = Validator::make($credentials, ['username' => "required|unique:users,id,{$user['id']}",'email' => "required|unique:users,id,{$user['id']}",'password' => 'required']);
         $validator->setAttributeNames(['username' => 'Gebruikersnaam', 'password' => 'Huidig wachtwoord', 'email' => 'E-mail']);
 
@@ -136,6 +136,7 @@ class UserLogic
 
         $user->username = $request->input('username');
         $user->email = $request->input('email');
+        $user->showrealname = $request->input('showrealname');
 
         /* Update password if needed. */
         if(!empty($request->input('newpassword')) || !empty($request->input('newpassword2'))){

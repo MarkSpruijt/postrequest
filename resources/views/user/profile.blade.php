@@ -8,12 +8,12 @@
             @if($userdata->showedit)
                 <a href="{{URL::to('account/edit/' .$userdata->id)}}"><i class="fa fa-cog"></i> Wijzig je profiel</a>
             @endif
-            <a href="{{URL::to('account/sendmail/'. $userdata->id)}}" class="sendemail button button-primary">Stuur {{ $userdata->username }} een e-mail</a>
+            <a href="{{URL::to('account/sendmail/'. $userdata->id)}}" class="sendemail button button-primary"><i class="fa fa-envelope-o"></i> Stuur {{ $userdata->username }} een e-mail</a>
         </div>
 
-        <h2>{{ $userdata->username }}</h2>
+        <h2>{{ $userdata->name() }}</h2>
         <hr>
-        <p>Echte naam: {{ $userdata->realname }}</p><br>
+
     </div><br><br>
 
     @foreach($questions as $question)

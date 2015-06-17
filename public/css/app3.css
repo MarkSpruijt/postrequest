@@ -27,6 +27,11 @@ a{
     margin: 0 auto;
 }
 
+.edit_form
+{
+    width: 50%;
+}
+
 /* Avatars */
 
 .avatar_small{
@@ -193,6 +198,10 @@ h2.answers {
     font-size: inherit;
 }
 
+.box .votes > a:hover{
+    background-color: white;
+}
+
 .question{
     width: 100%;
     border: 1px solid grey;
@@ -278,10 +287,12 @@ section a, input[type=submit]{
     margin: 5px 0;
     padding: 0px;
     border: none;
+
 }
 
 .userBox a:hover{
     color: #222;
+    background-color: white;
 }
 
 .box .boxFooter{
@@ -312,7 +323,6 @@ section a, input[type=submit]{
     float: left;
     text-align: left;
     word-break: break-all;
-    width: 215px;
 }
 /* Footer */
 
