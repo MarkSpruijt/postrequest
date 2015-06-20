@@ -15,7 +15,7 @@
                
             @foreach($question->tags as $tag)
 
- 				<li><a href="{{URL::to('search/tags/'. $tag->tag)}}">{{$tag->tag}}</a></li>
+ 				<li><a href="{{URL::to('search/tags/'. urlencode($tag->tag))}}">{{$tag->tag}}</a></li>
             @endforeach
             </ul>
             <div class="userBox">

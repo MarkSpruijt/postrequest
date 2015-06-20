@@ -11,11 +11,14 @@ class SearchController extends Controller {
 
     public function getTags($tag)
     {
-        if($questions = Tag::where('tag',$tag)->first()->question)
+        /* Decode tag from url */
+        $tag = urldecode($tag);
+        if($questions = Tag::where('tag',$tag)->first())
         {
-            return view('search.tags', compact('questions'));
+            $questions = $questions->question;
+            return view('search.tags', compact('questions', 'tag'));
         }
-        return view('search.tags')->withMessages(['type'=> 'error', 'messages' => ['Er zijn geen vragen gevonden bij deze tag.']]);
+        return view('search.tags', compact('tag'))->withMessages(['type'=> 'error', 'messages' => ['Er zijn geen vragen gevonden bij deze tag.']]);
     }
 }
 
