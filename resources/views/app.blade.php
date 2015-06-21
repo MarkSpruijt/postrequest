@@ -18,6 +18,7 @@
             @else
                 <li><a href="{{URL::to('/')}}">Overzicht</a></li>
                 <li><a href="{{URL::to('ask')}}">Vraag stellen</a></li>
+                <li><a href="{{URL::to('search')}}">Zoeken</a></li>
                 @if (Auth::User()->rank == 100)
                     <li><a href="{{URL::to('admin')}}">Beheer</a></li>
                 @endif

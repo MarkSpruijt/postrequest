@@ -1,12 +1,29 @@
 <?php namespace App\Http\Controllers;
 
 use App\Models\Tag;
+use Illuminate\Http\Request;
 
 class SearchController extends Controller {
 
     public function __construct()
     {
         /* ... */
+    }
+
+    public function getIndex(){
+        return view('search.findtag');
+    }
+
+    public function postIndex(Request $request)
+    {
+        if($request->input('tag') == NULL)
+        {
+            return view('search.findtag')->withMessages(['type' => 'error', 'messages' => ["Zoekbalk mag niet leeg zijn."]]);
+        }
+        $tag = Tag::cleanTags($request->input('tag'));
+        /* Tag::cleanTags returns an array & urlencode only accepts strings. */
+        $tag = urlencode($tag[0]);
+        return redirect('search/tags/' . $tag);
     }
 
     public function getTags($tag)
