@@ -100,10 +100,18 @@ nav ul li a:hover{
 .messages li {
     padding: 4px;
     margin: 4px 0;
-    color: #761e13;
     width: calc(100% - 4px);
-    border: 2px solid #c2301f;
+}
+.messages .info{
+    background-color: #888;
+    border: 2px solid #666;
+    color: #fff;
+
+}
+.messages .error{
     background-color: #ff6c60;
+    border: 2px solid #c2301f;
+    color: #761e13;
 }
 
 section {
@@ -112,20 +120,21 @@ section {
     padding: 30px;
     min-height: calc(100% - 186px);
 }
-section > a {
-    width: 100%;
-    margin-top: 2px;
-}
-section > a > .info{
-    text-align: right;
-    float: right;
-}
+
 
 /* Vragen, antwoorden en comments */
 h2.answers {
     border-bottom: 1px solid #CCC;
 }
 
+.question {
+    width: 100%;
+    margin-top: 2px;
+}
+.question .info{
+    text-align: right;
+    float: right;
+}
 .box {
     position: relative;
     padding: 5px 0;
