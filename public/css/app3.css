@@ -112,14 +112,14 @@ section {
     padding: 30px;
     min-height: calc(100% - 186px);
 }
-/*section > a{*/
-    /*background-color: #00b3ee;*/
-    /*color: #005f7b;*/
-    /*border-radius: 3px;*/
-    /*height: 10px;*/
-    /*line-height: 5px;*/
-    /*padding: 4px 10px;*/
-/*}*/
+section > a {
+    width: 100%;
+    margin-top: 2px;
+}
+section > a > .info{
+    text-align: right;
+    float: right;
+}
 
 /* Vragen, antwoorden en comments */
 h2.answers {
