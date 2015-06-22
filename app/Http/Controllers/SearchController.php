@@ -32,7 +32,7 @@ class SearchController extends Controller {
         $tag = urldecode($tag);
         if($questions = Tag::where('tag',$tag)->first())
         {
-            $questions = $questions->question;
+            $questions = $questions->question()->orderBy('updated_at','DESC')->get();
             return view('search.tags', compact('questions', 'tag'));
         }
         return view('search.tags', compact('tag'))->withMessages(['type'=> 'error', 'messages' => ['Er zijn geen vragen gevonden bij deze tag.']]);
