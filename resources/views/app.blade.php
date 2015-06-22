@@ -13,9 +13,7 @@
     <nav>
         <a href="{{URL::to('/')}}"><img class="logo" src="{{ asset('images/postrequest.png') }}" alt="Header"></a>
         <ul>
-            @if (Auth::guest())
-                <li><a href="{{URL::to('account/login')}}">Inloggen</a></li>
-            @else
+            @if (!Auth::guest())
                 <li><a href="{{URL::to('/')}}">Overzicht</a></li>
                 <li><a href="{{URL::to('ask')}}">Vraag stellen</a></li>
                 <li><a href="{{URL::to('search')}}">Zoeken</a></li>
