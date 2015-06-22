@@ -16,16 +16,22 @@ class Tag extends Eloquent {
         return $this->belongsToMany('App\Models\Question');
     }
 
-    static function AddTags($tags, $question_id)
+    static function addTags($tags, $question_id)
     {
-        $tags = explode(',', $tags);
-        $tags = array_map('trim', $tags);
-        $tags = array_map('strtoupper', $tags);
+        $tags = Tag::cleanTags($tags);
         DB::delete("delete from question_tag where question_id='$question_id'");
         foreach($tags as $tag)
         {
             Tag::firstOrCreate(['tag' => $tag])->Question()->attach($question_id);
         }
+    }
+
+    static function cleanTags($tags)
+    {
+        $tags = explode(',', $tags);
+        $tags = array_map('trim', $tags);
+        $tags = array_map('strtoupper', $tags);
+        return $tags;
     }
     
 }

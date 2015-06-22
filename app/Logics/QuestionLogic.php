@@ -27,7 +27,7 @@ class QuestionLogic
         }
         $question = new Question;
         $question->fill($data)->save();
-        Tag::AddTags($request->input('tags'), $question->id);
+        Tag::addTags($request->input('tags'), $question->id);
         return redirect('question/' . $question->id);
     }
 
@@ -51,7 +51,7 @@ class QuestionLogic
         if($question && $question->user_id == Auth::user()->id)
         {
             $question->fill($data)->save();
-            Tag::AddTags($request->input('tags'), $question->id);
+            Tag::addTags($request->input('tags'), $question->id);
             return redirect('question/' . $question->id);
         }
     }

@@ -71,8 +71,6 @@ class Question extends Eloquent{
 			}
 			$answer->votes = $totalvotes;
 
-            $vote = AnswerVote::where('user_id', Auth::User()->id)->where('answer_id', $answer['id'])->first();
-
             $answerVote = AnswerVote::where('user_id', Auth::User()->id)->where('answer_id', $answer['id'])->first();
             if($answerVote || Auth::user()->id === $answer->user_id){
                 $answer->disablevote = true;
