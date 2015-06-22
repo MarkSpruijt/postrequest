@@ -2,6 +2,7 @@
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
+use Auth;
 
 class Authenticate {
 
@@ -43,6 +44,11 @@ class Authenticate {
 				return redirect()->action('UserController@getLogin');
 			}
 		}
+
+        if(Auth::user()->disabled){
+            Auth::logout();
+            return redirect()->action('UserController@getLogin')->withMessages(['type' => 'error', 'messages' => ['Dit account is op inactief gezet']]);
+        }
 
 		return $next($request);
 	}

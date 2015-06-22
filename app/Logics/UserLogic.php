@@ -64,6 +64,13 @@ class UserLogic
 
         if(Auth::attempt($credentials))
         {
+            if(Auth::user()->disabled) {
+                Auth::logout();
+                $v->messages()->add('generic', 'Dit account is op inactief gezet.');
+                return redirect()->action('UserController@getLogin')->withErrors($v->messages());
+            }
+
+
             return redirect()->intended('/');
         }
 

@@ -31,4 +31,10 @@ class AdminController extends Controller{
         return UserLogic::editUser($request, $id);
     }
 
+    public function getDisableuser($id, $disabled){
+        $user = User::find($id);
+        $user->disabled = $disabled;
+        $user->save();
+        return redirect()->action('AdminController@getEdituser', $id);
+    }
 }
