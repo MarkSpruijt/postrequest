@@ -8,7 +8,7 @@ use App\Models\CommentVote;
 class Question extends Eloquent{
 
 	protected $fillable = [
-		'title','content', 'answer_id', 'user_id'
+		'title','content', 'answer_id', 'user_id' , 'viewcount'
 	];
 
 	public function answers()

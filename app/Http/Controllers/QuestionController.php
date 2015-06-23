@@ -28,6 +28,9 @@ class QuestionController extends Controller {
             App::abort(404);
         }
         $question->sortAnswers();
+        $question->viewcount += 1;
+        $question->save();
+
 
         return view('question.details', compact('question'));
     }
