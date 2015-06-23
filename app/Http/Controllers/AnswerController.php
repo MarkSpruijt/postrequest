@@ -2,8 +2,10 @@
 
 use Auth;
 use App;
+use Mail;
 use App\Models\Answer;
 use App\Models\AnswerVote;
+use App\Models\Question;
 use Illuminate\Http\Request;
 
 class AnswerController extends Controller {
@@ -24,6 +26,15 @@ class AnswerController extends Controller {
         $data = $request->only('content');
         $user_id = Auth::user()->id;
         Answer::create(['content' => $data['content'],'question_id' => $id, 'user_id' => $user_id]);
+        $question = Question::find($id);
+        $email = $question->user->email;
+        $title = $question->title;
+        $realname = $question->user->realname;
+
+        Mail::send('emails.answermail', ['title' => $title,'email' => $email,'realname'=> $realname, 'question_id' => $id], function($message) use ($email, $realname, $title)
+        {
+            $message->to($email, $realname)->subject("[PostRequest] U heeft een antwoord ontvangen op vraag: '$title'");
+        });
         return redirect("question/". $id);
     }
 

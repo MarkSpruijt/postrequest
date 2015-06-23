@@ -6,7 +6,7 @@
 	<div class="box">
         <div class="boxContent">
             <h1>{{ucfirst($question['title'])}}</h1>
-            {!! nl2br((Markdown::convertToHtmlHTML::entities($question['content']))) !!}
+            {!! nl2br(Markdown::convertToHtml(HTML::entities($question['content']))) !!}
         </div>
 
         <script>
