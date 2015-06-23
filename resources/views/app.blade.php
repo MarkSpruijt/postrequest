@@ -8,6 +8,7 @@
 		<link href="{{ asset('/css/app3.css') }}" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="{{ asset('/css/font-awesome.min.css')}}">
+    <script src="{{asset('/js/encoder.js')}}"></script>
 </head>
 <body>
     <nav>
