@@ -51,7 +51,6 @@ form {
 form input, textarea{
     display: block;
     padding: 5px;
-    width: 100%;
     font-size: 15px;
     font-family: 'Open Sans', sans-serif;
     margin-bottom: 10px;
@@ -135,6 +134,7 @@ section {
 
 /* Vragen, antwoorden en comments */
 h2.answers {
+    margin-top: 5%;
     border-bottom: 1px solid #CCC;
 }
 
@@ -163,6 +163,12 @@ h2.answers {
     clear: both;
     margin: 3px 0;
 }
+.boxContent a{
+    float:right;
+}
+.boxContent .info{
+    float:right;
+}
 .tags li{
     display: inline;
 }
@@ -171,8 +177,13 @@ h2.answers {
     margin: 2px 0;
 }
 
-.box h1, .box h2, .box h3{
+.box .question_info{
+    min-width: 100%;
     border-bottom: 1px solid #CCC;
+}
+
+.question_info{
+    font-size: 0.8em;
 }
 
 .box.answer, .box.comment{
@@ -309,12 +320,15 @@ section a, input[type=submit]{
     height: 100px;
 }
 
+.userBox a{
+    float: none;
+}
 .box:first-child .userBox{
     float: left;
 }
 .userBox {
     float: right;
-    width: 300px;
+    width: 55F0px;
 }
 
 .userBox label{
@@ -327,11 +341,16 @@ section a, input[type=submit]{
 .userBox img{
     float: left;
     margin-right: 5px;
+    margin-bottom: 15px;
 }
 .userBox a {
-    float: left;
+    /*float: left;*/
     text-align: left;
     word-break: break-all;
+}
+
+.checkbox{
+    width: auto;
 }
 /* Footer */
 

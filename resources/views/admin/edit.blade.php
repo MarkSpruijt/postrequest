@@ -33,14 +33,6 @@
 {!! Form::label('Laat je naam zien op je profiel') !!}
 {!! Form::checkbox('showrealname' , '1') !!}
 
-{!! Form::label('Nieuw wachtwoord') !!}
-{!! Form::password('newpassword', array('class' => 'edit_form', 'placeholder'=>'Nieuw wachtwoord')) !!}
-
-{!! Form::label('Herhaal nieuw wachtwoord') !!}
-{!! Form::password('newpassword2', array('class' => 'edit_form', 'placeholder'=>'Herhaal je nieuwe wachtwoord')) !!}
-<br><br><br><hr>
-{!! Form::label('Huidig Wachtwoord') !!}
-{!! Form::password('password', array('class' => 'edit_form', 'placeholder'=>'Graag je huidige wachtwoord invullen')) !!}
 {!! Form::submit('Wijzig je profiel.', array('class' => 'edit_form')) !!}
 {!! Form::close() !!}
 @endsection

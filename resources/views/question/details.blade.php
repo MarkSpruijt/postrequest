@@ -5,8 +5,12 @@
 
 	<div class="box">
         <div class="boxContent">
-            <h1>{{ucfirst($question['title'])}}</h1>
+            @if($question->user_id == Auth::user()->id)
+                <a href='{{ URL::to('question/edit/' . $question->id) }}'>Vraag bewerken</a>
+            @endif
+                <h1>{{ucfirst($question['title'])}}</h1><span class="info">Views : {{$question->viewcount}}</span><br>
             {!! nl2br(Markdown::convertToHtml(HTML::entities($question['content']))) !!}
+
         </div>
 
         <div class='boxFooter'>
@@ -20,12 +24,10 @@
             </ul>
             <div class="userBox">
                 <img class="avatar_small" src="{{$question->User->avatar()}}">
-                <label>{{ $question->created_at->toDateTimeString() }}</label>
-                <a href="{{URL::to('profile/'. $question->User->id )}}">{{$question->User->username}}</a>
+                <label>Geplaatst op:<br>{{ $question->created_at->toDateTimeString() }}</label><br>
+                Door: <a href="{{URL::to('profile/'. $question->User->id )}}">{{$question->User->username}}</a><br>
             </div>
-            @if($question->user_id == Auth::user()->id)
-                <a href='{{ URL::to('question/edit/' . $question->id) }}'>Vraag bewerken</a>
-            @endif
+
         </div>
     </div>
 
