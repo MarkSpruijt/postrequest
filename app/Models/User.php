@@ -89,4 +89,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		}
 	}
 
+    public function name()
+    {
+        if($this->showrealname){
+            return $this->realname;
+        }
+        else{
+            return $this->username;
+        }
+    }
+
 }

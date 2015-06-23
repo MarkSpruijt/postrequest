@@ -24,7 +24,7 @@ class AdminController extends Controller{
 
     public function getEdituser($id){
         $user = User::find($id);
-        return view('user.edit')->with('user', $user);
+        return view('admin.edit')->with('user', $user);
     }
 
     public function postEdituser(Request $request, $id){

@@ -40,7 +40,7 @@ class UserLogic
 		});
         $user = new User;
         $user->fill($data)->save();
-        return view('admin.adduser')->with("message", "Account aangemaakt voor '$properties->realname'");
+        return view('admin.adduser')->withMessages(['type' => 'info', 'messages' => ["Account aangemaakt voor '$properties->realname'"]]);
 	}
 
     static function loginUser($properties)
@@ -125,7 +125,7 @@ class UserLogic
         */
         $failed = false;
 
-        $credentials = $request->only('username','email', 'password');
+        $credentials = $request->only('username','email', 'password','showrealname');
         $validator = Validator::make($credentials, ['username' => "required|unique:users,id,{$user['id']}",'email' => "required|unique:users,id,{$user['id']}",'password' => 'required']);
         $validator->setAttributeNames(['username' => 'Gebruikersnaam', 'password' => 'Huidig wachtwoord', 'email' => 'E-mail']);
 
@@ -143,6 +143,7 @@ class UserLogic
 
         $user->username = $request->input('username');
         $user->email = $request->input('email');
+        $user->showrealname = $request->input('showrealname');
 
         /* Update password if needed. */
         if(!empty($request->input('newpassword')) || !empty($request->input('newpassword2'))){
@@ -156,6 +157,9 @@ class UserLogic
             }
             $user->password = Hash::make($request->input('newpassword'));
         }
+
+        if ( $user->showrealname == 'on'){
+            $user->showrealname = '1';}
 
         /* Update image if needed. */
         if($request->hasFile('avatar'))
@@ -186,9 +190,10 @@ class UserLogic
             $request->flash();
             return redirect()->back()->withMessages(["type" => "error","messages" => $validator->messages()->all()]);
         }
+//        dd($user);
         $user->save();
         $request->flash();
-        return redirect()->back()->withMessages(["type" => "info","messages" => ["Gebruikers gegevens gewijzigd."]]);
+        return redirect()->action('UserController@getProfile', $user->id)->withMessages(["type" => "info","messages" => ["Gebruikers gegevens gewijzigd."]]);
     }
 
     static function sendMailtoUser($userid, $request)

@@ -6,7 +6,7 @@
 	<div class="box">
         <div class="boxContent">
             <h1>{{ucfirst($question['title'])}}</h1>
-            {!! Markdown::convertToHtml(HTML::entities($question['content'])) !!}
+            {!! nl2br((Markdown::convertToHtmlHTML::entities($question['content']))) !!}
         </div>
 
         <div class='boxFooter'>
@@ -23,7 +23,7 @@
                 <label>{{ $question->created_at->toDateTimeString() }}</label>
                 <a href="{{URL::to('profile/'. $question->User->id )}}">{{$question->User->username}}</a>
             </div>
-            @if($question->user_id == Auth::user()->id)
+`            @if($question->user_id == Auth::user()->id)
                 <a href='{{ URL::to('question/edit/' . $question->id) }}'>Vraag bewerken</a>
             @endif
         </div>
