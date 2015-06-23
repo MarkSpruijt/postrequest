@@ -225,6 +225,15 @@ h2.answers {
     float: right;
 }
 
+/* Code blocks & blockquotes */
+pre{
+    background-color: #EEE;
+    padding: 10px;
+}
+blockquote{
+    border-left: 5px solid #CCC;
+}
+
 /* Profile Page */
     .profile_info > .avatar
     {
