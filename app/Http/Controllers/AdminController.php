@@ -1,34 +1,34 @@
 <?php  namespace App\Http\Controllers;
 
-use Mail;
 use App\Models\User;
+use App\Logics\UserLogic;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller{
 	
 	public function getIndex()
-	{
-		return view('admin.show');
+    {
+		$users = User::orderBy('realname', 'ASC')->get();
+		return view('admin.show', compact('users'));
 	}
 
-	public function getAdduser(){
+	public function getAdduser()
+    {
 		return view('admin.adduser');
 	}
 
-	public function postAdduser(Request $request){
-		$key = str_random(15);
-		$user = new User;
-		$user->key = $key;
-		$user->realname = $request->realname;
-		$user->email = $request->email;
-		$user->rank = $request->rank;
-		$email = $request->email;
-		Mail::send('emails.welcome', ['key' => $key], function($message) use ($email)
-		{
-		    $message->to($email, $email)->subject('Welkom bij PostRequest!');
-		});
-		$user->save();
-		return view('admin.adduser')->with("message", "Account aangemaakt voor '$request->realname'");
+	public function postAdduser(Request $request)
+    {
+        return UserLogic::createUser($request);
 	}
+
+    public function getEdituser($id){
+        $user = User::find($id);
+        return view('admin.edit')->with('user', $user);
+    }
+
+    public function postEdituser(Request $request, $id){
+        return UserLogic::editUser($request, $id);
+    }
 
 }

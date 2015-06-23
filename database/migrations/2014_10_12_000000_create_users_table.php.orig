@@ -20,8 +20,11 @@ class CreateUsersTable extends Migration {
 			$table->string('email')->unique();
 			$table->integer('rank');
 			$table->string('password', 60);
+<<<<<<< HEAD
             $table->boolean('disabled');
+=======
             $table->boolean('showrealname');
+>>>>>>> 50c1fe4dbf87bb4c4d6e075390fb2b0471b3d52f
 			$table->string('key', 15)->unique()->nullable();
 			$table->rememberToken();
 			$table->timestamps();

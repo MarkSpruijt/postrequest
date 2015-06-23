@@ -1,64 +1,175 @@
 @extends('app')
 
 @section('content')
-	<div class="question_detail" style="margin: 10px;"> 
-		<h1>{{ucfirst($question['title'])}}</h1>
-		<p class="question_content">{{$question['content']}}</p>
-			@if($question->user_id == Auth::user()->id)
-				<a href='{{ URL::to('question/edit/' . $question->id) }}'>Bewerk je vraag</a>
-			@endif
-	</div>
-		<h2 class="answers">Antwoorden:</h2>
-			@foreach($question->answers as $answer)
-				<div class="question_answers">
-				@if($question['answer_id'] == $answer['id'])
-						<i class="fa question_checked fa-check fa-3"></i>
-				@endif
 
-				<p>Votes: {{$answer['votes']}}
-					<a href="{{URL::to('answer/vote/' . $answer['id'])}}">
-						<i title="Upvote!" class="fa fa-chevron-up"></i>
-					</a>
-				</p>
 
-				<p>{{$answer['content']}}</p>
+	<div class="box">
+        <div class="boxContent">
+            @if($question->user_id == Auth::user()->id)
+                <a href='{{ URL::to('question/edit/' . $question->id) }}'>Vraag bewerken</a>
+            @endif
+                <h1>{{ucfirst($question['title'])}}</h1><span class="info">Views : {{$question->viewcount}}</span><br>
+            {!! nl2br(Markdown::convertToHtml(HTML::entities($question['content']))) !!}
 
-				<p class="post_info">{{ date('d M Y H:m',strtotime($question->updated_at)) }}<br>
-				{{-- <a href="{{URL::to('profile/'. $answer->User->id )}}">{{$answer->User->username}}</p></a> --}}
-				<a href="#">{{$answer->User->username}}</p></a>
+        </div>
 
-				<!-- Juiste answer -->
-				@if($question['answer_id'] == $answer->id)
-					<!-- Owner van de vraag -->
-					@if(Auth::user()->id == $question->user_id)
-						<a href='{{ URL::to('question/'. $question['id'] . '/' . $answer['id'] . '/choose') }}'>Dit antwoord niet meer accepteren.</a>
-						Dit antwoord is als geaccepteerd beschouwd door de desbetreffende vraagstellende gebruiker.
-					@endif
-				@else
-					@if(Auth::user()->id == $question->user_id)
-						<a href='{{ URL::to('question/'. $question['id'] . '/' . $answer['id'] . '/choose') }}'>
-							Markeer dit als het juiste antwoord. <i class="fa fa-check"></i>
-						</a>
-					@endif
-				@endif
+        <script>
+            (function() {
+                var codeblocks = document.getElementsByTagName('CODE');
+                for(var i=0;i<codeblocks.length;i++)
+                {
+                    codeblocks[i].innerHTML = Encoder.htmlDecode(codeblocks[i].innerHTML);
+                }
+            })();
+        </script>
 
-				<!-- Edit button voor de eigenaar van het antwoord. -->
-				@if(Auth::user()->id == $answer->user_id)
-					<a href='{{ URL::to('answer/edit/' . $answer->id) }}'><i class="fa fa-pencil"></i></a>
-				@endif
+        <div class='boxFooter'>
+            <ul class="tags">
+                <li>Tags:</li>
+               
+            @foreach($question->tags as $tag)
 
-				<a href="{{ action('CommentController@getCreate', [$question->id, $answer->id]) }}">Reageer op dit antwoord.</a>
+ 				<li><a href="{{URL::to('search/tags/'. urlencode($tag->tag))}}">{{$tag->tag}}</a></li>
+            @endforeach
+            </ul>
+            <div class="userBox">
+                <img class="avatar_small" src="{{$question->User->avatar()}}">
+                <label>Geplaatst op:<br>{{ $question->created_at->toDateTimeString() }}</label><br>
+                Door: <a href="{{URL::to('profile/'. $question->User->id )}}">{{$question->User->username}}</a><br>
+            </div>
 
-				<!-- Antwoorden -->
-				@foreach($answer->comments as $comment)
-					<div class="answer" style="margin: 10px;"> 
-						<p class="post_info">{{ date('d M Y H:m',strtotime($question->updated_at)) }}<br>
-							{{-- <a href="{{URL::to('profile/'. $comment->User->id )}}">{{$comment->user->username}}</a> --}}
-							<a href="#">{{$comment->user->username}}</a></p><br>
-						<p class="question_content">{{$comment->content}}</p>
-				</div>
-				@endforeach
-		</div>
+        </div>
+    </div>
+
+	<h2 class="answers">
+        @if(count($question->answers))
+            @if(count($question->answers) === 1)
+                1 Antwoord:
+            @else
+                {{ count($question->answers) }} Antwoorden:
+            @endif
+        @else
+            Er is nog geen antwoord op deze vraag
+        @endif
+    </h2>
+    <a class="button" href="{{ URL::to('answer/create/'.$question['id']) }}">Antwoord toevoegen</a>
+    @foreach($question->answers as $answer)
+
+	@if($question['answer_id'] == $answer['id'])
+	<div class="box answer solved">
+	@else
+	<div class="box answer">
+	@endif
+        <div class="votes">
+            <!-- Juiste answer vinkje -->
+            @if($question['answer_id'] == $answer->id)
+                <!-- Owner van de vraag -->
+                @if(Auth::user()->id == $question->user_id)
+                    <a href='{{ URL::to('question/'. $question['id'] . '/' . $answer['id'] . '/choose') }}'>
+                        <i class="fa check active fa-check fa-3"></i>
+                    </a>
+                @else
+                    <i class="fa check active fa-check fa-3"></i>
+                @endif
+            @else
+                @if(Auth::user()->id == $question->user_id)
+                    <a href='{{ URL::to('question/'. $question['id'] . '/' . $answer['id'] . '/choose') }}'>
+                        <i class="fa check fa-check fa-3"></i></i>
+                    </a>
+                @endif
+            @endif
+
+            {{-- UPVOTE --}}
+            @if (!isset($answer->disablevote))
+                <a class="upvote" href="{{URL::to('answer/vote/' . $answer['id'])}}">
+                    <i title="Upvote!" class="fa fa-chevron-up"></i>
+                </a>
+            @elseif($answer->userVote == 1)
+                {{-- USER HAS VOTED --}}
+                <i title="Upvote!" class="fa fa-chevron-up upvoted"></i>
+            @else
+                <i title="Upvote!" class="fa fa-chevron-up"></i>
+            @endif
+
+            {{-- NUMBER --}}
+            <strong class="votecount">{{$answer['votes']}}</strong>
+
+            {{-- DOWNVOTE --}}
+
+            @if (!isset($answer->disablevote))
+                <a class="upvote" href="{{URL::to('answer/vote/' . $answer['id'] ."/0")}}">
+                    <i title="Downvote!" class="fa fa-chevron-down"></i>
+                </a>
+            @elseif($answer->userVote === 0)
+                <i title="Downvote!" class="fa fa-chevron-down downvoted"></i>
+            @else
+                <i title="Downvote!" class="fa fa-chevron-down"></i>
+            @endif
+        </div>
+
+        <div class='boxContent'>
+		    <p>{!! Markdown::convertToHtml(HTML::entities($answer['content'])) !!}</p>
+
+        </div>
+        <!-- Edit button voor de eigenaar van het antwoord. -->
+        <div class="boxFooter">
+            <div class="userBox">
+                <img class="avatar_small" src="{{$answer->User->avatar()}}">
+                <label>{{ $answer->updated_at->toDateTimeString() }}</label>
+                <a href="{{URL::to('profile/'. $answer->User->id )}}">{{$answer->User->username}}</a>
+            </div>
+        </div>
+        <a href="{{ action('CommentController@getCreate', [$question->id, $answer->id]) }}">Reactie toevoegen</a>
+        @if(Auth::user()->id == $answer->user_id)
+            <a class='button' href='{{ URL::to('answer/edit/' . $answer->id) }}'>Antwoord bewerken</a>
+            @endif
+		<!-- Comments op het antwoord -->
+        @if(count($answer->comments) === 1)
+            <h3>1 Reactie:</h3>
+        @elseif(count($answer->comments) !== 0)
+            <h3>{{ count($answer->comments) }} reacties:</h3>
+        @endif
+
+		@foreach($answer->comments as $comment)
+			<div class="box comment">
+                <div class="votes">
+                    @if (!isset($comment->disablevote))
+                        <a class="upvote" href="{{URL::to('comment/vote/' . $comment['id'])}}">
+                            <i title="Upvote!" class="fa fa-chevron-up"></i>
+                        </a>
+                    @elseif($comment->userVote === 1)
+                        <i title="Upvote!" class="fa fa-chevron-up upvoted"></i>
+                    @else
+                        <i title="Upvote!" class="fa fa-chevron-up"></i>
+                    @endif
+
+                    <strong class="votecount">{{$comment['votes']}}</strong><br>
+                    @if (!isset($comment->disablevote))
+                        <a class="upvote" href="{{URL::to('comment/vote/' . $comment['id'] ."/0")}}">
+                            <i title="Downvote!" class="fa fa-chevron-down"></i>
+                        </a>
+                    @elseif($comment->userVote === 0)
+                        <i title="Downvote!" class="fa fa-chevron-down downvoted"></i>
+                    @else
+                        <i title="Downvote!" class="fa fa-chevron-down"></i>
+                    @endif
+                </div>
+                <div class="boxContent">
+                    <p>{{$comment->content}}</p>
+                </div>
+                <div class="boxFooter">
+                    @if($comment->user_id == Auth::user()->id)
+                        <a href='{{ action('CommentController@getEdit', [$question->id, $answer->id, $comment->id]) }}'>Reactie bewerken</a>
+                    @endif
+                    <div class="userBox">
+                        <img class="avatar_small" src="{{$comment->User->avatar()}}">
+                        <label>{{ $comment->updated_at->toDateTimeString() }}</label>
+                        <a href="{{URL::to('profile/'. $comment->User->id )}}">{{$comment->User->username}}</a>
+                    </div>
+                </div>
+
+			</div><!-- close regel 75 -->
+		@endforeach
+	</div><!-- close regel 45 -->
 	@endforeach
-	<a class="button" href="{{ URL::to('answer/create/'.$question['id']) }}">Stuur antwoord</a>
 @endsection

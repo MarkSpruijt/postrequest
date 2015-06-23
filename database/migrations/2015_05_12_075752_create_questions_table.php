@@ -16,7 +16,8 @@ class CreateQuestionsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('title');
-			$table->string('content');
+			$table->text('content');
+			$table->integer('viewcount')->default(0);
 			$table->integer('user_id');
 			$table->integer('answer_id')->nullable()->default(NULL);
 			$table->timestamps();
@@ -30,6 +31,7 @@ class CreateQuestionsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('questions');	}
+		Schema::drop('questions');
+    }
 
 }

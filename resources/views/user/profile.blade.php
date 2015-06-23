@@ -1,24 +1,31 @@
 @extends('app')
 
 @section('content')
-<div class="profile_info">
-	<h1>{{ $userdata->realname }}<span>&nbsp&nbsp&nbsp( {{ $userdata->username }} )</span></h1>
-	E-mail: {{ $userdata->email }}<br><br>
-	Rank: {{ $userdata->rank }}
-</div>
 
-	@foreach($questions as $question)
-		<a class="a_view" href="{{ URL::to('question/'.$question['id']) }}">
-			@if (isset($question->answer_id))
-					<div class="question question_solved">
-					<i class="fa solved fa-check"></i>
-			@else
-				<div class="question a_view">
-			@endif
-				<p class="title"><strong>{{ $question->title }}</strong></p>
-				<p class="info">
-				{{($question->updated_at->diffForHumans()) }} by: {{$question->user->username}}</p>
-			</div>
-		</a>
-	@endforeach
+    <div class="profile_info">
+        <img class="avatar profile" src="{{$userdata->avatar()}}">
+        <div class="profile_buttons">
+            @if($userdata->showedit)
+                <a href="{{URL::to('account/edit/' .$userdata->id)}}"><i class="fa fa-cog"></i> Wijzig je profiel</a>
+            @endif
+            <a href="{{URL::to('account/sendmail/'. $userdata->id)}}" class="sendemail button button-primary"><i class="fa fa-envelope-o"></i> Stuur {{ $userdata->username }} een e-mail</a>
+        </div>
+
+        <h2>{{ $userdata->name() }}</h2>
+        <hr>
+
+    </div><br><br>
+
+    @foreach($questions as $question)
+        <a  href="{{ URL::to('question/'.$question['id']) }}"
+        @if (isset($question->answer_id))
+            class="question question_solved" >
+            <i class="fa solved fa-check"></i>
+            @else
+                class="question">
+            @endif
+            <span class="title"><strong>{{ $question->title }}</strong></span>
+            <span class="info">{{($question->updated_at->diffForHumans()) }} by: {{$question->user->username}}</span>
+        </a>
+    @endforeach
 @endsection
