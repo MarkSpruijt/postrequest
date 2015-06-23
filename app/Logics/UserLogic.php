@@ -151,6 +151,9 @@ class UserLogic
             $user->password = Hash::make($request->input('newpassword'));
         }
 
+        if ( $user->showrealname == 'on'){
+            $user->showrealname = '1';}
+
         /* Update image if needed. */
         if($request->hasFile('avatar'))
         {
@@ -180,9 +183,10 @@ class UserLogic
             $request->flash();
             return redirect()->back()->withMessages(["type" => "error","messages" => $validator->messages()->all()]);
         }
+//        dd($user);
         $user->save();
         $request->flash();
-        return redirect()->back()->withMessages(["type" => "info","messages" => ["Gebruikers gegevens gewijzigd."]]);
+        return redirect()->action('UserController@getProfile', $user->id)->withMessages(["type" => "info","messages" => ["Gebruikers gegevens gewijzigd."]]);
     }
 
     static function sendMailtoUser($userid, $request)

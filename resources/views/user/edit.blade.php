@@ -17,25 +17,16 @@
         <img src="{{ $user->avatar() }}" class='avatar_medium'>
         {!! Form::file('avatar') !!}
     </div>
-
 			{!! Form::label('Gebruikersnaam') !!}
 			{!! Form::text('username', $user['username'], array('class' => 'edit_form', 'placeholder'=>'je gebruikersnaam')) !!}
-    @if (Auth::User()->rank == 100)
-        {!! Form::label('Echte naam') !!}
-        {!! Form::text('realname',$user['realname'], array('class' => 'edit_form', 'placeholder'=>'Je echte naam')) !!}
-    @else
 
-    @endif
 			{!! Form::label('E-mail') !!}
 			{!! Form::email('email', $user['email'], array('class' => 'edit_form', 'placeholder'=>'E-mail')) !!}
 
             {!! Form::label('Laat je naam zien op je profiel') !!}
-            {!! Form::checkbox('checkbox', $user['showrealname']) !!}
+            {!! Form::checkbox('showrealname', null , 'true') !!}
 
-        @if (Auth::User()->rank == 100)
-
-        @else
-			{!! Form::label('Nieuw wachtwoord') !!}
+            {!! Form::label('Nieuw wachtwoord') !!}
 			{!! Form::password('newpassword', array('class' => 'edit_form', 'placeholder'=>'Nieuw wachtwoord')) !!}
 
 			{!! Form::label('Herhaal nieuw wachtwoord') !!}
@@ -43,7 +34,6 @@
             <br><br><br><hr>
 			{!! Form::label('Huidig Wachtwoord') !!}
 			{!! Form::password('password', array('class' => 'edit_form', 'placeholder'=>'Graag je huidige wachtwoord invullen')) !!}
-        @endif
 			{!! Form::submit('Wijzig je profiel.', array('class' => 'edit_form')) !!}
 		{!! Form::close() !!}
 @endsection
