@@ -31,8 +31,11 @@
 {!! Form::text('realname',$user['realname'], array('class' => 'edit_form', 'placeholder'=>'Je echte naam')) !!}
 
 {!! Form::label('Laat je naam zien op je profiel') !!}
-{!! Form::checkbox('showrealname' , '1') !!}
+{!! Form::checkbox('showrealname' , '1') !!}<br>
 
+{!! Form::label('inactief') !!}
+{!! Form::checkbox('disabled' , '1', $user['disabled']) !!}<br>
+s
 {!! Form::label('Nieuw wachtwoord') !!}
 {!! Form::password('newpassword', array('class' => 'edit_form', 'placeholder'=>'Nieuw wachtwoord')) !!}
 

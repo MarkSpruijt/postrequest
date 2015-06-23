@@ -48,7 +48,8 @@ form {
     width: 80%;
     margin: 0 auto;
 }
-form input, textarea{
+
+form input, textarea {
     display: block;
     padding: 5px;
     width: 100%;
@@ -57,9 +58,15 @@ form input, textarea{
     margin-bottom: 10px;
 }
 
+form input[type=checkbox] {
+    width: auto;
+    display: inline;
+}
+
 textarea{
     resize: vertical;
 }
+
 form input[type=submit]
 {
     width: calc(100% - 10px); /* Remove 20px padding */
