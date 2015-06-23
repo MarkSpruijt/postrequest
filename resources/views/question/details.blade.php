@@ -9,7 +9,7 @@
                 <a href='{{ URL::to('question/edit/' . $question->id) }}'>Vraag bewerken</a>
             @endif
                 <h1>{{ucfirst($question['title'])}}</h1><span class="info">Views : {{$question->viewcount}}</span><br>
-            {!! nl2br((Markdown::convertToHtmlHTML::entities($question['content']))) !!}
+            {!! nl2br(Markdown::convertToHtml(HTML::entities($question['content']))) !!}
 
         </div>
 

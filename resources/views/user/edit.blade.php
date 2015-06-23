@@ -24,7 +24,7 @@
 			{!! Form::email('email', $user['email'], array('class' => 'edit_form', 'placeholder'=>'E-mail')) !!}
 
             {!! Form::label('Laat je naam zien op je profiel') !!}
-            {!! Form::checkbox('showrealname', null, array('class' => 'checkbox')) !!}
+            {!! Form::checkbox('showrealname', null, array('class' => 'checkbox')) !!}<br>
 
             {!! Form::label('Nieuw wachtwoord') !!}
 			{!! Form::password('newpassword', array('class' => 'edit_form', 'placeholder'=>'Nieuw wachtwoord')) !!}

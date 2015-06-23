@@ -52,6 +52,7 @@ form {
 form input, textarea {
     display: block;
     padding: 5px;
+    width: 100%;
     font-size: 15px;
     font-family: 'Open Sans', sans-serif;
     margin-bottom: 10px;
