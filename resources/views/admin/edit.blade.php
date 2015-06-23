@@ -31,8 +31,10 @@
 {!! Form::text('realname',$user['realname'], array('class' => 'edit_form', 'placeholder'=>'Je echte naam')) !!}
 
 {!! Form::label('Laat je naam zien op je profiel') !!}
-{!! Form::checkbox('showrealname' , '1') !!}
+{!! Form::checkbox('showrealname' , '1') !!}<br>
 
+{!! Form::label('inactief') !!}
+{!! Form::checkbox('disabled' , '1', $user['disabled']) !!}<br>
 {!! Form::submit('Wijzig je profiel.', array('class' => 'edit_form')) !!}
 {!! Form::close() !!}
 @endsection

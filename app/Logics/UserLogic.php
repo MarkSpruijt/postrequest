@@ -64,6 +64,13 @@ class UserLogic
 
         if(Auth::attempt($credentials))
         {
+            if(Auth::user()->disabled) {
+                Auth::logout();
+                $v->messages()->add('generic', 'Dit account is op inactief gezet.');
+                return redirect()->action('UserController@getLogin')->withErrors($v->messages());
+            }
+
+
             return redirect()->intended('/');
         }
 
@@ -214,6 +221,7 @@ class UserLogic
         return view('user.sendmail')->withMessages(['type' => 'info', 'messages' => ["E-mail is verstuurd."]])->withUser($user);
     }
 
+    // For the admin
     static function editUser($request, $id)
     {
         $user = User::find($id);
@@ -237,6 +245,8 @@ class UserLogic
         $user->username = $request->input('username');
         $user->realname = $request->input('realname');
         $user->email = $request->input('email');
+
+        $user->disabled = $request->input('disabled');
 
         /* Update image if needed. */
         if($request->hasFile('avatar'))

@@ -8,14 +8,13 @@
 		<link href="{{ asset('/css/app3.css') }}" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="{{ asset('/css/font-awesome.min.css')}}">
+    <script src="{{asset('/js/encoder.js')}}"></script>
 </head>
 <body>
     <nav>
         <a href="{{URL::to('/')}}"><img class="logo" src="{{ asset('images/postrequest.png') }}" alt="Header"></a>
         <ul>
-            @if (Auth::guest())
-                <li><a href="{{URL::to('account/login')}}">Inloggen</a></li>
-            @else
+            @if (!Auth::guest())
                 <li><a href="{{URL::to('/')}}">Overzicht</a></li>
                 <li><a href="{{URL::to('ask')}}">Vraag stellen</a></li>
                 <li><a href="{{URL::to('search')}}">Zoeken</a></li>
