@@ -11,7 +11,6 @@
     <script src="{{asset('/js/encoder.js')}}"></script>
     <link rel="stylesheet" href="{{asset('css/highlight/github-gist.css')}}">
     <script src="{{asset('js/highlight.pack.js')}}"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body>
     <nav>
