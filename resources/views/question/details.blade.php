@@ -170,7 +170,6 @@
             {
                 codeblocks[i].innerHTML = Encoder.htmlDecode(codeblocks[i].innerHTML);
             }
-            hljs.initHighlightingOnLoad();
         })();
     </script>
 
