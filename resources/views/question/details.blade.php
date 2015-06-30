@@ -13,16 +13,6 @@
 
         </div>
 
-        <script>
-            (function() {
-                var codeblocks = document.getElementsByTagName('CODE');
-                for(var i=0;i<codeblocks.length;i++)
-                {
-                    codeblocks[i].innerHTML = Encoder.htmlDecode(codeblocks[i].innerHTML);
-                }
-            })();
-        </script>
-
         <div class='boxFooter'>
             <ul class="tags">
                 <li>Tags:</li>
@@ -172,4 +162,15 @@
 		@endforeach
 	</div><!-- close regel 45 -->
 	@endforeach
+
+    <script>
+        (function() {
+            var codeblocks = document.getElementsByTagName('CODE');
+            for(var i=0;i<codeblocks.length;i++)
+            {
+                codeblocks[i].innerHTML = Encoder.htmlDecode(codeblocks[i].innerHTML);
+            }
+        })();
+    </script>
+
 @endsection

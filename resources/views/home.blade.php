@@ -12,8 +12,8 @@
 				class="question">
 			@endif
 				<span class="title"><strong>{{ $question->title }}</strong></span>
-				<span class="info">{{($question->updated_at->diffForHumans()) }} by: {{$question->user->username}}</span>
-				<span class="info">Views:{{$question->viewcount}}  ||&nbsp&nbsp</span>
+				<span class="info">{{($question->created_at->diffForHumans()) }} by: {{$question->user->username}}</span>
+				<span class="info">Views: {{$question->viewcount}} - </span>
 		</a>
 	@endforeach
 @endsection

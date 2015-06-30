@@ -9,9 +9,6 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="{{ asset('/css/font-awesome.min.css')}}">
     <script src="{{asset('/js/encoder.js')}}"></script>
-    <link rel="stylesheet" href="{{asset('css/highlight/github-gist.css')}}">
-    <script src="{{asset('js/highlight.pack.js')}}"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body>
     <nav>

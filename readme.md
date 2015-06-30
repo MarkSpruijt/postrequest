@@ -15,16 +15,17 @@ This guide will be a fast setup guide.
 
     ```composer update```
 
-6. Create a mysql database named: "PostRequest"
+6. Create a database. Use the login values in stap 8.
 7. Open cmd, navigate to the project folder then run the following commands:
 
 	```php artisan migrate:install```
 	
-	```php artisan migrate```
+	```php artisan migrate --seed```
 
-	```php artisan db:seed```
-	
-8. You are done installing. Enjoy our project!
+8. Open .env.example and add your config values. Make sure to setup a mail service. [(laravel supports alot of mail services)](http://laravel.com/docs/5.0/mail). Save the file as '.env' in the root folder. 
+   
+
+9. You are done installing. Enjoy our project!
 
 ### License
 
