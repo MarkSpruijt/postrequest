@@ -17,6 +17,9 @@ h1{
     font-size: 30px;
 }
 
+.bold{
+    font-weight: bold;
+}
 a{
     text-decoration: none;
     color: #000000;
@@ -256,8 +259,9 @@ blockquote{
 /* Profile Page */
     .profile_info > .avatar
     {
+        width: 200px;
         float: left;
-        padding:0% 5% 2% 0%;
+        padding:0% 5% 1% 0%;
     }
 
     .profile_buttons
@@ -297,6 +301,11 @@ blockquote{
 }
 .box .votes .disabled {
     opacity: 0;
+}
+
+a.question > section a, input[type=submit]{
+    text-transform: none;
+    color: #ffff00;
 }
 section a, input[type=submit]{
     border: 1px solid #CCC;

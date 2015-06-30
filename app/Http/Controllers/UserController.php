@@ -5,6 +5,8 @@ use Auth;
 use App\Models\User;
 use App\Logics\UserLogic;
 use Illuminate\Http\Request;
+use App\Models\Question;
+use App\Models\Answer;
 
 class UserController extends Controller{
 	
@@ -43,7 +45,9 @@ class UserController extends Controller{
 	  {
 	  	$userdata->showedit = true;
 	  }
-	  return view('user/profile')->withuserdata($userdata)->withquestions($questions);
+      $countquestions = Question::where('user_id','=',$userdata->id)->count();
+      $countanwers = Answer::where('user_id','=',$userdata->id)->count();
+	  return view('user/profile')->withuserdata($userdata)->withquestions($questions)->withcountquestions($countquestions)->withcountanswers($countanwers);
 	}
 
 	public function getEdit(){

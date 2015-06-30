@@ -12,9 +12,15 @@
         </div>
 
         <h2>{{ $userdata->name() }}</h2>
-        <hr>
-
-    </div><br><br>
+        <hr><br>
+        <span class="bold">Gebruikersnaam : &nbsp;</span>
+        <span>{{ $userdata->username  }}</span><br><br>
+        <span class="bold">Aantal Vragen: &nbsp;</span>
+        <span>{{ $countquestions  }}</span><br><br>
+        <span class="bold">Aantal Antwoorden: &nbsp;</span>
+        <span>{{ $countanswers  }}</span>
+        <p></p>
+    </div><br>
 
     @foreach($questions as $question)
         <a  href="{{ URL::to('question/'.$question['id']) }}"
